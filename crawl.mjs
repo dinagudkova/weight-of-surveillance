@@ -10,8 +10,10 @@
 // Usage:
 //   node crawl.mjs --sites sites_pilot.csv --out results --workers 3 --repeats 1
 //   node crawl.mjs --mock            (offline self-test against fake sites)
+//   parallel machines: --shard 1/4 --machine laptop1   (each machine crawls a fixed quarter of the sites)
 //   options: --retry-failed --fresh --headed --window 30 --visit-timeout 150 --pause 3 --no-shuffle --restart-every 6
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import { createRequire } from 'module';
 import { chromium } from 'playwright';
@@ -178,6 +180,16 @@ function acConfig(mode) {
   };
 }
 
+// --shard k/n: keep only sites whose hostname hashes to k (1-based). Stable across machines and runs,
+// so every site (with all its modes and repeats) is crawled on exactly one machine.
+const SHARD = args.shard ? String(args.shard).split('/').map(Number) : null;
+const MACHINE = String(args.machine || os.hostname());
+function shardOf(url, n) {
+  let h = 2166136261;
+  for (const ch of new URL(url).hostname) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; }
+  return (h % n) + 1;
+}
+
 function loadSites() {
   if (MOCK) return [
     { url: 'https://www.beispiel-news.test/', category: 'mock' },
@@ -189,10 +201,15 @@ function loadSites() {
     { url: 'https://www.haengt-loop.test/', category: 'mock-hang' }, // main thread blocked forever
   ];
   const lines = fs.readFileSync(SITES_FILE, 'utf8').trim().split('\n').slice(1);
-  return lines.map((l) => {
+  const sites = lines.map((l) => {
     const [url, category] = l.split(',');
     return { url: url.trim(), category: (category || '').trim() };
   });
+  if (!SHARD) return sites;
+  const [k, n] = SHARD;
+  const mine = sites.filter((st) => shardOf(st.url, n) === k);
+  console.log(`Shard ${k}/${n}: ${mine.length} of ${sites.length} sites on machine "${MACHINE}"`);
+  return mine;
 }
 
 const adblockType = (req, page) => {
@@ -358,6 +375,8 @@ async function visit(browser, ua, site, mode, rep, handle) {
 
   const visitRow = {
     visitId, site: site.url, category: site.category, mode, rep, date: new Date().toISOString(),
+    machine: MACHINE, shard: args.shard || null, cpu: os.cpus()[0]?.model || null, cores: os.cpus().length,
+    platform: `${os.platform()} ${os.release()}`, browserVersion: browser.version(),
     navError, loadTimeout, mainStatus, finalUrl,
     botBlocked: pre.botBlocked, bannerPre: pre.banner, bannerText: pre.bannerText, payOrOkay: pre.payOrOkay,
     bannerEnd: post?.banner ?? null,
@@ -447,7 +466,7 @@ async function main() {
         console.log(`[${++done}/${total}] ${key}: ${requests.length} req, ${trk} tracking, banner=${visitRow.bannerPre ? 'yes' : 'no'} consent=${visitRow.consentMethod ?? '-'}/${cv} ${flags}`);
       } catch (e) {
         console.error(`[${++done}/${total}] ${key}: FAILED ${e.message}`);
-        visOut.write(JSON.stringify({ site: s.url, category: s.category, mode: m, rep: r, date: new Date().toISOString(), navError: 'crash: ' + e.message.slice(0, 200) }) + '\n');
+        visOut.write(JSON.stringify({ site: s.url, category: s.category, mode: m, rep: r, date: new Date().toISOString(), machine: MACHINE, navError: 'crash: ' + e.message.slice(0, 200) }) + '\n');
       } finally {
         running.delete(key);
       }
