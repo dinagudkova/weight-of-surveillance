@@ -110,9 +110,26 @@ const floodPage = `<!doctype html><html lang="de"><head><meta charset="utf-8"><t
   fire();
 </script></body></html>`;
 
+
+// Usercentrics/consentmanager style: banner in a shadow root; after a choice the host element stays in the
+// page (full width) with its content hidden. Buttons labelled "OK" / "Einwilligung ablehnen".
+const ucPage = `<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Shop UC</title></head><body>
+<h1>Shop</h1>${'<p>Produkt</p>'.repeat(30)}
+<div id="uc-root" style="position:fixed;left:0;right:0;bottom:0;width:100%"></div>
+<script>
+  const host = document.getElementById('uc-root'); const r = host.attachShadow({ mode: 'open' });
+  r.innerHTML = '<div id="box" style="background:#fff;border-top:2px solid #333;padding:20px;height:160px">' +
+    '<p>Cookies und andere Technologien erlauben? Wir und unsere Partner verarbeiten Daten für personalisierte Werbung.</p>' +
+    '<button id="no">Einwilligung ablehnen</button> <button id="ok">OK</button><span style="display:none">Datenschutz Cookie Einstellungen versteckt</span></div>';
+  const hide = () => { r.getElementById('box').style.display = 'none'; };
+  r.getElementById('ok').onclick = () => { hide(); new Image().src = 'https://www.google-analytics.com/g/collect?v=2'; };
+  r.getElementById('no').onclick = hide;
+</script></body></html>`;
+
 export function installMock(context) {
   context.route('**/*', (route) => {
     const url = route.request().url();
+    if (url === 'https://www.beispiel-uc.test/') return route.fulfill({ status: 200, contentType: 'text/html', body: ucPage });
     if (url === 'https://www.beispiel-flood.test/') return route.fulfill({ status: 200, contentType: 'text/html', body: floodPage });
     if (url.startsWith('https://ads.flood-ads.test/')) return route.fulfill({ status: 200, contentType: 'application/json', body: '{}' });
     if (url === 'https://www.beispiel-shadow.test/') return route.fulfill({ status: 200, contentType: 'text/html', body: shadowPage });

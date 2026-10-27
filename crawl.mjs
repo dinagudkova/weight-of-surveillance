@@ -53,8 +53,8 @@ const T = {
 const withTimeout = (p, ms, fallback = null) =>
   Promise.race([Promise.resolve(p).catch(() => fallback), new Promise((r) => setTimeout(() => r(fallback), ms))]);
 
-const ACCEPT_RE = /^(alle(s)? (cookies )?(akzeptieren|annehmen|zulassen|erlauben)|(alle )?(cookies )?akzeptieren( und weiter| & weiter)?|(allem |allen )?zustimmen( und weiter| & weiter)?|alle(n)? zustimmen|(alle(n)? )?einwilligen( und weiter| & weiter)?|ich willige ein|einverstanden|ok(ay)?,? (verstanden|einverstanden)|accept( all)?( cookies)?|accept all cookies|agree( and continue)?|allow all( cookies)?|i agree)$/i;
-const REJECT_RE = /^(alle(s)? (cookies )?ablehnen|(cookies )?ablehnen( und weiter)?|nicht einwilligen|ohne (einwilligung|zustimmung) (weiter|fortfahren)|weiter ohne (einwilligung|zustimmung)|nur (notwendige|erforderliche|essenzielle|technisch notwendige)( cookies)?( (akzeptieren|zulassen|verwenden|erlauben))?|reject( all)?( cookies)?|decline( all)?( cookies)?|necessary only|only necessary)$/i;
+const ACCEPT_RE = /^(alle(s)? (cookies )?(akzeptieren|annehmen|zulassen|erlauben|auswählen)( (und|&) (weiter|schließen|bestätigen))?|(alle )?(cookies )?(akzeptieren|annehmen|zulassen)( (und|&) (weiter|schließen))?|schließen (und|&) akzeptieren|(allem |allen )?zustimmen( (und|&) weiter)?( mit werbung)?|alle(n)? zustimmen|(alle(n)? )?einwilligen( (und|&) weiter)?|ich willige ein|ich stimme zu|einverstanden|weiter mit werbung|geht klar|ok(ay)?|ok(ay)?,? (verstanden|einverstanden)|accept( all)?( cookies)?|accept all cookies|agree( and continue)?|allow all( cookies)?|i agree|принять( все)?)$/i;
+const REJECT_RE = /^(alle(s)? (cookies )?ablehnen|(cookies )?ablehnen( (und|&) (weiter|schließen))?|einwilligung ablehnen|nicht (einwilligen|zustimmen)|ohne (einwilligung|zustimmung) (weiter|fortfahren)|weiter ohne (einwilligung|zustimmung)|nur (notwendige|erforderliche|essenzielle|technisch notwendige)( cookies)?( (akzeptieren|zulassen|verwenden|erlauben))?|reject( all)?( cookies)?|decline( all)?( cookies)?|necessary only|only necessary|отклонить( все)?)$/i;
 const CONSENT_WORDS = /(cookie|einwillig|zustimm|tracking|datenschutz|consent|partner|werbung|personalis)/i;
 const PAY_OR_OKAY = /(werbefrei|ohne werbung|ohne werbetracking|pur[- ]?abo|jetzt abonnieren|abo abschließen|abonnieren|contentpass|ad-?free)/i;
 const BOT_BLOCK = /(zugriff (auf .{0,40})?(wurde )?verweigert|aus sicherheitsgründen mussten wir|access denied|are you a robot|bist du ein mensch|sind sie ein mensch|verify you are human|unusual traffic|request blocked|pardon our interruption|just a moment|attention required|captcha)/i;
@@ -76,8 +76,10 @@ async function clickByText(page, re) {
       const labelOf = (el) => {
         const by = el.getAttribute('aria-labelledby');
         const byText = by ? by.split(/\s+/).map((id) => (el.getRootNode().getElementById?.(id) || document.getElementById(id))?.innerText || '').join(' ') : '';
+        // trim symbols around the label ("Alle akzeptieren ›", "Akzeptieren & weiter ▷")
         return [el.innerText, el.value, el.getAttribute('aria-label'), el.title, byText]
-          .map((t) => (t || '').replace(/\s+/g, ' ').trim()).find((t) => t && t.length < 60 && re.test(t)) || null;
+          .map((t) => (t || '').replace(/\s+/g, ' ').trim().replace(/^[^\p{L}]+|[^\p{L}]+$/gu, ''))
+          .find((t) => t && t.length < 60 && re.test(t)) || null;
       };
       for (const el of all) {
         const r = el.getBoundingClientRect();
@@ -112,6 +114,7 @@ async function inspect(page) {
         // CMPs often keep the iframe in the page after a choice and only hide it, so check real visibility:
         // size, position inside the viewport, and display/visibility/opacity of the iframe and its ancestors.
         const visible = await withTimeout(el.evaluate((e) => {
+          if (e.checkVisibility && !e.checkVisibility({ opacityProperty: true, visibilityProperty: true })) return false;
           const r = e.getBoundingClientRect();
           if (r.width < 100 || r.height < 100) return false;
           if (r.bottom <= 0 || r.right <= 0 || r.top >= innerHeight || r.left >= innerWidth) return false;
@@ -128,14 +131,21 @@ async function inspect(page) {
       const re = new RegExp(cw, 'i');
       let texts = (window.autoconsentHeuristics?.getPotentialPopups(1500) || []).map((p) => p.text || '').filter((t) => re.test(t));
       if (!texts.length && cmpFrame) texts = [(document.body?.innerText || '').slice(0, 2000)];
-      // Banners inside open shadow roots (web components, e.g. arbeitsagentur.de) are invisible to the heuristics.
+      // Banners inside open shadow roots (web components: arbeitsagentur.de, Usercentrics, consentmanager, ...).
+      // Many CMPs keep the (empty, hidden) host element in the page after a choice, so only *visible* content
+      // inside the shadow root counts, and only its visible text (innerText), not hidden textContent.
+      const shown = (e) => {
+        if (e.checkVisibility && !e.checkVisibility({ opacityProperty: true, visibilityProperty: true })) return false;
+        const b = e.getBoundingClientRect();
+        return b.width > 200 && b.height > 60 && b.bottom > 0 && b.right > 0 && b.top < innerHeight && b.left < innerWidth;
+      };
       if (!texts.length) {
         for (const host of document.querySelectorAll('*')) {
           if (!host.shadowRoot) continue;
-          const r = host.getBoundingClientRect();
-          const inner = [...host.shadowRoot.querySelectorAll('*')].find((e) => { const b = e.getBoundingClientRect(); return b.width > 200 && b.height > 80; });
-          const t = (host.shadowRoot.textContent || '').replace(/\s+/g, ' ');
-          if ((r.width > 200 || inner) && re.test(t) && /(akzeptier|ablehn|zustimm|einwillig|accept|reject)/i.test(t)) { texts = [t.slice(0, 2000)]; break; }
+          const box = [...host.shadowRoot.querySelectorAll('*')].find(shown);
+          if (!box) continue;
+          const t = (box.innerText || '').replace(/\s+/g, ' ');
+          if (re.test(t) && /(akzeptier|ablehn|zustimm|einwillig|accept|reject|zulassen)/i.test(t)) { texts = [t.slice(0, 2000)]; break; }
         }
       }
       const body = isMain ? `${document.title}\n${(document.body?.innerText || '').slice(0, 3000)}` : '';
@@ -208,6 +218,7 @@ function loadSites() {
     { url: 'https://www.beispiel-shadow.test/', category: 'mock' }, // banner in a shadow root, "Alle Cookies akzeptieren"
     { url: 'https://www.beispiel-input.test/', category: 'mock' }, // Amazon-style <input> buttons labelled elsewhere
     { url: 'https://www.beispiel-flood.test/', category: 'mock' }, // ad loop with huge requests (memory stress test)
+    { url: 'https://www.beispiel-uc.test/', category: 'mock' }, // shadow-DOM banner whose empty host stays after the choice
     { url: 'https://www.beispiel-block.test/', category: 'mock' }, // bot protection page
     { url: 'https://www.haengt-loop.test/', category: 'mock-hang' }, // main thread blocked forever
   ];
@@ -367,7 +378,14 @@ async function visit(browser, ua, site, mode, rep, handle) {
       // verified: true = a banner was there and is gone now; false = still visible; null = never saw one
       // verified only if something was clicked and no banner is visible afterwards
       const sawBanner = pre.banner || ac.popupFound || Boolean(consent.method);
+      // autoconsent sometimes clicks without reporting success: if it worked on the banner and the banner is
+      // gone, count the click as verified and mark the method accordingly.
+      if (!consent.method && (ac.popupFound || ac.cmp) && !after.banner) {
+        consent.method = 'autoconsent-unreported';
+        consent.clickAt = ac.foundAt ?? tPre;
+      }
       consent.verified = !sawBanner ? null : consent.method ? !after.banner : false;
+      consent.bannerTextAfter = after.banner ? after.bannerText : null; // what the detector still saw, for review
       await shot('2consent');
     }
 
@@ -407,6 +425,7 @@ async function visit(browser, ua, site, mode, rep, handle) {
     botBlocked: pre.botBlocked, bannerPre: pre.banner, bannerText: pre.bannerText, payOrOkay: pre.payOrOkay,
     bannerEnd: post?.banner ?? null,
     cmp: ac.cmp, autoconsentDone: ac.done, autoconsentResult: ac.result, clicks: ac.clicks,
+    bannerTextAfter: consent.bannerTextAfter ?? null,
     consentAttempted: consent.attempted, consentMethod: consent.method, fallbackLabel: consent.label, consentVerified: consent.verified,
     consentAt: consent.clickAt, t0, windowMs: T.window, acErrors: ac.errors.slice(0, 3),
     scriptMs: metrics.ScriptDuration ? Math.round(metrics.ScriptDuration * 1000) : null,
@@ -481,6 +500,8 @@ async function main() {
     let b = await launch();
     let count = 0;
     while (jobs.length) {
+      // Take the job first: other workers may empty the queue while this one waits below.
+      const [s, m, r] = jobs.shift();
       if (count >= RESTART) {
         await withTimeout(b.browser.close(), T.op);
         b = await launch();
@@ -491,9 +512,8 @@ async function main() {
       // cause the following visits to be aborted as well.
       for (let i = 0; i < 30 && heapMB() > HEAP_LIMIT_MB * 0.7; i++) {
         if (global.gc) global.gc();
-        await new Promise((r) => setTimeout(r, 500));
+        await new Promise((res) => setTimeout(res, 500));
       }
-      const [s, m, r] = jobs.shift();
       const key = `${s.url} ${m}`;
       running.set(key, Date.now());
       const handle = { context: null };
