@@ -1,61 +1,118 @@
-# Вес слежки — пилот
+# The Weight of Surveillance
 
-Проверка на 25 немецких сайтах: есть ли в данных всё, что нужно проекту.
+**How much of the German web is tracking, and what changes when you click "Accept" or "Reject"?**
 
-## Запуск
+This project measures how much of a web page's weight (requests, bytes, script time) comes from third-party tracking on popular German websites. Every site is visited in three states:
 
-Нужны Node.js 18+ и Python 3.10+.
+- `none`: no interaction with the cookie banner
+- `accept`: "Accept all" clicked
+- `reject`: "Reject all" clicked
+
+Business questions are listed in [docs/business_questions.md](docs/business_questions.md).
+
+> Status: pilot finished (25 sites, 3 repeats). Full study in progress.
+
+## Pipeline
+
+```
+CrUX top list ──► sample + categories (Python) ──► crawler (Node.js + Playwright)
+                                                       │
+                                                       ▼
+                                           raw JSONL + screenshots (local)
+                                                       │
+                                        loader (Python) ▼
+                                       DuckDB (local)  /  PostgreSQL (Neon)
+                                                       │
+                                                  dbt  ▼
+                                    staging ─► classification ─► marts + tests
+                                                       │
+                                                       ▼
+                                        analysis (Python) + Tableau dashboard
+```
+
+## How a visit works
+
+1. Load the page in a fresh browser profile, wait 4 seconds.
+2. **Pre snapshot:** is a consent banner visible, is the page a bot-protection page, is the banner "pay or okay", which cookies are already set.
+3. **Consent action** (`accept` / `reject` only): first [DuckDuckGo autoconsent](https://github.com/duckduckgo/autoconsent), then a fallback click on typical button labels (also inside shadow DOM and consent iframes). The crawler then **verifies** that the banner is gone.
+4. **Observation window** of fixed length (30 s by default), starting at the consent click (or, in `none`, right after the pre snapshot). The main metrics only use requests that start inside this window, so all states are observed equally long.
+5. **End snapshot:** cookies, script time, screenshots (before the click, after the click, end of window).
+
+## Request classification
+
+| Category | Meaning | Source |
+|---|---|---|
+| `consent` | the consent banner itself | `lists/cmp_domains.txt` |
+| `tracking` | advertising, analytics or identity syncing | DuckDuckGo Tracker Data Set (with categories), EasyPrivacy, EasyList (third party only), `lists/custom_trackers.csv` (German ad-tech), CNAME cloaking via DNS |
+| `telemetry` | error monitoring, performance monitoring, A/B testing (not counted as tracking) | `lists/custom_trackers.csv` |
+| `first-party` | the site and domains owned by the same company | DuckDuckGo entities, `lists/site_aliases.csv` |
+| `other` | other third parties: CDNs, fonts, video, payment | everything else |
+
+Tracking is further split into `advertising`, `analytics` and `identity` (ID syncing, cookie matching, telco identifiers). Tracker cookies are detected by domain and by name (`_ga`, `_fbp`, ..., see `lists/tracker_cookie_names.txt`).
+
+## Quick start
+
+Requirements: Node.js 18+, Python 3.10+.
 
 ```bash
 npm install
-npm run setup          # скачивает Chromium для Playwright
+npx playwright install chromium
 pip install -r requirements.txt
+bash update_lists.sh          # download third-party tracker lists
 
-npm run mock           # офлайн-самопроверка на фейковом сайте (1 минута)
-npm run pilot          # реальный прогон: 25 сайтов × 3 режима, примерно 25–30 минут
-npm run report         # отчёт в results_v2/pilot_report.md
+node crawl.mjs --mock --out results_mock --window 10      # offline self-test (~2 min)
+node crawl.mjs --sites sites_pilot.csv --out results --workers 2
+node reclassify.mjs results   # re-apply classification after list changes, no new crawl
+python3 analyze.py results    # writes results/pilot_report.md
 ```
 
-Запускать из Германии (или из ЕС), без VPN и без блокировщика рекламы.
-Прогон можно прервать (Ctrl+C) и запустить снова: уже сделанные визиты пропускаются.
-`node crawl.mjs --retry-failed` повторяет только визиты с ошибками, `--fresh` начинает заново.
-Каждые 30 секунд краулер пишет, какие визиты ещё идут; визит дольше 150 секунд прерывается.
+Useful crawler options:
 
-## Что делает краулер (v2)
+| Option | Effect |
+|---|---|
+| `--repeats 3` | visit every site and state several times |
+| `--modes accept` | only selected states |
+| `--retry-failed` | re-run visits with errors or bot protection |
+| `--fresh` | re-run visits that already exist (the analysis keeps the latest) |
+| `--headed` | visible browser |
+| `--window 30` | observation window in seconds |
+| `--restart-every 6` | restart the browser every N visits (limits memory) |
+| `--pause 3` | pause between visits, in seconds |
 
-Каждый сайт открывается в чистом профиле три раза: `none` (баннер не трогаем), `accept`, `reject`.
+A run can be stopped and restarted: finished visits are skipped.
 
-Порядок одного визита:
-1. загрузка страницы и 4 секунды ожидания;
-2. снимок «до»: есть ли баннер, нет ли страницы блокировки бота, есть ли подписка вместо отказа («плати или соглашайся»), какие cookies уже стоят;
-3. в `accept`/`reject` клик по баннеру: сначала autoconsent, затем запасной клик по тексту кнопки. После клика проверяется, что баннер действительно исчез;
-4. **окно наблюдения фиксированной длины** (по умолчанию 30 секунд, `--window`), которое начинается в момент клика или, в `none`, сразу после снимка «до». Основные метрики считаются только по запросам, начавшимся в этом окне, поэтому все режимы наблюдаются одинаково долго;
-5. снимок «после»: cookies, время работы скриптов, скриншот.
+## Output files
 
-Классификация запросов (`classify.mjs`):
-- **consent** — скрипты самих баннеров (`lists/cmp_domains.txt`);
-- **tracking** — DuckDuckGo Tracker Data Set с учётом категорий (CDN и встроенный контент не считаются трекингом), немецкий ад-тек из `lists/custom_trackers.csv`, EasyPrivacy, EasyList (только сторонние запросы), CNAME-маскировка через DNS;
-- **first-party** — сайт и домены той же компании (`lists/site_aliases.csv`);
-- **other** — остальные сторонние: CDN, шрифты, видео, платежи.
+| File | Content |
+|---|---|
+| `visits.jsonl` | one row per visit: banner, consent method and verification, flags, cookies, script time |
+| `requests.jsonl` | one row per request: start time, phase (`pre` / `window` / `after`), size, category, owner |
+| `summary_by_visit.csv` | metrics per visit |
+| `review_domains.csv` | third-party domains classified as `other`, for manual review |
+| `review_tracking.csv` | top domains classified as tracking, to catch false positives |
+| `screens/` | screenshots per visit |
+| `pilot_report.md` | report |
 
-Cookies трекеров распознаются по домену и по имени (`_ga`, `_fbp` и т.п., `lists/tracker_cookie_names.txt`).
+Raw data and screenshots are not part of this repository.
 
-## Повторы и блокировки
+## Measurement setup
 
-- `node crawl.mjs --retry-failed` повторяет визиты с ошибками и с блокировкой бота;
-- сайты с блокировкой можно попробовать в видимом браузере: `node crawl.mjs --sites sites_pilot.csv --out results_v2 --retry-failed --headed`. Если не помогло, сайт честно учитывается как «не удалось измерить»;
-- `--fresh` начинает заново.
+- Crawled from Germany through a German VPN exit, desktop viewport 1366×900, locale `de-DE`.
+- Gentle crawling: random order, pause between visits, two parallel browsers.
+- Only home pages, no login.
 
-## Файлы результатов
+## Limitations
 
-- `visits.jsonl` — одна строка на визит: баннер, способ и проверка клика, флаги, cookies до и после, время скриптов
-- `requests.jsonl` — одна строка на запрос: время начала, фаза (`pre` / `window` / `after`), размер, категория, владелец
-- `summary_by_visit.csv` — метрики по визитам
-- `review_domains.csv` — сторонние домены категории `other` для ручной проверки
-- `screens/` — скриншоты после окна наблюдения
-- `pilot_report.md` — отчёт
+- About 16% of the pilot sites block automated browsers and cannot be measured.
+- Server-side tracking (e.g. on Amazon) is not visible from the browser.
+- International tracker lists miss part of the German ad-tech market; the custom lists are reviewed manually.
+- The number of clicks to reject cannot be measured for consent platforms controlled through an API (e.g. Sourcepoint).
+- Requests sent before consent are indicators, not proof of a legal violation.
 
-## Ручная проверка после прогона
+## Data sources and licences
 
-1. Открой `review_domains.csv`. Трекеры добавь в `lists/custom_trackers.csv`, домены того же владельца — в `lists/site_aliases.csv`. Классификация выполняется во время краулинга, поэтому изменения списков подействуют со следующего прогона.
-2. Просмотри скриншоты визитов из таблицы «banner not verifiably closed».
+- Site sample: [Chrome UX Report top lists](https://github.com/zakird/crux-top-lists)
+- [DuckDuckGo Tracker Blocklists](https://github.com/duckduckgo/tracker-blocklists) and [autoconsent](https://github.com/duckduckgo/autoconsent)
+- [EasyList / EasyPrivacy / EasyList Germany](https://easylist.to/)
+
+Third-party lists keep their own licences.

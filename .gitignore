@@ -2,6 +2,11 @@ node_modules/
 results*/
 *.jsonl
 screens/
+.env
+*.duckdb
+*.duckdb.wal
 .DS_Store
 __pycache__/
-.env
+target/
+logs/
+dbt_packages/

@@ -1,13 +1,14 @@
 {
   "name": "weight-of-surveillance-pilot",
   "version": "1.0.0",
-  "description": "Pilot crawler: tracking weight on German websites",
+  "description": "The Weight of Surveillance: measuring third-party tracking on German websites in three consent states",
   "scripts": {
     "setup": "npx playwright install chromium",
     "lists": "bash update_lists.sh",
     "mock": "node crawl.mjs --mock --out results_mock --window 10",
-    "pilot": "node crawl.mjs --sites sites_pilot.csv --out results_v2 --workers 3",
-    "report": "python3 analyze.py results_v2"
+    "crawl": "node crawl.mjs --sites sites_pilot.csv --out results --workers 2",
+    "reclassify": "node reclassify.mjs results",
+    "report": "python3 analyze.py results"
   },
   "keywords": [],
   "author": "",
