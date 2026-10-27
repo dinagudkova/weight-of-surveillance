@@ -100,9 +100,21 @@ const inputPage = `<!doctype html><html lang="de"><head><meta charset="utf-8"><t
     document.getElementById('sp-cc').remove(); if(acc){ new Image().src='https://c.amazon-adsystem.com/aax2/apstag.js'; } };
 </script></body></html>`;
 
+
+// Pathological ad loop: thousands of requests with huge query strings and POST bodies (memory stress test).
+const floodPage = `<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Flood</title></head><body><h1>Flood</h1>
+<script>
+  const big = 'x'.repeat(100000), body = 'y'.repeat(200000);
+  let n = 0;
+  const fire = () => { for (let i = 0; i < 50; i++) { n++; fetch('https://ads.flood-ads.test/bid?n=' + n + '&d=' + big, { method: 'POST', body }).catch(() => {}); } if (n < 20000) setTimeout(fire, 20); };
+  fire();
+</script></body></html>`;
+
 export function installMock(context) {
   context.route('**/*', (route) => {
     const url = route.request().url();
+    if (url === 'https://www.beispiel-flood.test/') return route.fulfill({ status: 200, contentType: 'text/html', body: floodPage });
+    if (url.startsWith('https://ads.flood-ads.test/')) return route.fulfill({ status: 200, contentType: 'application/json', body: '{}' });
     if (url === 'https://www.beispiel-shadow.test/') return route.fulfill({ status: 200, contentType: 'text/html', body: shadowPage });
     if (url === 'https://www.beispiel-input.test/') return route.fulfill({ status: 200, contentType: 'text/html', body: inputPage });
     if (url === 'https://www.beispiel-iframe.test/') return route.fulfill({ status: 200, contentType: 'text/html', body: spPage });

@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: prep_visits
+    description: Latest visit per site, mode and repeat, with validity flags (is_measured, is_usable).
+    columns:
+      - name: visit_id
+        tests: [not_null, unique]
+  - name: prep_host_suffixes
+    description: All domain suffixes of every requested host, for equality joins against domain lists.
+  - name: prep_host_lookup
+    description: Per host, the matching tracker (custom list first), owning entity and consent-platform flag.
+    columns:
+      - name: host
+        tests: [not_null, unique]
+  - name: prep_requests_classified
+    description: Every request with its category (consent, tracking, telemetry, first-party, other), tracking type and owner.
+    columns:
+      - name: request_category
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["consent", "tracking", "telemetry", "first-party", "other"]
+      - name: tracking_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["advertising", "analytics", "identity"]

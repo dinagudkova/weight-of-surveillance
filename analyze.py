@@ -27,12 +27,13 @@ def pct(x):
 
 
 # Keep the latest visit per (site, mode, rep); crashes have no requests column.
-for col in ["botBlocked", "navError", "consentVerified", "consentMethod", "payOrOkay", "bannerPre", "cmp", "requests"]:
+for col in ["memoryAbort", "botBlocked", "navError", "consentVerified", "consentMethod", "payOrOkay", "bannerPre", "cmp", "requests"]:
     if col not in vis:
         vis[col] = None
 vis = vis.sort_values("date").drop_duplicates(key, keep="last").reset_index(drop=True)
 vis["botBlocked"] = vis["botBlocked"].fillna(False).astype(bool)
-valid = vis[vis.navError.isna() & ~vis.botBlocked & (vis.requests.fillna(0) > 1)].copy()
+vis["memoryAbort"] = vis["memoryAbort"].fillna(False).astype(bool)
+valid = vis[vis.navError.isna() & ~vis.botBlocked & ~vis.memoryAbort & (vis.requests.fillna(0) > 1)].copy()
 req = req[req.visitId.isin(valid.visitId)]
 if "trackingType" not in req:
     req["trackingType"] = None
@@ -43,10 +44,11 @@ sites = vis.site.unique()
 L += ["# Pilot report", "", "## 1. Which sites could be measured", ""]
 blocked = vis[vis.botBlocked].site.unique()
 errors = vis[vis.navError.notna()][["site", "mode", "navError"]]
-empty = vis[vis.navError.isna() & ~vis.botBlocked & (vis.requests.fillna(0) <= 1)].site.unique()
+empty = vis[vis.navError.isna() & ~vis.botBlocked & ~vis.memoryAbort & (vis.requests.fillna(0) <= 1)].site.unique()
 L += [f"- Sites in list: **{len(sites)}**, measured in all three modes: **{(valid.groupby('site')['mode'].nunique() == 3).sum()}**, repeats per site and mode: up to {int(vis.rep.max()) + 1}",
       f"- Bot protection page: **{len(blocked)}** {', '.join(blocked)}",
       f"- Empty page (≤1 request): {len(empty)} {', '.join(empty)}",
+      f"- Aborted for memory (page with a request flood): {vis[vis.memoryAbort].site.nunique()} {', '.join(vis[vis.memoryAbort].site.unique())}",
       f"- Navigation errors: {len(errors)}",
       f"- Window length: {int(vis.windowMs.dropna().iloc[0] / 1000) if 'windowMs' in vis and vis.windowMs.notna().any() else '?'} s", ""]
 if len(errors):
@@ -102,15 +104,16 @@ L += ["Top third-party domains classified as _other_ (not tracking). Review thes
       md(review.drop(columns="example").head(15)), ""]
 
 # ---------------------------------------------------------------- 4. per-visit summary
-g = win.groupby("visitId")
-s = pd.DataFrame({
-    "win_requests": g.size(),
-    "win_bytes": g.bytes.sum(),
-    "trk_requests": g.isTracking.sum(),
-    "trk_bytes": g.apply(lambda d: d.loc[d.isTracking, "bytes"].sum(), include_groups=False),
-    "consent_bytes": g.apply(lambda d: d.loc[d.isConsent, "bytes"].sum(), include_groups=False),
-    "trk_companies": g.apply(lambda d: d.loc[d.isTracking, "owner"].nunique(), include_groups=False),
-}).reset_index()
+# Per-visit window metrics (column arithmetic + groupby, robust also when there are no window requests)
+w = win.assign(
+    trk_bytes=win.bytes.where(win.isTracking, 0),
+    consent_bytes=win.bytes.where(win.isConsent.astype(bool), 0),
+    trk_owner=win.owner.where(win.isTracking),
+)
+s = (w.groupby("visitId")
+     .agg(win_requests=("url", "size"), win_bytes=("bytes", "sum"), trk_requests=("isTracking", "sum"),
+          trk_bytes=("trk_bytes", "sum"), consent_bytes=("consent_bytes", "sum"), trk_companies=("trk_owner", "nunique"))
+     .reset_index())
 summary = valid.merge(s, on="visitId", how="left").fillna({"win_requests": 0, "win_bytes": 0, "trk_requests": 0, "trk_bytes": 0, "consent_bytes": 0, "trk_companies": 0})
 summary["trk_share_bytes"] = (summary.trk_bytes / summary.win_bytes.where(summary.win_bytes > 0)).round(3)
 summary["cookies_tracker_pre"] = summary.cookiesPre.apply(lambda c: c.get("tracker") if isinstance(c, dict) else None)

@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: fct_visits
+    description: One row per visit with tracking metrics of the fixed observation window.
+    columns:
+      - name: visit_id
+        tests: [not_null, unique]
+      - name: tracking_share_bytes
+        description: Tracking bytes divided by all bytes in the window.
+  - name: mart_site_consent_effect
+    description: One row per site with tracking in the three consent modes and the available reject option.
+    columns:
+      - name: site
+        tests: [not_null, unique]
+      - name: reject_option
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["no banner", "reject on first layer", "reject only in settings", "no reject without subscription", "reject not verified"]
+  - name: mart_category_summary
+    description: Tracking load by site category (medians over sites).
+  - name: mart_company_reach
+    description: Reach and data volume per company, consent mode and tracking type.
+  - name: mart_cmp_market
+    description: Consent management platforms, pay-or-okay share and banner weight.
+  - name: mart_pre_consent
+    description: Tracking requests and tracker cookies before any interaction with the banner.

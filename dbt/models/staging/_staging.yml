@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stg_visits
+    description: Visits with cleaned flags and normalized consent platform names.
+    columns:
+      - name: visit_id
+        tests: [not_null, unique]
+      - name: mode
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["none", "accept", "reject"]
+  - name: stg_requests
+    description: Requests with a host (data, blob and malformed URLs are dropped).
+    columns:
+      - name: visit_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_visits')
+                field: visit_id
+      - name: phase
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["pre", "window", "after"]

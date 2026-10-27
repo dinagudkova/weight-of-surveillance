@@ -35,6 +35,15 @@ const MOCK = Boolean(args.mock);
 const SITES_FILE = args.sites || (MOCK ? null : 'sites_pilot.csv');
 
 // Timings (ms). Reported in the methodology.
+// Memory safety. V8 keeps the whole original string alive behind a slice, so a short piece of a 500 KB URL
+// can retain 500 KB. flat() makes a real copy. Visits are also capped in recorded requests and heap use.
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms)); // unlike page.waitForTimeout, safe after the page is closed
+const flat = (x) => (x == null ? x : Buffer.from(String(x), 'utf8').toString('utf8'));
+const MAX_REQUESTS = Number(args['max-requests'] || 6000);
+const HEAP_LIMIT_MB = Number(args['heap-limit'] || 1500);
+const heapMB = () => process.memoryUsage().heapUsed / 1048576;
+const active = new Map(); // visitId -> { seen, aborted, abort } for the memory guard
+
 const T = {
   nav: 45000, load: 20000, settle: 4000, consentMax: 15000, verify: 2500,
   window: Number(args.window || 30) * 1000, op: 8000, visit: Number(args['visit-timeout'] || 150) * 1000,
@@ -191,12 +200,14 @@ function shardOf(url, n) {
 }
 
 function loadSites() {
+  if (MOCK && args.only) return [{ url: args.only, category: 'mock' }];
   if (MOCK) return [
     { url: 'https://www.beispiel-news.test/', category: 'mock' },
     { url: 'https://www.beispiel-abo.test/', category: 'mock' }, // pay-or-okay banner, autoconsent cannot opt in
     { url: 'https://www.beispiel-iframe.test/', category: 'mock' }, // banner inside a CMP iframe (like Sourcepoint)
     { url: 'https://www.beispiel-shadow.test/', category: 'mock' }, // banner in a shadow root, "Alle Cookies akzeptieren"
     { url: 'https://www.beispiel-input.test/', category: 'mock' }, // Amazon-style <input> buttons labelled elsewhere
+    { url: 'https://www.beispiel-flood.test/', category: 'mock' }, // ad loop with huge requests (memory stress test)
     { url: 'https://www.beispiel-block.test/', category: 'mock' }, // bot protection page
     { url: 'https://www.haengt-loop.test/', category: 'mock-hang' }, // main thread blocked forever
   ];
@@ -257,12 +268,21 @@ async function visit(browser, ua, site, mode, rep, handle) {
   });
   await context.addInitScript({ content: autoconsentScript });
 
+  let dropped = 0;
+  let memoryAbort = false;
+  // Register with the global memory guard (see main): if the heap gets too large, the visit with the most
+  // requests is aborted, not the visit that happens to be running next to it.
+  let seen = 0;
+  active.set(visitId, { seen: () => seen, aborted: () => memoryAbort, abort: () => { memoryAbort = true; page.close().catch(() => {}); } });
   page.on('request', (req) => {
+    seen++;
     startedAt.set(req, now());
     // start DNS resolution early for possible CNAME cloaking
-    try { cnameLookup(new URL(req.url()).hostname, site.url); } catch {}
+    try { cnameLookup(flat(new URL(req.url()).hostname), site.url); } catch {}
   });
   const record = (req, failed) => {
+    // Pages that fire thousands of requests (ad reload loops) are capped: only the count is kept beyond the cap.
+    if (requests.length + pending.length >= MAX_REQUESTS || memoryAbort) { dropped++; return; }
     pending.push((async () => {
       let sizes = { responseBodySize: 0, responseHeadersSize: 0, requestBodySize: 0, requestHeadersSize: 0 };
       let status = null;
@@ -274,13 +294,16 @@ async function visit(browser, ua, site, mode, rep, handle) {
         mime = r ? await withTimeout(r.headerValue('content-type'), T.op) : null;
       }
       const ts = startedAt.get(req) ?? now();
+      // Classify on a bounded copy of the URL: rule matching does not need megabyte-long query strings.
+      const url = flat(req.url().slice(0, 4096));
       let host = '';
-      try { host = new URL(req.url()).hostname; } catch {}
+      try { host = flat(new URL(url).hostname); } catch {}
       const chain = (await withTimeout(cnameLookup(host, site.url), 3000, [])) || [];
-      const c = classify(req.url(), site.url, adblockType(req, page), chain);
+      const c = classify(url, site.url, adblockType(req, page), chain);
+      for (const k of ['host', 'regDomain', 'owner', 'cname']) if (typeof c[k] === 'string') c[k] = flat(c[k]);
       requests.push({
         visitId, site: site.url, mode, rep, ts, phase: null, // phase is assigned at the end, once t0 is known
-        url: req.url().slice(0, 500), type: req.resourceType(), status, mime: mime?.split(';')[0] ?? null, failed,
+        url: flat(url.slice(0, 500)), type: req.resourceType(), status, mime: flat(mime?.split(';')[0] ?? null), failed,
         bytes: Math.max(0, sizes.responseBodySize) + Math.max(0, sizes.responseHeadersSize),
         bodyBytes: Math.max(0, sizes.responseBodySize),
         upBytes: Math.max(0, sizes.requestBodySize) + Math.max(0, sizes.requestHeadersSize),
@@ -308,7 +331,7 @@ async function visit(browser, ua, site, mode, rep, handle) {
   const consent = { attempted: false, method: null, label: null, verified: null, clickAt: null };
 
   if (!navError) {
-    await page.waitForTimeout(T.settle);
+    await sleep(T.settle);
 
     // 2. PRE snapshot: state before any interaction.
     pre = await inspect(page);
@@ -323,10 +346,10 @@ async function visit(browser, ua, site, mode, rep, handle) {
       consent.attempted = true;
       const until = Date.now() + T.consentMax;
       while (!ac.done && Date.now() < until && (pre.banner || ac.popupFound || ac.cmp || Date.now() < until - 10000)) {
-        await page.waitForTimeout(500);
+        await sleep(500);
       }
       if (ac.done) { consent.method = 'autoconsent'; consent.clickAt = Math.min(ac.foundAt ?? ac.at, ac.at); }
-      await page.waitForTimeout(T.verify);
+      await sleep(T.verify);
       let after = await inspect(page);
       // Fallback: autoconsent did nothing, or claimed success but the banner is still visible.
       // Also tried when nothing was detected: the patterns are exact button labels, so a click is unlikely to hit anything else.
@@ -337,7 +360,7 @@ async function visit(browser, ua, site, mode, rep, handle) {
           consent.clickAt = tClick;
           consent.method = consent.method ? 'autoconsent+text-fallback' : 'text-fallback';
           consent.label = label;
-          await page.waitForTimeout(T.verify);
+          await sleep(T.verify);
           after = await inspect(page);
         }
       }
@@ -356,8 +379,10 @@ async function visit(browser, ua, site, mode, rep, handle) {
     await withTimeout(page.evaluate(async ([n, pause]) => {
       for (let i = 0; i < n; i++) { window.scrollBy(0, window.innerHeight * 0.8); await new Promise((r) => setTimeout(r, pause)); }
     }, [steps, Math.floor(T.window / 2 / steps)]), T.window);
-    const rest = tEnd - now();
-    if (rest > 0) await page.waitForTimeout(rest);
+    // Wait for the end of the window in 1 s steps; stop early if this page drives memory up (flagged in the data).
+    while (now() < tEnd && !memoryAbort) {
+      await new Promise((r) => setTimeout(r, Math.min(500, Math.max(0, tEnd - now()))));
+    }
 
     post = await inspect(page);
   }
@@ -373,6 +398,7 @@ async function visit(browser, ua, site, mode, rep, handle) {
   const finalUrl = page.url();
   await withTimeout(context.close(), T.op);
 
+  active.delete(visitId);
   const visitRow = {
     visitId, site: site.url, category: site.category, mode, rep, date: new Date().toISOString(),
     machine: MACHINE, shard: args.shard || null, cpu: os.cpus()[0]?.model || null, cores: os.cpus().length,
@@ -387,6 +413,8 @@ async function visit(browser, ua, site, mode, rep, handle) {
     taskMs: metrics.TaskDuration ? Math.round(metrics.TaskDuration * 1000) : null,
     cookiesPre, cookiesEnd,
     requests: requests.length,
+    requestsDropped: dropped,
+    memoryAbort,
   };
   return { visitRow, requests };
 }
@@ -429,6 +457,20 @@ async function main() {
   let done = 0;
   const running = new Map();
 
+  // Memory guard: Playwright keeps every request (URL, POST body) of a page until the page is closed, so one
+  // pathological page (ad reload loop) can fill the heap within a minute. Above the limit, the running visit
+  // with the most requests is aborted: its page is closed, the visit is flagged (memoryAbort) and excluded
+  // from the analysis. After an abort the guard waits 10 s for garbage collection before acting again.
+  let lastAbort = 0;
+  const guard = setInterval(() => {
+    if (heapMB() <= HEAP_LIMIT_MB || Date.now() - lastAbort < 10000) return;
+    const candidates = [...active.values()].filter((v) => !v.aborted());
+    if (!candidates.length) return;
+    candidates.sort((a, b) => b.seen() - a.seen())[0].abort();
+    lastAbort = Date.now();
+    if (global.gc) setTimeout(() => global.gc(), 2000);
+  }, 500);
+
   // Heartbeat: shows what is still running, so a stuck visit is never silent.
   const hb = setInterval(() => {
     const mb = Math.round(process.memoryUsage().heapUsed / 1048576);
@@ -445,6 +487,12 @@ async function main() {
         count = 0;
       }
       count++;
+      // Let memory from a previous heavy visit be collected before starting, so one bad page cannot
+      // cause the following visits to be aborted as well.
+      for (let i = 0; i < 30 && heapMB() > HEAP_LIMIT_MB * 0.7; i++) {
+        if (global.gc) global.gc();
+        await new Promise((r) => setTimeout(r, 500));
+      }
       const [s, m, r] = jobs.shift();
       const key = `${s.url} ${m}`;
       running.set(key, Date.now());
@@ -458,10 +506,11 @@ async function main() {
           throw new Error(`watchdog: visit exceeded ${T.visit / 1000}s`);
         }
         const { visitRow, requests } = out;
+        if (visitRow.memoryAbort) count = RESTART; // free everything the aborted page left behind
         visOut.write(JSON.stringify(visitRow) + '\n');
         for (const q of requests) reqOut.write(JSON.stringify(q) + '\n');
         const trk = requests.filter((q) => q.isTracking && q.phase === 'window').length;
-        const flags = [visitRow.botBlocked && 'BOT-BLOCKED', visitRow.payOrOkay && 'pay-or-okay', visitRow.loadTimeout && 'load-timeout', visitRow.navError && 'ERR ' + visitRow.navError].filter(Boolean).join(' ');
+        const flags = [visitRow.botBlocked && 'BOT-BLOCKED', visitRow.payOrOkay && 'pay-or-okay', visitRow.loadTimeout && 'load-timeout', visitRow.requestsDropped && `CAPPED(+${visitRow.requestsDropped})`, visitRow.memoryAbort && 'MEMORY-ABORT', visitRow.navError && 'ERR ' + visitRow.navError].filter(Boolean).join(' ');
         const cv = visitRow.consentVerified === null ? '-' : visitRow.consentVerified ? 'verified' : 'NOT closed';
         console.log(`[${++done}/${total}] ${key}: ${requests.length} req, ${trk} tracking, banner=${visitRow.bannerPre ? 'yes' : 'no'} consent=${visitRow.consentMethod ?? '-'}/${cv} ${flags}`);
       } catch (e) {
@@ -476,6 +525,7 @@ async function main() {
   }
   await Promise.all(Array.from({ length: WORKERS }, worker));
   clearInterval(hb);
+  clearInterval(guard);
   reqOut.end(); visOut.end();
   console.log('Done.');
   process.exit(0);

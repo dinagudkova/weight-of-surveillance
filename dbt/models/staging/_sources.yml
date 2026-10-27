@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Crawl results loaded by load/load_raw.py (full reload on every run).
+    schema: raw
+    tables:
+      - name: visits
+        description: One row per visit (site × consent mode × repeat) as written by crawl.mjs.
+        columns:
+          - name: visit_id
+            tests: [not_null, unique]
+      - name: requests
+        description: One row per network request of a visit.
+        columns:
+          - name: visit_id
+            tests: [not_null]
