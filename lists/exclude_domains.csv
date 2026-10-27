@@ -1,0 +1,6 @@
+domain,reason
+# Sites excluded after manual review. The reason is copied to sample/candidates.csv.
+bycs.de,login only (lernplattform.bycs.de)
+onoffice.de,login only (crm.onoffice.de)
+awi-rems.de,login only (iris.awi-rems.de)
+iam-bms.de,login only
