@@ -1,0 +1,23 @@
+# Consent management platforms: the banner itself. Counted as "consent", not as tracking.
+cookielaw.org
+onetrust.com
+consentmanager.net
+consensu.org
+privacy-mgmt.com
+sp-prod.net
+sourcepoint.com
+usercentrics.eu
+usercentrics.com
+didomi.io
+cookiebot.com
+cookiebot.eu
+trustarc.com
+truste.com
+cookie-script.com
+iubenda.com
+ccm19.de
+cookiefirst.com
+termly.io
+osano.com
+axeptio.eu
+onetrust.eu

@@ -1,0 +1,6 @@
+! Path rules for advertising on shared domains (merged into EasyList).
+! iq digital ad creatives on S3 / CloudFront
+/iqdcdn.am.yb/*
+! affiliate ad tags embedded in ads
+||aaa.telekom.de/telekom/aff/
+||em.baur.de/ai.aspx

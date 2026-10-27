@@ -1,0 +1,25 @@
+# First-party cookies set by tracking scripts (prefix match). Domain-based detection misses these,
+# because e.g. Google Analytics and the Meta pixel write their IDs as cookies of the visited site.
+_ga|Google Analytics
+_gid|Google Analytics
+_gat|Google Analytics
+_gcl_|Google Ads
+_fbp|Meta
+_fbc|Meta
+_uetsid|Microsoft Ads
+_uetvid|Microsoft Ads
+_pin_unauth|Pinterest
+_ttp|TikTok
+_tt_enable_cookie|TikTok
+_scid|Snap
+_hjSessionUser|Hotjar
+_hjSession_|Hotjar
+_clck|Microsoft Clarity
+_clsk|Microsoft Clarity
+AMCV_|Adobe
+s_ecid|Adobe
+mbox|Adobe Target
+_pk_id|Matomo
+_cq_duid|Criteo
+cto_bundle|Criteo
+_li_dcdm_c|LinkedIn

@@ -1,0 +1,56 @@
+domain,owner,category,note
+stroeer.de,Ströer SE & Co. KGaA,Advertising,German ad-tech; missing from DDG TDS
+stroeerws.de,Ströer SE & Co. KGaA,Advertising,Ströer web services (ads); verify
+stroeerdigitalgroup.de,Ströer SE & Co. KGaA,Advertising,verify
+adscale.de,Ströer SE & Co. KGaA,Advertising,Ströer SSP
+emetriq.de,emetriq GmbH,Ad Motivated Tracking,German data management platform
+emetriq.com,emetriq GmbH,Ad Motivated Tracking,German data management platform
+xplosion.de,emetriq GmbH,Ad Motivated Tracking,emetriq/xplosion audience data; verify
+uimserv.net,United Internet Media,Advertising,United Internet ad server; verify
+plista.com,plista GmbH,Advertising,content recommendation ads
+nativendo.de,nativendo GmbH,Advertising,native advertising
+yieldlove.com,Yieldlove GmbH,Advertising,header bidding
+yieldlove-ad-serving.net,Yieldlove GmbH,Advertising,header bidding; verify
+vgwort.de,VG Wort,Audience Measurement,counting pixel for author royalties (met.vgwort.de)
+greenvideo.io,GreenVideo,Advertising,video advertising; verify
+jwpltx.com,JW Player,Analytics,JW Player analytics (jwpsrv.com is the CDN, not tracking)
+eu-3-id5-sync.com,ID5 Technology Ltd,Identity,ID5 identity sync (seen on 7 sites)
+eu-4-id5-sync.com,ID5 Technology Ltd,Identity,ID5 identity sync (seen on 7 sites)
+privacymanager.io,LiveRamp Holdings Inc.,Identity,LiveRamp ATS wrapper (ats-wrapper.privacymanager.io)
+utiq.com,Utiq SA/NV,Identity,telco-based ad identifier (Telekom/Vodafone/Telefónica/Orange JV)
+utiqcontent.com,Utiq SA/NV,Identity,Utiq consent/templates
+fusion-platform.com,Novatiq Ltd,Identity,telco identity (novatiq_gam_integration.js)
+erne.co,Ströer SE & Co. KGaA,Identity,cookie matching for Ströer/adscale (green.erne.co/stroer/cm?uid=); verify owner
+sharethis.com,ShareThis Inc.,Identity,sync.sharethis.com cookie sync (ShareThis is also a data broker)
+adnxs-simple.com,Microsoft Corporation,Advertising,Xandr ad calls
+asadcdn.com,Axel Springer SE,Advertising,Axel Springer ad library (adlib); verify
+funkedigital.de,FUNKE Mediengruppe,Analytics,scout.data.funkedigital.de; verify
+sophi.io,Globe and Mail Inc.,Analytics,content analytics/paywall decisions; verify
+brilliantchap.com,unknown,Advertising,obfuscated script domain (ob.brilliantchap.com); verify
+cleverpush.com,CleverPush GmbH,Analytics,push notifications with audience analytics; verify
+qualtrics.com,Qualtrics,Analytics,site intercept surveys / experience analytics
+sentry.io,Functional Software Inc. (Sentry),Telemetry,error monitoring
+sentry-cdn.com,Functional Software Inc. (Sentry),Telemetry,error monitoring
+bugsnag.com,SmartBear (Bugsnag),Telemetry,error monitoring
+go-mpulse.net,Akamai Technologies,Telemetry,real user monitoring (mPulse)
+akstat.io,Akamai Technologies,Telemetry,real user monitoring (mPulse)
+baqend.com,Baqend GmbH,Telemetry,performance acceleration (Speed Kit)
+nr-data.net,New Relic,Telemetry,real user monitoring
+newrelic.com,New Relic,Telemetry,real user monitoring
+cloudflareinsights.com,Cloudflare Inc.,Telemetry,web analytics / RUM beacon
+kameleoon.io,Kameleoon,Telemetry,A/B testing
+kameleoon.eu,Kameleoon,Telemetry,A/B testing
+optimizely.com,Optimizely Inc.,Telemetry,A/B testing
+id5-sync.com,ID5 Technology Ltd,Identity,ID5 identity (cdn / api)
+loudecho.ai,LoudEcho,Identity,cs.loudecho.ai/sync; verify
+adtech.ink,adtech.ink,Identity,sync.adtech.ink/psync; verify
+rvty.net,rvty.net,Identity,AdscaleMatch cookie matching; verify
+netid.de,European netID Foundation,Identity,German login/identity alliance (netID permissions)
+apester.com,Apester,Advertising,interactive content with ad sync; verify
+adnz.co,Adnz AG,Advertising,clickstream collector; verify
+atmosvere.eu,atmosvere,Analytics,traffic collect API; verify
+yaleo.com,Yaleo,Advertising,prebid bidder; verify
+webalyse.org,webalyse,Analytics,verify
+reachit.network,reachit,Advertising,verify
+stroeerdigitalmedia.de,Ströer SE & Co. KGaA,Advertising,Ströer ad creatives
+relevant-digital.com,Relevant Digital Oy,Advertising,prebid wrapper (header bidding)

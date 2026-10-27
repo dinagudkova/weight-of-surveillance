@@ -1,0 +1,10 @@
+! Path rules for tracking on shared domains, in EasyList syntax (merged into EasyPrivacy).
+! Needed where a domain also serves normal content, so it cannot be classified as a whole.
+||s.pinimg.com/ct/
+||static.xingcdn.com/xingtrk/
+! United Internet (web.de / gmx) data acquisition script; verify
+||s.uicdn.com/t/prod/iq/mam/*/daq.js
+! Adobe Launch tag container of iq digital on CloudFront (Spiegel)
+||cloudfront.net/iqdadobe/
+! Spotify ad pixel
+||pixels.spotify.com^

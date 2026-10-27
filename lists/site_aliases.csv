@@ -1,0 +1,21 @@
+site_domain,alias_domain,note
+wetteronline.de,wo-cloud.com,WetterOnline asset CDN
+chefkoch.de,chefkoch-cdn.de,Chefkoch image CDN
+web.de,ui-portal.de,United Internet portal assets (web.de / gmx)
+gmx.net,ui-portal.de,United Internet portal assets (web.de / gmx)
+bahn.de,static-bahn.de,Deutsche Bahn static assets
+bild.de,bildstatic.de,BILD static assets
+zalando.de,ztat.net,Zalando static CDN
+tagesschau.de,sportschau.de,ARD shared assets
+tagesschau.de,ard.de,ARD shared assets
+tagesschau.de,ardmediathek.de,ARD shared assets
+web.de,uicdn.com,United Internet CDN
+gmx.net,uicdn.com,United Internet CDN
+web.de,gmx.net,United Internet
+gmx.net,web.de,United Internet
+gmx.net,gmx.ch,United Internet (consent cookie transfer)
+gmx.net,gmx.at,United Internet (consent cookie transfer)
+web.de,gmx.ch,United Internet (consent cookie transfer)
+web.de,gmx.at,United Internet (consent cookie transfer)
+t-online.de,tstat.net,t-online static assets (s.tstat.net/s/paper/...)
+bild.de,personalstream.tv,BILD video streaming (bild.personalstream.tv)

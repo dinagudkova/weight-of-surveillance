@@ -1,0 +1,7 @@
+node_modules/
+results*/
+*.jsonl
+screens/
+.DS_Store
+__pycache__/
+.env
