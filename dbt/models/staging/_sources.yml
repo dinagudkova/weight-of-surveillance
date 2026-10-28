@@ -15,3 +15,8 @@ sources:
         columns:
           - name: visit_id
             tests: [not_null]
+      - name: tcf_visits
+        description: >
+          Consent-vendor crawl ("promise vs reality"), loaded with load_raw.py --dataset tcf. Same columns as
+          visits; tcf_* fields hold the IAB TCF vendor consents after the click. May be absent until that crawl
+          is loaded (stg_tcf_visits then returns no rows).

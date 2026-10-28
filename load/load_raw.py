@@ -69,7 +69,17 @@ SELECT
     array_to_string(cookiesEnd.trackerOwners, ', ') AS cookies_end_tracker_owners,
     CAST(requests AS INTEGER)                 AS request_count,
     CAST(COALESCE(requestsDropped, 0) AS INTEGER) AS requests_dropped,
-    COALESCE(memoryAbort, false)              AS memory_abort
+    COALESCE(memoryAbort, false)              AS memory_abort,
+    CAST(declaredPartners AS INTEGER)         AS declared_partners,
+    declaredPartnersSnippet                   AS declared_partners_snippet,
+    tcf.available                             AS tcf_available,
+    tcf.ok                                    AS tcf_ok,
+    CAST(tcf.cmpId AS INTEGER)                AS tcf_cmp_id,
+    tcf.eventStatus                           AS tcf_event_status,
+    CAST(tcf.vendorConsents AS INTEGER)       AS tcf_vendor_consents,
+    CAST(tcf.vendorLegitimateInterests AS INTEGER) AS tcf_vendor_legitimate_interests,
+    CAST(tcf.purposeConsents AS INTEGER)      AS tcf_purpose_consents,
+    CAST(tcf.acVendors AS INTEGER)            AS tcf_ac_vendors
 FROM read_json('{path}', format = 'newline_delimited', union_by_name = true, sample_size = -1, columns = {columns})
 """
 
@@ -85,6 +95,9 @@ VISIT_COLUMNS = {
     "cookiesPre": "STRUCT(total BIGINT, thirdParty BIGINT, tracker BIGINT, trackerOwners VARCHAR[])",
     "cookiesEnd": "STRUCT(total BIGINT, thirdParty BIGINT, tracker BIGINT, trackerOwners VARCHAR[])",
     "requests": "BIGINT", "requestsDropped": "BIGINT", "memoryAbort": "BOOLEAN",
+    "declaredPartners": "BIGINT", "declaredPartnersSnippet": "VARCHAR",
+    "tcf": "STRUCT(available BOOLEAN, ok BOOLEAN, cmpId BIGINT, gdprApplies BOOLEAN, eventStatus VARCHAR, vendorConsents BIGINT, "
+           "vendorLegitimateInterests BIGINT, purposeConsents BIGINT, acVendors BIGINT, tcStringLength BIGINT, error VARCHAR)",
 }
 REQUEST_COLUMNS = {
     "visitId": "VARCHAR", "ts": "BIGINT", "phase": "VARCHAR", "url": "VARCHAR", "type": "VARCHAR", "status": "BIGINT",
@@ -138,7 +151,7 @@ def build_frames(con, folder, url_expr):
 
 
 def log(target, table, rows, seconds, folder):
-    WAREHOUSE.mkdir(exist_ok=True)
+    WAREHOUSE.mkdir(parents=True, exist_ok=True)
     path = WAREHOUSE / "load_log.csv"
     new = not path.exists()
     with open(path, "a", newline="") as f:
@@ -148,14 +161,20 @@ def log(target, table, rows, seconds, folder):
         w.writerow([datetime.now(timezone.utc).isoformat(timespec="seconds"), target, table, rows, round(seconds, 2), folder])
 
 
-def load_duckdb(folder, db_path):
-    WAREHOUSE.mkdir(exist_ok=True)
+# --dataset study (default): the main study, raw.visits + raw.requests (full reload).
+# --dataset tcf: the consent-vendor crawl ("promise vs reality"), visits only, into raw.tcf_visits;
+# its requests are not needed (observed companies come from the main study) and would only use Neon storage.
+DATASETS = {"study": {"visits": "visits", "requests": "requests"}, "tcf": {"visits": "tcf_visits"}}
+
+
+def load_duckdb(folder, db_path, dataset="study"):
+    WAREHOUSE.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect(str(db_path))
     con.execute("CREATE SCHEMA IF NOT EXISTS raw")
     build_frames(con, folder, "url")
-    for table in ["visits", "requests"]:
+    for view, table in DATASETS[dataset].items():
         t = time.perf_counter()
-        con.execute(f"CREATE OR REPLACE TABLE raw.{table} AS SELECT * FROM v_{table}")
+        con.execute(f"CREATE OR REPLACE TABLE raw.{table} AS SELECT * FROM v_{view}")
         n = con.execute(f"SELECT count(*) FROM raw.{table}").fetchone()[0]
         secs = time.perf_counter() - t
         log("duckdb", table, n, secs, folder)
@@ -175,7 +194,7 @@ def neon_url():
     return url
 
 
-def load_postgres(folder, url):
+def load_postgres(folder, url, dataset="study"):
     import psycopg
 
     con = duckdb.connect()
@@ -183,13 +202,13 @@ def load_postgres(folder, url):
     build_frames(con, folder, "left(split_part(url, '?', 1), 200)")
     with psycopg.connect(url, autocommit=False) as pg:
         pg.execute("CREATE SCHEMA IF NOT EXISTS raw")
-        for table in ["visits", "requests"]:
+        for view, table in DATASETS[dataset].items():
             t = time.perf_counter()
-            desc = con.execute(f"DESCRIBE v_{table}").fetchall()
+            desc = con.execute(f"DESCRIBE v_{view}").fetchall()
             cols = [(name, PG_TYPES.get(dtype, "text")) for name, dtype, *_ in desc]
             pg.execute(f"DROP TABLE IF EXISTS raw.{table} CASCADE")
             pg.execute(f"CREATE TABLE raw.{table} ({', '.join(f'{c} {t}' for c, t in cols)})")
-            rel = con.execute(f"SELECT * FROM v_{table}")
+            rel = con.execute(f"SELECT * FROM v_{view}")
             n = 0
             with pg.cursor().copy(f"COPY raw.{table} ({', '.join(c for c, _ in cols)}) FROM STDIN") as cp:
                 while True:
@@ -215,12 +234,14 @@ def main():
     p.add_argument("folder", help="crawl results folder with visits.jsonl and requests.jsonl")
     p.add_argument("--target", choices=["duckdb", "postgres", "both"], default="both")
     p.add_argument("--duckdb-path", default=str(WAREHOUSE / "wos.duckdb"))
+    p.add_argument("--dataset", choices=list(DATASETS), default="study",
+                   help="study: raw.visits + raw.requests; tcf: consent-vendor crawl into raw.tcf_visits")
     args = p.parse_args()
     folder = Path(args.folder).resolve()
     if args.target in ("duckdb", "both"):
-        load_duckdb(folder, args.duckdb_path)
+        load_duckdb(folder, args.duckdb_path, args.dataset)
     if args.target in ("postgres", "both"):
-        load_postgres(folder, neon_url())
+        load_postgres(folder, neon_url(), args.dataset)
 
 
 if __name__ == "__main__":

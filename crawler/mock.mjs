@@ -10,7 +10,7 @@ const page = `<!doctype html><html lang="de"><head><meta charset="utf-8"><title>
 ${Array.from({ length: 30 }, (_, i) => `<p>Artikel ${i} Lorem ipsum dolor sit amet.</p><img src="/img/${i}.jpg" width="300" height="100">`).join('')}
 <div id="cookie-banner" role="dialog" aria-label="Cookie-Einstellungen"
      style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #333;padding:24px;z-index:9999">
-  <p>Wir verwenden Cookies und ähnliche Technologien, um Inhalte zu personalisieren und Werbung anzuzeigen.
+  <p>Wir und unsere 185 Partner verwenden Cookies und ähnliche Technologien, um Inhalte zu personalisieren und Werbung anzuzeigen.
      Mit „Alle akzeptieren“ stimmen Sie der Verarbeitung Ihrer Daten durch uns und unsere Partner zu.</p>
   <button id="accept">Alle akzeptieren</button>
   <button id="reject">Alle ablehnen</button>
@@ -18,6 +18,14 @@ ${Array.from({ length: 30 }, (_, i) => `<p>Artikel ${i} Lorem ipsum dolor sit am
 <script>
   function load(src){ var s=document.createElement('script'); s.src=src; document.head.appendChild(s); }
   function px(src){ new Image().src=src; }
+  var tcState = { vendor: { consents: {}, legitimateInterests: {} }, purpose: { consents: {} }, addtlConsent: '2~~dv.', cmpId: 999, gdprApplies: true, eventStatus: 'cmpuishown', tcString: '' };
+  window.__tcfapi = function(cmd, v, cb){ if (cmd === 'getTCData') cb(tcState, true); };
+  document.getElementById('accept').addEventListener('click', function(){
+    for (var i = 1; i <= 185; i++) tcState.vendor.consents[i] = true;
+    for (var p = 1; p <= 10; p++) tcState.purpose.consents[p] = true;
+    tcState.addtlConsent = '2~1.39.43.46~dv.'; tcState.eventStatus = 'useractioncomplete'; tcState.tcString = 'CQ' + 'x'.repeat(200);
+  });
+  document.getElementById('reject').addEventListener('click', function(){ tcState.eventStatus = 'useractioncomplete'; tcState.tcString = 'CQ' + 'x'.repeat(60); });
   document.getElementById('accept').onclick=function(){
     document.getElementById('cookie-banner').remove();
     load('https://securepubads.g.doubleclick.net/tag/js/gpt.js');

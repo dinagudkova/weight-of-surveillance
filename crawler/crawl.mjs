@@ -161,9 +161,41 @@ async function inspect(page) {
   }
   if (out.bannerText) {
     out.payOrOkay = PAY_OR_OKAY.test(out.bannerText);
-    out.bannerText = out.bannerText.replace(/\s+/g, ' ').slice(0, 300);
+    out.bannerText = out.bannerText.replace(/\s+/g, ' ').slice(0, 1500); // long enough for "…und unsere 185 Partner…"
   }
   return out;
+}
+
+// "Promise vs reality": how many vendors did the user consent to? The IAB TCF v2 API (__tcfapi) of the CMP
+// reports the vendor consents of the current choice; after "Accept all" this is the number of partners the
+// banner asked consent for. Google's Additional Consent string (addtlConsent "1~id.id...") lists non-IAB vendors.
+async function tcfSnapshot(page) {
+  return withTimeout(page.evaluate(() => new Promise((resolve) => {
+    if (typeof window.__tcfapi !== 'function') return resolve({ available: false });
+    let done = false;
+    const finish = (v) => { if (!done) { done = true; resolve(v); } };
+    setTimeout(() => finish({ available: true, ok: false, error: 'timeout' }), 4000);
+    const count = (o) => (o ? Object.values(o).filter(Boolean).length : null);
+    try {
+      window.__tcfapi('getTCData', 2, (d, ok) => {
+        if (!ok || !d) return finish({ available: true, ok: false, error: 'not ok' });
+        const ac = typeof d.addtlConsent === 'string' && d.addtlConsent.includes('~')
+          ? d.addtlConsent.split('~')[1].split('.').filter(Boolean).length : null;
+        finish({
+          available: true, ok: true, cmpId: d.cmpId ?? null, gdprApplies: d.gdprApplies ?? null, eventStatus: d.eventStatus ?? null,
+          vendorConsents: count(d.vendor && d.vendor.consents), vendorLegitimateInterests: count(d.vendor && d.vendor.legitimateInterests),
+          purposeConsents: count(d.purpose && d.purpose.consents), acVendors: ac, tcStringLength: (d.tcString || '').length,
+        });
+      });
+    } catch (e) { finish({ available: true, ok: false, error: String(e).slice(0, 100) }); }
+  })), 6000, { available: null, ok: false, error: 'evaluate timeout' });
+}
+
+// Number of partners the banner text declares ("wir und unsere 185 Partner", "mit bis zu 254 Drittanbietern").
+const PARTNERS_RE = /(\d{1,4})\s*(?:[\p{L}-]+\s+){0,3}?(partner|partnern|drittanbieter|drittanbietern|dritte|anbieter|anbietern|vendors?|partners)\b/iu;
+function declaredPartners(text) {
+  const m = (text || '').match(PARTNERS_RE);
+  return m ? { n: Number(m[1]), snippet: m[0].slice(0, 80) } : { n: null, snippet: null };
 }
 
 async function cookieSnapshot(context, siteUrl) {
@@ -226,7 +258,8 @@ function loadSites() {
     { url: 'https://www.beispiel-block.test/', category: 'mock' }, // bot protection page
     { url: 'https://www.haengt-loop.test/', category: 'mock-hang' }, // main thread blocked forever
   ];
-  const lines = fs.readFileSync(SITES_FILE, 'utf8').trim().split('\n').slice(1);
+  // --sites accepts several files separated by commas (e.g. sample/sites_study.csv,sample/sites_boost.csv)
+  const lines = String(SITES_FILE).split(',').flatMap((f) => fs.readFileSync(f.trim(), 'utf8').trim().split('\n').slice(1));
   const sites = lines.map((l) => {
     const [url, category] = l.split(',');
     return { url: url.trim(), category: (category || '').trim() };
@@ -343,7 +376,7 @@ async function visit(browser, ua, site, mode, rep, handle) {
   let pre = { banner: false, bannerText: null, payOrOkay: false, botBlocked: false };
   let post = null;
   let cookiesPre = null;
-  const consent = { attempted: false, method: null, label: null, verified: null, clickAt: null };
+  const consent = { tcf: null, attempted: false, method: null, label: null, verified: null, clickAt: null };
 
   if (!navError) {
     await sleep(T.settle);
@@ -391,6 +424,7 @@ async function visit(browser, ua, site, mode, rep, handle) {
       consent.verified = !sawBanner ? null : consent.method ? !after.banner : false;
       consent.bannerTextAfter = after.banner ? after.bannerText : null; // what the detector still saw, for review
       await shot('2consent');
+      consent.tcf = await tcfSnapshot(page);
     }
 
     // 4. Observation window of fixed length, starting at the consent click (accept/reject) or right after
@@ -427,6 +461,8 @@ async function visit(browser, ua, site, mode, rep, handle) {
     platform: `${os.platform()} ${os.release()}`, browserVersion: browser.version(),
     navError, loadTimeout, mainStatus, finalUrl,
     botBlocked: pre.botBlocked, bannerPre: pre.banner, bannerText: pre.bannerText, payOrOkay: pre.payOrOkay,
+    declaredPartners: declaredPartners(pre.bannerText).n, declaredPartnersSnippet: declaredPartners(pre.bannerText).snippet,
+    tcf: consent.tcf,
     bannerEnd: post?.banner ?? null,
     cmp: ac.cmp, autoconsentDone: ac.done, autoconsentResult: ac.result, clicks: ac.clicks,
     bannerTextAfter: consent.bannerTextAfter ?? null,

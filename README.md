@@ -99,6 +99,25 @@ NEON_URL=postgresql://user:password@host/neondb?sslmode=require
 
 `scripts/dbt.py` passes this connection to dbt and logs run times to `data/warehouse/dbt_log.csv`; the loader logs to `data/warehouse/load_log.csv`. Both feed the DuckDB vs PostgreSQL comparison. Model details: [dbt/README.md](dbt/README.md).
 
+## Promise vs reality: consent partners
+
+Consent banners state how many partners the user consents to. After a verified "Accept all" the crawler asks
+the page's IAB TCF v2 API (`__tcfapi('getTCData')`) for the vendor consents of that choice, plus non-IAB
+vendors from Google's Additional Consent string, and also reads the number stated in the banner text
+("wir und unsere 185 Partner"). These are compared with the tracking companies actually observed after
+"Accept all" (`dbt/models/marts/mart_promise_vs_reality.sql`).
+
+This uses a separate crawl in mode `accept`, loaded into its own table so the main study stays unchanged:
+
+```bash
+node crawler/crawl.mjs --sites sample/sites_study.csv,sample/sites_boost.csv --out data/raw/tcf_mac1 --modes accept --shard 1/4 --machine mac1
+python scripts/merge_results.py data/raw/tcf_merged data/raw/tcf_mac1 data/raw/tcf_mac2 data/raw/tcf_win1 data/raw/tcf_win2
+python load/load_raw.py data/raw/tcf_merged --dataset tcf      # -> raw.tcf_visits
+python scripts/dbt.py build
+```
+
+Observed companies are a lower bound of who receives data: server-side sharing is not visible from the browser.
+
 ## Output files
 
 | File | Content |

@@ -20,6 +20,14 @@ models:
           - accepted_values:
               arguments:
                 values: ["no banner", "reject on first layer", "reject only in settings", "no reject without subscription", "reject not verified"]
+  - name: mart_promise_vs_reality
+    description: >
+      Per site: partners the banner asks consent for (IAB TCF vendor consents after a verified "Accept all",
+      plus Google Additional Consent vendors; and the number stated in the banner text) against the tracking
+      companies observed after "Accept all".
+    columns:
+      - name: site
+        tests: [not_null, unique]
   - name: mart_group_summary
     description: >
       Tracking load by category group (coarser categories for the dashboard). sites_boost counts sites added
