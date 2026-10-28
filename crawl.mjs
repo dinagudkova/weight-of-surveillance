@@ -535,7 +535,7 @@ async function main() {
         console.log(`[${++done}/${total}] ${key}: ${requests.length} req, ${trk} tracking, banner=${visitRow.bannerPre ? 'yes' : 'no'} consent=${visitRow.consentMethod ?? '-'}/${cv} ${flags}`);
       } catch (e) {
         console.error(`[${++done}/${total}] ${key}: FAILED ${e.message}`);
-        visOut.write(JSON.stringify({ site: s.url, category: s.category, mode: m, rep: r, date: new Date().toISOString(), machine: MACHINE, navError: 'crash: ' + e.message.slice(0, 200) }) + '\n');
+        visOut.write(JSON.stringify({ visitId: `crash-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`, site: s.url, category: s.category, mode: m, rep: r, date: new Date().toISOString(), machine: MACHINE, navError: 'crash: ' + e.message.slice(0, 200) }) + '\n');
       } finally {
         running.delete(key);
       }

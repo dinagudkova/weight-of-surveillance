@@ -54,3 +54,6 @@ webalyse.org,webalyse,Analytics,verify
 reachit.network,reachit,Advertising,verify
 stroeerdigitalmedia.de,Ströer SE & Co. KGaA,Advertising,Ströer ad creatives
 relevant-digital.com,Relevant Digital Oy,Advertising,prebid wrapper (header bidding)
+ad-production-stage.com,unknown,Advertising,ad creatives (seen on 2 sites); verify
+adcanvas.com,adcanvas,Advertising,ad creative platform; verify
+target-video.com,Target Video,Advertising,video ad delivery (cdn.target-video.com/live/partners); verify

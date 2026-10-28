@@ -1,0 +1,1060 @@
+domain,owner,source,priority,categories,only_non_tracking,cdn_like,ad_category,action_pixel,ad_owner,identity,telemetry
+stroeer.de,Ströer SE & Co. KGaA,custom,1,Advertising,False,False,True,False,True,False,False
+stroeerws.de,Ströer SE & Co. KGaA,custom,1,Advertising,False,False,True,False,True,False,False
+stroeerdigitalgroup.de,Ströer SE & Co. KGaA,custom,1,Advertising,False,False,True,False,True,False,False
+adscale.de,Ströer SE & Co. KGaA,custom,1,Advertising,False,False,True,False,True,False,False
+emetriq.de,emetriq GmbH,custom,1,Ad Motivated Tracking,False,False,True,False,False,False,False
+emetriq.com,emetriq GmbH,custom,1,Ad Motivated Tracking,False,False,True,False,False,False,False
+xplosion.de,emetriq GmbH,custom,1,Ad Motivated Tracking,False,False,True,False,False,False,False
+uimserv.net,United Internet Media,custom,1,Advertising,False,False,True,False,False,False,False
+plista.com,plista GmbH,custom,1,Advertising,False,False,True,False,False,False,False
+nativendo.de,nativendo GmbH,custom,1,Advertising,False,False,True,False,False,False,False
+yieldlove.com,Yieldlove GmbH,custom,1,Advertising,False,False,True,False,True,False,False
+yieldlove-ad-serving.net,Yieldlove GmbH,custom,1,Advertising,False,False,True,False,True,False,False
+vgwort.de,VG Wort,custom,1,Audience Measurement,False,False,False,False,False,False,False
+greenvideo.io,GreenVideo,custom,1,Advertising,False,False,True,False,False,False,False
+jwpltx.com,JW Player,custom,1,Analytics,False,False,False,False,False,False,False
+eu-3-id5-sync.com,ID5 Technology Ltd,custom,1,Identity,False,False,False,False,False,True,False
+eu-4-id5-sync.com,ID5 Technology Ltd,custom,1,Identity,False,False,False,False,False,True,False
+privacymanager.io,LiveRamp Holdings Inc.,custom,1,Identity,False,False,False,False,False,True,False
+utiq.com,Utiq SA/NV,custom,1,Identity,False,False,False,False,False,True,False
+utiqcontent.com,Utiq SA/NV,custom,1,Identity,False,False,False,False,False,True,False
+fusion-platform.com,Novatiq Ltd,custom,1,Identity,False,False,False,False,False,True,False
+erne.co,Ströer SE & Co. KGaA,custom,1,Identity,False,False,False,False,True,True,False
+sharethis.com,ShareThis Inc.,custom,1,Identity,False,False,False,False,False,True,False
+adnxs-simple.com,Microsoft Corporation,custom,1,Advertising,False,False,True,False,False,False,False
+asadcdn.com,Axel Springer SE,custom,1,Advertising,False,False,True,False,False,False,False
+funkedigital.de,FUNKE Mediengruppe,custom,1,Analytics,False,False,False,False,False,False,False
+sophi.io,Globe and Mail Inc.,custom,1,Analytics,False,False,False,False,False,False,False
+brilliantchap.com,unknown,custom,1,Advertising,False,False,True,False,False,False,False
+cleverpush.com,CleverPush GmbH,custom,1,Analytics,False,False,False,False,False,False,False
+qualtrics.com,Qualtrics,custom,1,Analytics,False,False,False,False,False,False,False
+sentry.io,Functional Software Inc. (Sentry),custom,1,Telemetry,False,False,False,False,False,False,True
+sentry-cdn.com,Functional Software Inc. (Sentry),custom,1,Telemetry,False,False,False,False,False,False,True
+bugsnag.com,SmartBear (Bugsnag),custom,1,Telemetry,False,False,False,False,False,False,True
+go-mpulse.net,Akamai Technologies,custom,1,Telemetry,False,False,False,False,False,False,True
+akstat.io,Akamai Technologies,custom,1,Telemetry,False,False,False,False,False,False,True
+baqend.com,Baqend GmbH,custom,1,Telemetry,False,False,False,False,False,False,True
+nr-data.net,New Relic,custom,1,Telemetry,False,False,False,False,False,False,True
+newrelic.com,New Relic,custom,1,Telemetry,False,False,False,False,False,False,True
+cloudflareinsights.com,Cloudflare Inc.,custom,1,Telemetry,False,False,False,False,False,False,True
+kameleoon.io,Kameleoon,custom,1,Telemetry,False,False,False,False,False,False,True
+kameleoon.eu,Kameleoon,custom,1,Telemetry,False,False,False,False,False,False,True
+optimizely.com,Optimizely Inc.,custom,1,Telemetry,False,False,False,False,False,False,True
+id5-sync.com,ID5 Technology Ltd,custom,1,Identity,False,False,False,False,False,True,False
+loudecho.ai,LoudEcho,custom,1,Identity,False,False,False,False,False,True,False
+adtech.ink,adtech.ink,custom,1,Identity,False,False,False,False,False,True,False
+rvty.net,rvty.net,custom,1,Identity,False,False,False,False,False,True,False
+netid.de,European netID Foundation,custom,1,Identity,False,False,False,False,False,True,False
+apester.com,Apester,custom,1,Advertising,False,False,True,False,False,False,False
+adnz.co,Adnz AG,custom,1,Advertising,False,False,True,False,False,False,False
+atmosvere.eu,atmosvere,custom,1,Analytics,False,False,False,False,False,False,False
+yaleo.com,Yaleo,custom,1,Advertising,False,False,True,False,False,False,False
+webalyse.org,webalyse,custom,1,Analytics,False,False,False,False,False,False,False
+reachit.network,reachit,custom,1,Advertising,False,False,True,False,False,False,False
+stroeerdigitalmedia.de,Ströer SE & Co. KGaA,custom,1,Advertising,False,False,True,False,True,False,False
+relevant-digital.com,Relevant Digital Oy,custom,1,Advertising,False,False,True,False,False,False,False
+ad-production-stage.com,unknown,custom,1,Advertising,False,False,True,False,False,False,False
+adcanvas.com,adcanvas,custom,1,Advertising,False,False,True,False,False,False,False
+target-video.com,Target Video,custom,1,Advertising,False,False,True,False,False,False,False
+2020mustang.com,"ICF Technology, Inc",ddg_tds,2,,True,False,False,False,False,False,False
+2mdn.net,Google LLC,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+33across.com,"33Across, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics,False,False,False,True,False,False,False
+360yield.com,Improve Digital BV,ddg_tds,2,Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+3lift.com,TripleLift,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,True,False,False
+4dex.io,Adagio,ddg_tds,2,,False,False,False,False,False,False,False
+4dsply.com,"AdSupply, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+64ce7c22c5.com,64ce7c22c5.com,ddg_tds,2,,True,False,False,False,False,False,False
+6sc.co,6 Sense Insights Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+9gtb.com,9gtb.com,ddg_tds,2,,True,False,False,False,False,False,False
+a-mo.net,Monet Engine Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+a-mx.com,Monet Engine Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+abtasty.com,AB Tasty,ddg_tds,2,Analytics|Session Replay|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+acint.net,Poshibalov Evgeny Vasilyevich,ddg_tds,2,,True,False,False,False,False,False,False
+acsbapp.com,accessiBe Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+acscdn.com,acscdn.com,ddg_tds,2,,True,False,False,False,False,False,False
+acuityplatform.com,AcuityAds,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+ad-score.com,Adscore Technologies DMCC,ddg_tds,2,,True,False,False,False,False,False,False
+ad.gt,Audigent,ddg_tds,2,,False,False,False,False,False,False,False
+adalyser.com,OneSoon Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+adapf.com,Maverick Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+adara.com,Adara Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+addtoany.com,AddToAny,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Embedded Content|Social - Share|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+adelixir.com,"NetElixir, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+adentifi.com,AdTheorent Inc,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+adform.net,Adform A/S,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Audience Measurement,False,False,False,False,True,False,False
+adgrx.com,AdGear Technologies Inc.,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+adhese.com,Doggybites bvba,ddg_tds,2,,True,False,False,False,False,False,False
+adhigh.net,GetIntent,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+adition.com,Virtual Minds AG,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,True,False,False
+aditude.cloud,aditude.cloud,ddg_tds,2,,False,False,False,False,False,False,False
+aditude.io,aditude.io,ddg_tds,2,,False,False,False,False,False,False,False
+adkernel.com,"Adkernel, LLC",ddg_tds,2,Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+adlightning.com,"Ad Lightning, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+adlooxtracking.com,Adloox SAS,ddg_tds,2,,True,False,False,False,False,False,False
+admanmedia.com,ADman Media,ddg_tds,2,,False,False,False,False,False,False,False
+admaster.cc,admaster.cc,ddg_tds,2,,False,False,False,False,False,False,False
+admatrix.jp,fullspeed,ddg_tds,2,,True,False,False,False,False,False,False
+admd.ink,admd.ink,ddg_tds,2,,True,False,False,False,False,False,False
+admedo.com,Admedo,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+admixer.net,Admixer Technologies,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+adnami.io,Adnami ApS,ddg_tds,2,,False,False,False,False,True,False,False
+adnxs.com,Microsoft Corporation,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+adobedc.net,Adobe Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+adobedtm.com,Adobe Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Tag Manager|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+adocean.pl,Gemius S.A.,ddg_tds,2,,True,False,False,False,False,False,False
+adotmob.com,A.Mob SAS,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+adpone.com,"Adpone, S.L.",ddg_tds,2,,True,False,False,False,False,False,False
+adpushup.com,"CacheNetworks, LLC",ddg_tds,2,,True,False,False,False,False,False,False
+adroll.com,"AdRoll, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+ads-twitter.com,"Twitter, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+adsafeprotected.com,"Integral Ad Science, Inc.",ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising,False,False,True,False,True,False,False
+adsco.re,Adscore Technologies DMCC,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Analytics|Audience Measurement,False,False,False,False,False,False,False
+adspeed.net,ADSPEED.COM,ddg_tds,2,,True,False,False,False,False,False,False
+adsrvr.org,The Trade Desk Inc,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,True,False,False
+adtarget.biz,adtarget.biz,ddg_tds,2,,False,False,False,False,False,False,False
+adtarget.com.tr,AdTarget Medya A.Ş.,ddg_tds,2,,False,False,False,False,False,False,False
+adtelligent.com,Adtelligent Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+adthrive.com,"AdThrive, LLC",ddg_tds,2,Advertising,False,False,True,False,False,False,False
+adtng.com,Aylo,ddg_tds,2,,True,False,False,False,False,False,False
+adtrafficquality.google,Google LLC,ddg_tds,2,,False,False,False,False,False,False,False
+adultfriendfinder.com,FriendFinder Networks Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+adventive.com,"Adventive, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+advolve.io,advolve.io,ddg_tds,2,,True,False,False,False,False,False,False
+adyen.com,Adyen N.V.,ddg_tds,2,,True,False,False,False,False,False,False
+aegpresents.com,"Anschutz Entertainment Group, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+affirm.com,"Affirm Holdings, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+agilone.com,Agilone Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+agkn.com,TransUnion LLC,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+agoda.com,Booking Holdings Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+ahrefs.com,Ahrefs Pte Ltd,ddg_tds,2,,False,False,False,False,False,False,False
+aidata.io,Aidata,ddg_tds,2,Ad Motivated Tracking|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+aimbase.com,Avala Marketing Group,ddg_tds,2,,True,False,False,False,False,False,False
+albacross.com,Albacross Nordic AB,ddg_tds,2,,True,False,False,False,False,False,False
+alcmpn.com,ALC,ddg_tds,2,Ad Motivated Tracking|Analytics|Audience Measurement,False,False,False,False,False,False,False
+alia-prod.com,alia-prod.com,ddg_tds,2,,True,False,False,False,False,False,False
+alicdn.com,Alibaba Group,ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+alocdn.com,"TowerData, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+amazon-adsystem.com,"Amazon Technologies, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,True,False,False
+amazon.com,"Amazon Technologies, Inc.",ddg_tds,2,Ad Motivated Tracking|Analytics|Embedded Content|Online Payment|SSO|Third-Party Analytics Marketing,False,True,False,False,True,False,False
+amplitude.com,Amplitude,ddg_tds,2,Analytics,False,False,False,False,False,False,False
+ampproject.org,Google LLC,ddg_tds,2,Advertising|Content Delivery,False,True,True,False,False,False,False
+amspbs.com,amspbs.com,ddg_tds,2,,False,False,False,False,False,False,False
+amx1.net,amx1.net,ddg_tds,2,,False,False,False,False,False,False,False
+amxrtb.com,Monet Engine Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+analytics-egain.com,eGain Corporation,ddg_tds,2,Support Chat Widget,True,False,False,False,False,False,False
+aniview.com,ANIVIEW LTD,ddg_tds,2,,False,False,False,False,False,False,False
+anonm.io,anonm.io,ddg_tds,2,,True,False,False,False,False,False,False
+anonymised.io,anonymised.io,ddg_tds,2,,False,False,False,False,False,False,False
+anymind360.com,AnyMind Group Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+app-us1.com,"ActiveCampaign, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+appboycdn.com,"Braze, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+appier.net,"Appier Group, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+apple-mapkit.com,Apple Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+applovin.com,AppLovin Corporation,ddg_tds,2,,False,False,False,False,False,False,False
+asapp.com,ASAPP Inc,ddg_tds,2,,True,False,False,False,False,False,False
+aswpsdkus.com,"Urban Airship, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+atlassian.com,Atlassian Corporation plc,ddg_tds,2,,True,False,False,False,False,False,False
+atmtd.com,atmtd.com,ddg_tds,2,,True,False,False,False,False,False,False
+attn.tv,Attentive Mobile,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+attntags.com,attntags.com,ddg_tds,2,,False,False,False,False,False,False,False
+au.edgekey.net,Akamai Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+audioeye.com,"AudioEye, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+auswaertiges-amt.de,Auswärtiges Amt,ddg_tds,2,,True,False,False,False,False,False,False
+automizely-analytics.com,automizely-analytics.com,ddg_tds,2,,True,False,False,False,False,False,False
+aweber.com,"AWEBER SYSTEMS, INC.",ddg_tds,2,,True,False,False,False,False,False,False
+awswaf.com,"Amazon Technologies, Inc.",ddg_tds,2,,True,False,False,False,True,False,False
+axon.ai,"Axon Enterprise, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+ay.delivery,Assertive Yield B.V.,ddg_tds,2,,False,False,False,False,False,False,False
+ayads.co,Sublime Skinz Labs,ddg_tds,2,,True,False,False,False,False,False,False
+azure.com,Microsoft Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+azurefd.net,Microsoft Corporation,ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+b2c.com,b2c.com,ddg_tds,2,,True,False,False,False,False,False,False
+bannerflow.net,BannerFlow AB,ddg_tds,2,,True,False,False,False,False,False,False
+basis.net,"Centro, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics,False,False,False,True,False,False,False
+batch.com,IMEDIAPP SA,ddg_tds,2,,True,False,False,False,False,False,False
+bc0a.com,BrightEdge Technologies Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+beehiiv.com,beehiiv.com,ddg_tds,2,,True,False,False,False,False,False,False
+betweendigital.com,SSP Network Ltd,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+bfmio.com,Beachfront Media LLC,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+bidr.io,Beeswax,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+bids.ws,bids.ws,ddg_tds,2,,True,False,False,False,False,False,False
+bidswitch.net,IPONWEB GmbH,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+bidtheatre.com,BidTheatre AB,ddg_tds,2,,False,False,False,False,False,False,False
+bing.com,Microsoft Corporation,ddg_tds,2,Action Pixels|Ad Fraud|Ad Motivated Tracking|Advertising|Embedded Content,False,True,True,True,False,False,False
+bizrate.com,"Synapse Group, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Embedded Content|Third-Party Analytics Marketing,False,True,False,True,False,False,False
+blackcrow.ai,"Black Crow AI, Inc",ddg_tds,2,,True,False,False,False,False,False,False
+blis.com,Blis Global Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+blismedia.com,Blis Global Ltd,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+blogherads.com,"BlogHer, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+bloomreach.com,"Bloomreach, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+bluecava.com,ALC,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Analytics|Audience Measurement,False,False,False,False,False,False,False
+blueconic.net,"BlueConic, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+boomtrain.com,Zeta Global,ddg_tds,2,,True,False,False,False,False,False,False
+bounceexchange.com,Bounce Exchange,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,True,False,False,False
+bqstreamer.com,bqstreamer.com,ddg_tds,2,,True,False,False,False,False,False,False
+brainlyads.com,"Next Millennium Media, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+branch.io,"Branch Metrics, Inc.",ddg_tds,2,Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+brand-display.com,Knorex Pte. Ltd.,ddg_tds,2,,True,False,False,False,False,False,False
+brandmetrics.com,Brandmetrics,ddg_tds,2,,False,False,False,False,False,False,False
+brealtime.com,"EMX Digital, LLC",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,False,False,False,False
+browser-update.org,Browser Update,ddg_tds,2,Badge|Embedded Content,True,True,False,False,False,False,False
+browsiprod.com,Browsi Mobile LLC,ddg_tds,2,,False,False,False,False,False,False,False
+btloader.com,Blockthrough Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+bttrack.com,"Bidtellect, Inc",ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Embedded Content,False,True,False,False,False,False,False
+btttag.com,Blue Triangle Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+buysellads.net,BuySellAds,ddg_tds,2,,True,False,False,False,False,False,False
+buzzoola.com,Buzzoola Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+byspotify.com,Spotify AB,ddg_tds,2,,True,False,False,False,False,False,False
+cachefly.net,"CacheNetworks, LLC",ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+callrail.com,"CallRail, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+campaigner.com,J2 Global Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+canva.com,Canva Pty Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+captcha-delivery.com,DataDome,ddg_tds,2,,False,False,False,False,False,False,False
+cartstack.com,10fold Solutions LLC,ddg_tds,2,,True,False,False,False,False,False,False
+casalemedia.com,"Index Exchange, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,True,False,False
+ccgateway.net,Clicksco FZ,ddg_tds,2,,False,False,False,False,False,False,False
+cdn-net.com,American Express Company,ddg_tds,2,,True,False,False,False,False,False,False
+cdnwidget.com,CDNWIDGET.COM,ddg_tds,2,Obscure Ownership|Unknown High Risk Behavior,False,False,False,False,False,False,False
+center.io,"Avenue 81, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+channeladvisor.com,CommerceHub,ddg_tds,2,,True,False,False,False,False,False,False
+chartbeat.com,Chartbeat,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,False,False,False,False
+chaseherbalpasty.com,Clickadu s.r.o.,ddg_tds,2,,True,False,False,False,False,False,False
+chatango.com,Chatango LLC.,ddg_tds,2,,True,False,False,False,False,False,False
+chatra.io,Roger Wilco LLC,ddg_tds,2,,True,False,False,False,False,False,False
+chaturbate.com,"Chaturbate, LLC",ddg_tds,2,Ad Motivated Tracking|Advertising|Embedded Content,False,True,True,False,False,False,False
+cheqzone.com,CHEQ AI Technologies Ltd.,ddg_tds,2,,True,False,False,False,False,False,False
+chocolateplatform.com,Vdopia Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+ck-ie.com,ck-ie.com,ddg_tds,2,,False,False,False,False,False,False,False
+clarity.ms,Microsoft Corporation,ddg_tds,2,,False,False,False,False,False,False,False
+cleantalk.org,cleantalk.org,ddg_tds,2,,True,False,False,False,False,False,False
+clearbit.com,"APIHub, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+clickagy.com,Clickagy,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+clicktripz.com,Clicktripz,ddg_tds,2,,True,False,False,False,False,False,False
+clientgear.com,"Easy Click Worldwide Network Technology Co., Ltd.",ddg_tds,2,,True,False,False,False,False,False,False
+cloudflare.com,"Cloudflare, Inc.",ddg_tds,2,Analytics|Content Delivery|Embedded Content,False,True,False,False,False,False,False
+cloudflareinsights.com,"Cloudflare, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+cnevids.com,"Sabin, Bermant & Gould LLP",ddg_tds,2,,True,False,False,False,False,False,False
+cnn.com,"Warner Bros. Discovery, Inc.",ddg_tds,2,Embedded Content,True,True,False,False,False,False,False
+cnt.my,INTER CITY ADS (MALAYSIA) SDN. BHD,ddg_tds,2,,True,False,False,False,False,False,False
+cnzz.com,Alibaba Group,ddg_tds,2,,True,False,False,False,False,False,False
+codedrink.com,codedrink.com,ddg_tds,2,,True,False,False,False,False,False,False
+cognitivlabs.com,Cognitiv Corp.,ddg_tds,2,,False,False,False,False,False,False,False
+collegenet.com,CollegeNET,ddg_tds,2,,True,False,False,False,False,False,False
+com-v1.edgekey.net,Akamai Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+comm100.com,Comm100 Network Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+company-target.com,"Demandbase, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Obscure Ownership|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+condenastdigital.com,Conde Nast Publications Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+confiant-integrations.net,"Confiant, Inc.",ddg_tds,2,,False,False,False,False,True,False,False
+config-security.com,config-security.com,ddg_tds,2,,False,False,False,False,False,False,False
+connatix.com,Connatix,ddg_tds,2,,False,False,False,False,False,False,False
+connectad.io,ConnectAd,ddg_tds,2,,False,False,False,False,False,False,False
+consentmo.com,consentmo.com,ddg_tds,2,,False,False,False,False,False,False,False
+contentabc.com,Aylo,ddg_tds,2,Advertising|Obscure Ownership|Unknown High Risk Behavior,False,False,True,False,False,False,False
+contentpass.net,Content Pass GmbH,ddg_tds,2,,True,False,False,False,False,False,False
+contentsquare.net,ContentSquare,ddg_tds,2,Action Pixels|Analytics|Audience Measurement|Session Replay|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+contextweb.com,"Pulsepoint, Inc.",ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Audience Measurement,False,False,False,False,False,False,False
+convertexperiments.com,Convert Insights Inc,ddg_tds,2,,False,False,False,False,False,False,False
+cookie-script.com,cookie-script.com,ddg_tds,2,,False,False,False,False,False,False,False
+coosync.com,coosync.com,ddg_tds,2,,True,False,False,False,False,False,False
+cootlogix.com,Vidazoo Ltd,ddg_tds,2,,False,False,False,False,False,False,False
+copper6.com,copper6.com,ddg_tds,2,,False,False,False,False,False,False,False
+cordial.io,"Bandfarm, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+coveo.com,Coveo Solutions Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+cquotient.com,"Salesforce.com, Inc.",ddg_tds,2,Analytics,False,False,False,False,False,False,False
+crazyegg.com,"Crazy Egg, Inc.",ddg_tds,2,Analytics|Audience Measurement|Session Replay|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+crcldu.com,crcldu.com,ddg_tds,2,,True,False,False,False,False,False,False
+creative-serving.com,Platform161,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising,False,False,True,True,False,False,False
+creativecdn.com,RTB House S.A.,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+crisp.chat,Crisp IM SARL,ddg_tds,2,Support Chat Widget,True,False,False,False,False,False,False
+criteo.com,Criteo SA,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,True,False,False
+criteo.net,Criteo SA,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,True,False,False
+crwdcntrl.net,"Lotame Solutions, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Audience Measurement,False,False,False,False,False,False,False
+ctctcdn.com,"Constant Contact, Inc",ddg_tds,2,,True,False,False,False,False,False,False
+ctnsnet.com,Crimtan Holdings Ltd,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+cxense.com,Piano Software,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+d.sni.global.fastly.net,"Fastly, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Content Delivery|Embedded Content|Session Replay|Third-Party Analytics Marketing,False,True,False,True,False,False,False
+d14jnfavjicsbe.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+d1af033869koo7.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+d1j0xlutvd326g.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+d1p5cqqchvbqmy.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+d1vg5xiq7qffdj.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+d1x4rwm1kh8pnu.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+d21gpk1vhmjuf5.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+d2trly8m2h0e8p.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+d38xvr37kwwhcm.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+d3fukwxve5r8zf.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+d6tizftlrpuof.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+dailymotion.com,Dailymotion SA,ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,False,False,False
+datadoghq-browser-agent.com,"Datadog, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+datagrail.io,datagrail.io,ddg_tds,2,,True,False,False,False,False,False,False
+datatrac.net,Datatrac Corp,ddg_tds,2,,True,False,False,False,False,False,False
+de.edgekey.net,Akamai Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+deadlinefunnel.com,Cash Cow Marketing,ddg_tds,2,,True,False,False,False,False,False,False
+dealerinspire.com,"THE ENDURANCE INTERNATIONAL GROUP, INC.",ddg_tds,2,,True,False,False,False,False,False,False
+deepintent.com,DeepIntent Inc,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,False,False,False,False
+delivra.com,Delivra,ddg_tds,2,,True,False,False,False,False,False,False
+demandbase.com,"Demandbase, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+demdex.net,Adobe Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+dhs.gov,Department of Homeland Security,ddg_tds,2,,True,False,False,False,False,False,False
+dianomi.com,Dianomi Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+digitaloceanspaces.com,"DigitalOcean, LLC",ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+digitaltarget.ru,LLC AmberData,ddg_tds,2,,True,False,False,False,False,False,False
+dimelochat.com,dimelo sas,ddg_tds,2,,True,False,False,False,False,False,False
+discover.com,DFS Services LLC,ddg_tds,2,,True,False,False,False,False,False,False
+disqus.com,"Disqus, Inc.",ddg_tds,2,Embedded Content|Federated Login|Social - Comment,True,True,False,False,False,False,False
+dm2q9qfzyjfox.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+docaccess.com,docaccess.com,ddg_tds,2,,False,False,False,False,False,False,False
+dotmetrics.net,Dotmetrics,ddg_tds,2,,True,False,False,False,False,False,False
+dotomi.com,Conversant LLC,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+doubleclick.net,Google LLC,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+doubleverify.com,DoubleVerify,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising,False,False,True,False,True,False,False
+dpgmedia.nl,Ringier AG,ddg_tds,2,,True,False,False,False,False,False,False
+driftt.com,"Drift.com, Inc.",ddg_tds,2,Analytics|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+dsh7ky7308k4b.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+dtscout.com,DTS Technology,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,False,False,False
+duube1y6ojsji.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+dv.tech,dv.tech,ddg_tds,2,,False,False,False,False,False,False,False
+dvagh3p3rk8xj.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+dwin1.com,Awin AG,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,False,False,False
+dxtech.ai,dxtech.ai,ddg_tds,2,,False,False,False,False,False,False,False
+dynatrace.com,Dynatrace LLC,ddg_tds,2,,False,False,False,False,False,False,False
+e-planning.net,Teroa S.A.,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+earmuffpostnasalrisotto.com,earmuffpostnasalrisotto.com,ddg_tds,2,,True,False,False,False,False,False,False
+ebaystatic.com,"eBay, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+ebxcdn.com,ebxcdn.com,ddg_tds,2,,False,False,False,False,False,False,False
+eccmp.com,Cheetah Digital Inc,ddg_tds,2,,True,False,False,False,False,False,False
+elfsight.com,Vladimir Fedotov,ddg_tds,2,,True,False,False,False,False,False,False
+eloqua.com,Oracle Corporation,ddg_tds,2,Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+empowerlocal.co,empowerlocal.co,ddg_tds,2,,True,False,False,False,False,False,False
+emxdgt.com,Engine USA LLC,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,False,False,False
+en25.com,Oracle Corporation,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+ensighten.com,"Ensighten, Inc",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+epichosted.com,Epic Systems Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+eskimi.com,eskimi.com,ddg_tds,2,,False,False,False,False,False,False,False
+esm1.net,Dealer Dot Com Inc,ddg_tds,2,,True,False,False,False,False,False,False
+eulerian.net,Eulerian Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+everestjs.net,Adobe Inc.,ddg_tds,2,Ad Motivated Tracking,False,False,True,False,False,False,False
+everesttech.net,Adobe Inc.,ddg_tds,2,Ad Motivated Tracking|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+evergage.com,"Salesforce.com, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+evgnet.com,"Salesforce.com, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+exdynsrv.com,"ExoClick, S.L.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+exelator.com,The Nielsen Company,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,True,False,False,False
+exoclick.com,"ExoClick, S.L.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+exosrv.com,"ExoClick, S.L.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+exponea.com,"Bloomreach, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+exponential.com,Exponential Interactive Inc.,ddg_tds,2,Action Pixels|Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Session Replay,False,False,False,True,False,False,False
+extole.com,Extole,ddg_tds,2,,True,False,False,False,False,False,False
+extole.io,Extole,ddg_tds,2,,True,False,False,False,False,False,False
+eyeota.net,eyeota Limited,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+ezodn.com,Ezoic Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+ezoic.net,Ezoic Inc.,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Session Replay|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+ezoicanalytics.com,ezoicanalytics.com,ddg_tds,2,,True,False,False,False,False,False,False
+ezojs.com,ezojs.com,ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+facebook.net,"Facebook, Inc.",ddg_tds,2,Action Pixels|Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Badge|Embedded Content|Federated Login|Social - Comment|Social - Share|Social Network,False,True,False,True,False,False,False
+fastclick.net,Conversant LLC,ddg_tds,2,,False,False,False,False,False,False,False
+feefo.com,Feefo Holdings Limited,ddg_tds,2,,True,False,False,False,False,False,False
+five9.com,"Five9, Inc",ddg_tds,2,Support Chat Widget,True,False,False,False,False,False,False
+flashtalking.com,Mediaocean LLC,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Embedded Content|Session Replay|Third-Party Analytics Marketing,False,True,False,True,False,False,False
+flippback.com,flippback.com,ddg_tds,2,,True,False,False,False,False,False,False
+flixcdn.com,flixcdn.com,ddg_tds,2,,True,False,False,False,False,False,False
+flodesk.com,"Flodesk, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+flowplayer.org,Flowplayer AB,ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,False,False,False
+fomo.com,Fomo,ddg_tds,2,,True,False,False,False,False,False,False
+fonts.net,Monotype Imaging Inc.,ddg_tds,2,Action Pixels|Content Delivery,False,True,True,True,False,False,False
+foresee.com,"ForeSee Results, Inc.",ddg_tds,2,Action Pixels|Analytics|Audience Measurement|Session Replay,False,False,False,True,False,False,False
+fouanalytics.com,"Marketing Science Consulting Group, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+fout.jp,"FreakOut Holdings, inc.",ddg_tds,2,,True,False,False,False,False,False,False
+fr.edgekey.net,Akamai Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+freshworks.com,Freshworks Inc,ddg_tds,2,,True,False,False,False,False,False,False
+fsrv.io,fsrv.io,ddg_tds,2,,False,False,False,False,False,False,False
+ftstatic.com,Mediaocean LLC,ddg_tds,2,,False,False,False,False,False,False,False
+fullstory.com,FullStory,ddg_tds,2,Analytics|Session Replay,False,False,False,False,False,False,False
+fuseplatform.net,fuseplatform.net,ddg_tds,2,,False,False,False,False,False,False,False
+fwmrm.net,FreeWheel,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+g2.com,g2.com,ddg_tds,2,,True,False,False,False,False,False,False
+gaug.es,gaug.es,ddg_tds,2,,True,False,False,False,False,False,False
+gbqofs.com,Glassbox Ltd.,ddg_tds,2,,True,False,False,False,False,False,False
+gcprivacy.net,gcprivacy.net,ddg_tds,2,,True,False,False,False,False,False,False
+gemius.pl,Gemius S.A.,ddg_tds,2,Ad Motivated Tracking|Advertising|Audience Measurement,False,False,False,False,False,False,False
+geoedge.be,Five Media Marketing Limited,ddg_tds,2,,False,False,False,False,True,False,False
+getcandid.com,FIVEACES INC,ddg_tds,2,,True,False,False,False,False,False,False
+getdrip.com,"Avenue 81, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+getelevar.com,getelevar.com,ddg_tds,2,,False,False,False,False,False,False,False
+getflowbox.com,cyon GmbH,ddg_tds,2,,True,False,False,False,False,False,False
+getlasso.co,"Lasso Analytics, Inc",ddg_tds,2,,True,False,False,False,False,False,False
+getrockerbox.com,"Rockerbox, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+getsitecontrol.com,GetWebCraft Limited,ddg_tds,2,Ad Motivated Tracking|Analytics|Audience Measurement|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+go-mpulse.net,Akamai Technologies,ddg_tds,2,Analytics,False,False,False,False,False,False,False
+go-vip.net,go-vip.net,ddg_tds,2,,True,False,False,False,False,False,False
+godaddy.com,GoDaddy Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+google-analytics.com,Google LLC,ddg_tds,2,Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+google.com,Google LLC,ddg_tds,2,Ad Motivated Tracking|Advertising|Content Delivery|Online Payment,False,True,True,False,False,False,False
+googleadservices.com,Google LLC,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+googlehosted.com,Google LLC,ddg_tds,2,,True,False,False,False,False,False,False
+googlesyndication.com,Google LLC,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+googletagmanager.com,Google LLC,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Tag Manager|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+googletagservices.com,Google LLC,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+gorgias.chat,gorgias.chat,ddg_tds,2,Support Chat Widget,True,False,False,False,False,False,False
+gotolstoy.com,gotolstoy.com,ddg_tds,2,,True,False,False,False,False,False,False
+gov.bc.ca,Government of the Province of British Columbia,ddg_tds,2,,True,False,False,False,False,False,False
+granicus.com,"Granicus, LLC",ddg_tds,2,,True,False,False,False,False,False,False
+greylabeldelivery.com,greylabeldelivery.com,ddg_tds,2,,True,False,False,False,False,False,False
+groovehq.com,Groove Networks LLC,ddg_tds,2,Support Chat Widget,True,False,False,False,False,False,False
+grow.me,"Mediavine, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+grsm.io,GrowSumo Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+grv.media,GRV Media,ddg_tds,2,,True,False,False,False,False,False,False
+gsitrix.com,GP One GmbH,ddg_tds,2,,True,False,False,False,False,False,False
+gstatic.com,Google LLC,ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,False,False,False
+gtranslate.net,gtranslate.net,ddg_tds,2,,True,False,False,False,False,False,False
+guarantee-cdn.com,buySAFE Inc,ddg_tds,2,,True,False,False,False,False,False,False
+gumgum.com,GumGum,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+hadronid.net,hadronid.net,ddg_tds,2,,True,False,False,False,False,False,False
+hatena.ne.jp,"Hatena Co., Ltd.",ddg_tds,2,,True,False,False,False,False,False,False
+hbrd.io,"Hybrid Adtech, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+hearst-hdm.map.fastly.net,"Fastly, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Content Delivery|Embedded Content|Session Replay|Third-Party Analytics Marketing,False,True,False,True,False,False,False
+heatmap.com,heatmap.com,ddg_tds,2,,True,False,False,False,False,False,False
+histats.com,wisecode s.r.l.,ddg_tds,2,Analytics|Audience Measurement,False,False,False,False,False,False,False
+hlx.page,hlx.page,ddg_tds,2,,False,False,False,False,False,False,False
+hotjar.com,Hotjar Ltd,ddg_tds,2,Analytics|Audience Measurement|Session Replay,False,False,False,False,False,False,False
+hrzn-nxt.com,"Horizon Media, LLC",ddg_tds,2,,True,False,False,False,False,False,False
+hs-analytics.net,"HubSpot, Inc.",ddg_tds,2,Action Pixels|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+hs-banner.com,"HubSpot, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+hs-scripts.com,"HubSpot, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Content Delivery|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+hsadspixel.net,"HubSpot, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+hsappstatic.net,"HubSpot, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+hscta.net,"HubSpot, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+htlbid.com,htlbid.com,ddg_tds,2,,False,False,False,False,False,False,False
+html-load.cc,html-load.cc,ddg_tds,2,,True,False,False,False,False,False,False
+html-load.com,html-load.com,ddg_tds,2,,False,False,False,False,False,False,False
+hubspot.com,"HubSpot, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+hubspotfeedback.com,"HubSpot, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+hybrid.ai,"Hybrid Adtech, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,False,False,False,False
+iadvize.com,iAdvize,ddg_tds,2,,True,False,False,False,False,False,False
+id5-sync.com,ID5 Technology Ltd,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+idio.co,idio,ddg_tds,2,,True,False,False,False,False,False,False
+igodigital.com,"Salesforce.com, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+ihg.edgekey.net,Akamai Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+iljmp.com,Awio Web Services LLC,ddg_tds,2,,True,False,False,False,False,False,False
+im-apps.net,"Intimate Merger, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+impact-ad.jp,Digital Advertising Consortium Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+impact.com,Impact,ddg_tds,2,,True,False,False,False,False,False,False
+impactcdn.com,Impact,ddg_tds,2,,False,False,False,False,False,False,False
+impactradius-event.com,Impact,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+impervadns.net,impervadns.net,ddg_tds,2,,True,False,False,False,False,False,False
+improvedcontactform.com,Awio Web Services LLC,ddg_tds,2,,True,False,False,False,False,False,False
+improvedigital.com,Improve Digital BV,ddg_tds,2,,True,False,False,False,False,False,False
+imrworldwide.com,The Nielsen Company,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+increasingly.co,Increasingly Technologies Limited,ddg_tds,2,,True,False,False,False,False,False,False
+indexww.com,"Index Exchange, Inc.",ddg_tds,2,Advertising|Analytics,False,False,False,False,True,False,False
+infolinks.com,Infolink Media LLC,ddg_tds,2,,False,False,False,False,False,False,False
+infusionsoft.app,Infusion Software,ddg_tds,2,,True,False,False,False,False,False,False
+infusionsoft.com,Infusion Software,ddg_tds,2,,True,False,False,False,False,False,False
+ingage.tech,Insticator,ddg_tds,2,,False,False,False,False,False,False,False
+inmobi.com,InMobi Pte Ltd,ddg_tds,2,,False,False,False,False,False,False,False
+inq.com,"TouchCommerce, Inc",ddg_tds,2,,True,False,False,False,False,False,False
+inside-graph.com,Michael Browitt,ddg_tds,2,,True,False,False,False,False,False,False
+instagram.com,"Facebook, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Embedded Content|Social - Share|Social Network,False,True,True,False,False,False,False
+instana.io,"Instana, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+intelligems.io,intelligems.io,ddg_tds,2,,False,False,False,False,False,False,False
+intentiq.com,Almondnet Group,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+intergi.com,Intergi Entertainment,ddg_tds,2,,False,False,False,False,False,False,False
+intergient.com,Intergi Entertainment,ddg_tds,2,,False,False,False,False,False,False,False
+intuit.com,Intuit Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+investingchannel.com,"InvestingChannel, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+invocacdn.com,Invoca,ddg_tds,2,,False,False,False,False,False,False,False
+io.edgekey.net,Akamai Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+ioam.de,INFOnline GmbH,ddg_tds,2,Audience Measurement,False,False,False,False,False,False,False
+iperceptions.com,iPerceptions Inc.,ddg_tds,2,Analytics|Embedded Content,False,True,False,False,False,False,False
+iplsc.com,Grupa Interia.pl Sp. z o.o. sp. k.,ddg_tds,2,,True,False,False,False,False,False,False
+ipredictive.com,"Adelphic, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+iqm.com,iqm.com,ddg_tds,2,,False,False,False,False,False,False,False
+ispot.tv,iSpot.tv,ddg_tds,2,Advertising|Analytics|Audience Measurement,False,False,False,False,False,False,False
+issuu.com,Bending Spoons S.p.A.,ddg_tds,2,,True,False,False,False,False,False,False
+iteratehq.com,Pickaxe LLC,ddg_tds,2,,True,False,False,False,False,False,False
+janusaent.com,janusaent.com,ddg_tds,2,,True,False,False,False,False,False,False
+jimstatic.com,Jimdo GmbH,ddg_tds,2,,True,False,False,False,False,False,False
+journeymv.com,journeymv.com,ddg_tds,2,,False,False,False,False,False,False,False
+journity.com,Five Q,ddg_tds,2,,True,False,False,False,False,False,False
+jsdelivr.net,Prospect One,ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+jsma.s3.us-west-2.amazonaws.com,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+jspm.io,jspm.io,ddg_tds,2,,True,False,False,False,False,False,False
+jsuol.com.br,Universo Online S.A.,ddg_tds,2,,True,False,False,False,False,False,False
+juicyads.com,JuicyAds,ddg_tds,2,Ad Motivated Tracking|Advertising|Malware,False,False,True,False,False,False,False
+k5a.io,Kilkaya AS,ddg_tds,2,,True,False,False,False,False,False,False
+kakaocdn.net,Kakao Corp.,ddg_tds,2,,True,False,False,False,False,False,False
+kameleoon.eu,Kameleoon,ddg_tds,2,,True,False,False,False,False,False,False
+kameleoon.io,kameleoon.io,ddg_tds,2,,True,False,False,False,False,False,False
+kargo.com,"Kargo Global, Inc.",ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+karte.io,Plaid Inc,ddg_tds,2,,True,False,False,False,False,False,False
+ketchcdn.com,"Ketch Kloud, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+kettledroopingcontinuation.com,kettledroopingcontinuation.com,ddg_tds,2,,True,False,False,False,False,False,False
+kit.com,"Kit, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+klarna.com,Klarna Bank AB,ddg_tds,2,,True,False,False,False,False,False,False
+klaviyo.com,Klaviyo,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+krushmedia.com,krushmedia.com,ddg_tds,2,,False,False,False,False,False,False,False
+kueezrtb.com,kueezrtb.com,ddg_tds,2,,False,False,False,False,False,False,False
+kxcdn.com,proinity GmbH,ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+ladesk.com,Quality Unit LLC,ddg_tds,2,,True,False,False,False,False,False,False
+ladsp.com,So-net Media Networks Corporation.,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,False,False,False
+leadsrx.com,"Sargents, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+lendingtree.com,"LENDINGTREE, LLC",ddg_tds,2,,True,False,False,False,False,False,False
+lexisnexis.com,RELX Group,ddg_tds,2,,True,False,False,False,False,False,False
+liadm.com,LiveIntent Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+licdn.com,Microsoft Corporation,ddg_tds,2,Analytics|Audience Measurement|Content Delivery,False,True,False,False,False,False,False
+liftdsp.com,liftdsp.com,ddg_tds,2,,False,False,False,False,False,False,False
+lightboxcdn.com,"Digioh, LLC",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Content Delivery|Embedded Content|Third-Party Analytics Marketing,False,True,False,True,False,False,False
+lijit.com,Sovrn Holdings,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,True,True,False,False
+linkconnector.com,LinkConnector Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+linkedin.com,Microsoft Corporation,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Embedded Content|Social - Share|Social Network,False,True,False,True,False,False,False
+linksynergy.com,"Rakuten, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+list-manage.com,Intuit Inc.,ddg_tds,2,Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+listrakbi.com,Listrak,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+litix.io,"Mux, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+livechatinc.com,LiveChat Inc,ddg_tds,2,Embedded Content|Support Chat Widget,True,True,False,False,False,False,False
+livedoor.net,Naver Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+liveperson.net,"LivePerson, Inc",ddg_tds,2,Ad Motivated Tracking|Analytics|Embedded Content|Support Chat Widget,False,True,False,False,False,False,False
+lngtd.com,"Longitude Ads, LLC",ddg_tds,2,,True,False,False,False,False,False,False
+localytics.com,Upland Software Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+loggly.com,"SolarWinds Worldwide, LLC",ddg_tds,2,,True,False,False,False,False,False,False
+loop11.com,Loop11,ddg_tds,2,,True,False,False,False,False,False,False
+loopme.me,Online Media Solutions Ltd. dba Brightcom,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+lpsnmedia.net,"LivePerson, Inc",ddg_tds,2,Ad Motivated Tracking|Analytics|Embedded Content|Support Chat Widget,False,True,False,False,False,False,False
+luckyorange.com,Lucky Orange LLC,ddg_tds,2,,True,False,False,False,False,False,False
+lytics.io,Lytics,ddg_tds,2,,True,False,False,False,False,False,False
+m.sni.global.fastly.net,"Fastly, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Content Delivery|Embedded Content|Session Replay|Third-Party Analytics Marketing,False,True,False,True,False,False,False
+m2.ai,eSell Solutions Ltd. DBA MonetizeMore,ddg_tds,2,,True,False,False,False,False,False,False
+magnetmail.net,Higher Logic,ddg_tds,2,,True,False,False,False,False,False,False
+magsrv.com,magsrv.com,ddg_tds,2,,False,False,False,False,False,False,False
+mail.ru,VK Company Ltd.,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Embedded Content|Social - Share,False,True,False,True,False,False,False
+mailchimp.com,Intuit Inc.,ddg_tds,2,Advertising|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+mailchimpapp.com,Intuit Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+mailerlite.com,"MailerLite, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+maillist-manage.com,ZOHO Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+mantis-intelligence.com,mantis-intelligence.com,ddg_tds,2,,False,False,False,False,False,False,False
+marketingautomation.services,Sharpspring Inc,ddg_tds,2,,True,False,False,False,False,False,False
+marketiq.com,marketiq.com,ddg_tds,2,,True,False,False,False,False,False,False
+marketo.com,Adobe Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+marketo.net,Adobe Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+marphezis.com,Online Media Solutions Ltd. dba Brightcom,ddg_tds,2,,False,False,False,False,False,False,False
+marzaent.com,marzaent.com,ddg_tds,2,,True,False,False,False,False,False,False
+mateti.net,Webtrekk GmbH,ddg_tds,2,,True,False,False,False,False,False,False
+matheranalytics.com,Mather Economics,ddg_tds,2,,True,False,False,False,False,False,False
+mathtag.com,"MediaMath, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+maxmind.com,MaxMind Inc.,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Analytics|Audience Measurement,False,False,False,False,False,False,False
+mczbf.com,Conversant LLC,ddg_tds,2,,False,False,False,False,False,False,False
+medallia.com,Medallia Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+medallia.eu,Medallia Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+media.net,Media.net Advertising FZ-LLC,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+media6degrees.com,Dstillery Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,False,False,False,False
+mediacorp.sg,MEDIACORP PTE. LTD.,ddg_tds,2,,True,False,False,False,False,False,False
+mediago.io,"Baidu, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+mediarithmics.com,mediarithmics SAS,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+mediavine.com,"Mediavine, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Audience Measurement,False,False,False,False,False,False,False
+memberful.com,"Patreon, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+mercari.com,"Mercari, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+metricswpsh.com,metricswpsh.com,ddg_tds,2,,True,False,False,False,False,False,False
+mfadsrvr.com,IPONWEB GmbH,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+mgaru.dev,mgaru.dev,ddg_tds,2,,True,False,False,False,False,False,False
+mgid.com,MGID Inc,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+mgln.ai,mgln.ai,ddg_tds,2,,False,False,False,False,False,False,False
+micpn.com,Movable Ink,ddg_tds,2,Ad Motivated Tracking|Advertising|Audience Measurement,False,False,False,False,False,False,False
+microad.jp,"MicroAd, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+minutemedia-prebid.com,minutemedia-prebid.com,ddg_tds,2,,False,False,False,False,False,False,False
+missena.io,missena.io,ddg_tds,2,,True,False,False,False,False,False,False
+mixpo.com,Mixpo Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+mktoresp.com,Adobe Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+mktoweb.com,Adobe Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+ml314.com,Bombora Inc.,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Session Replay,False,False,False,True,False,False,False
+mmvideocdn.com,mmvideocdn.com,ddg_tds,2,,True,False,False,False,False,False,False
+mobon.net,"Inrifle Co., Ltd.",ddg_tds,2,,True,False,False,False,False,False,False
+moloco.com,Moloco Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+monetate.net,"Monetate, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Embedded Content|Third-Party Analytics Marketing,False,True,False,True,False,False,False
+monsido.com,Monsido Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+monu.delivery,"Monumetric (The Blogger Network, LLC)",ddg_tds,2,,True,False,False,False,False,False,False
+mookie1.com,WPP plc,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+motortrend.com,TEN  A Discovery Communications Company,ddg_tds,2,,True,False,False,False,False,False,False
+mountain.com,"Mountain Digital, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+mouseflow.com,Mouseflow,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Analytics|Session Replay|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+mpeasylink.com,DigitalPoint,ddg_tds,2,,True,False,False,False,False,False,False
+mrf.io,"Marfeel Solutions, S.L.",ddg_tds,2,,False,False,False,False,False,False,False
+mrktmtrcs.net,mrktmtrcs.net,ddg_tds,2,,True,False,False,False,False,False,False
+mts.ru,Mobile TeleSystems Public Joint Stock Company,ddg_tds,2,,True,False,False,False,False,False,False
+mxpnl.com,"Mixpanel, Inc.",ddg_tds,2,Action Pixels|Analytics|Audience Measurement|Session Replay|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+mxptint.net,Valassis Digital,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,False,False,False,False
+mygaru.com,mygaru.com,ddg_tds,2,,True,False,False,False,False,False,False
+nakanohito.jp,"User Local, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+naver.net,Naver Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+navistechnologies.info,"Buehner-Fry, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+nc0.co,"Ensighten, Inc",ddg_tds,2,,True,False,False,False,False,False,False
+net.edgekey.net,Akamai Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+newrelic.com,New Relic,ddg_tds,2,Analytics,False,False,False,False,False,False,False
+news.com.au,Nationwide News Pty Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+newscgp.com,Nationwide News Pty Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+newsroom.bi,newsroom.bi,ddg_tds,2,,False,False,False,False,False,False,False
+nextday.media,P B.V.,ddg_tds,2,,True,False,False,False,False,False,False
+nextdoor.com,"Nextdoor, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+nextmillmedia.com,"Next Millennium Media, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+nexx360.io,nexx360.io,ddg_tds,2,,False,False,False,False,False,False,False
+nine.com.au,Nine Entertainment Co.,ddg_tds,2,,True,False,False,False,False,False,False
+nitropay.com,GG Software LLC,ddg_tds,2,,True,False,False,False,False,False,False
+nl.edgekey.net,Akamai Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+noibu.com,noibu.com,ddg_tds,2,,False,False,False,False,False,False,False
+northbeam.io,northbeam.io,ddg_tds,2,,False,False,False,False,False,False,False
+nosto.com,Nosto Solutions Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+npttech.com,Piano Software,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Embedded Content|SSO|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+nr-data.net,New Relic,ddg_tds,2,Analytics,False,False,False,False,False,False,False
+nrich.ai,N.Rich Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+nsaudience.pl,nazwa.pl sp. z o.o.,ddg_tds,2,,True,False,False,False,False,False,False
+ntv.io,"Nativo, Inc",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,False,False,False
+nuance.com,Microsoft Corporation,ddg_tds,2,Support Chat Widget,True,False,False,False,False,False,False
+nytrng.com,Voltn LLC,ddg_tds,2,,False,False,False,False,False,False,False
+ocmthood.com,ocmthood.com,ddg_tds,2,,True,False,False,False,False,False,False
+ojrq.net,Impact,ddg_tds,2,,True,False,False,False,False,False,False
+omappapi.com,Retyp LLC,ddg_tds,2,,False,False,False,False,False,False,False
+omguk.com,Optimise Media (UK) Limited,ddg_tds,2,,True,False,False,False,False,False,False
+omnisnippet1.com,"Omnisend, UAB",ddg_tds,2,,True,False,False,False,False,False,False
+omnisrc.com,Soundest Limited,ddg_tds,2,,True,False,False,False,False,False,False
+omnitagjs.com,Adyoulike,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+omtrdc.net,Adobe Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+onaudience.com,OnAudience Ltd.,ddg_tds,2,,True,False,False,False,False,False,False
+onecount.net,"GCN Publishing, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+onesignal.com,OneSignal,ddg_tds,2,Ad Motivated Tracking|Analytics|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+onet.pl,Ringier AG,ddg_tds,2,,True,False,False,False,False,False,False
+onetag-sys.com,OneTag Limited,ddg_tds,2,,False,False,False,False,False,False,False
+opecloud.com,TripleLift,ddg_tds,2,,False,False,False,False,True,False,False
+open-system.fr,ALLIANCE RESEAUX,ddg_tds,2,,True,False,False,False,False,False,False
+openfpcdn.io,openfpcdn.io,ddg_tds,2,,True,False,False,False,False,False,False
+openstreetmap.org,OpenStreetMap Foundation,ddg_tds,2,,True,False,False,False,False,False,False
+opentable.com,Booking Holdings Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+opentext.com,Open Text Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+openwebmp.com,openwebmp.com,ddg_tds,2,,False,False,False,False,False,False,False
+openx.net,OpenX Technologies Inc,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Audience Measurement,False,False,False,False,True,False,False
+openxcdn.net,OpenX Technologies Inc,ddg_tds,2,,True,False,False,False,True,False,False
+opera.com,Opera Software AS,ddg_tds,2,,False,False,False,False,False,False,False
+opmnstr.com,Retyp LLC,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Embedded Content|Third-Party Analytics Marketing,False,True,False,True,False,False,False
+opta.net,Perform Media Services Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+optable.co,optable.co,ddg_tds,2,,False,False,False,False,False,False,False
+optad360.io,Publishers Revenue Optimization Sp. z o.o.,ddg_tds,2,,True,False,False,False,False,False,False
+opti-digital.com,Opti Digital,ddg_tds,2,,True,False,False,False,False,False,False
+optidigital.com,Opti Digital,ddg_tds,2,,False,False,False,False,False,False,False
+optimizely.com,"Optimizely, Inc.",ddg_tds,2,Action Pixels|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+optimonk.com,WebShop Marketing Kft.,ddg_tds,2,,True,False,False,False,False,False,False
+optmnstr.com,Retyp LLC,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Embedded Content|Third-Party Analytics Marketing,False,True,False,True,False,False,False
+optmstr.com,Retyp LLC,ddg_tds,2,,True,False,False,False,False,False,False
+optnmnstr.com,Retyp LLC,ddg_tds,2,,True,False,False,False,False,False,False
+optnmstr.com,Retyp LLC,ddg_tds,2,,True,False,False,False,False,False,False
+oraclecloud.com,Oracle Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+oracleinfinity.io,Oracle Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+orbsrv.com,"ExoClick, S.L.",ddg_tds,2,,True,False,False,False,False,False,False
+osano.com,"Osano, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+otm-r.com,Online Technology and Media,ddg_tds,2,,True,False,False,False,False,False,False
+outbrain.com,Outbrain,ddg_tds,2,Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,False,True,False,False
+outbrainimg.com,Outbrain,ddg_tds,2,,False,False,False,False,True,False,False
+ownlocal.com,OwnLocal.com,ddg_tds,2,,True,False,False,False,False,False,False
+p-n.io,Pushly,ddg_tds,2,,False,False,False,False,False,False,False
+p7cloud.net,p7cloud.net,ddg_tds,2,,False,False,False,False,False,False,False
+pages02.net,International Business Machines Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+pages03.net,International Business Machines Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+pages04.net,International Business Machines Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+pages05.net,International Business Machines Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+pages08.net,International Business Machines Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+pandect.es,pandect.es,ddg_tds,2,,True,False,False,False,False,False,False
+pardot.com,"Salesforce.com, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Embedded Content,False,True,False,False,False,False,False
+parsely.com,"Parsely, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+patreon.com,"Patreon, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+paypal.com,"PayPal, Inc.",ddg_tds,2,Analytics|Audience Measurement|Badge|Embedded Content|Online Payment|SSO,False,True,False,False,False,False,False
+pbstck.com,Pubstack,ddg_tds,2,,False,False,False,False,True,False,False
+pdst.fm,Podsights,ddg_tds,2,,True,False,False,False,False,False,False
+peer-39.com,peer-39.com,ddg_tds,2,,False,False,False,False,False,False,False
+pemsrv.com,pemsrv.com,ddg_tds,2,,False,False,False,False,False,False,False
+perfalytics.com,perfalytics.com,ddg_tds,2,,True,False,False,False,False,False,False
+perfdrive.com,Radware Ltd.,ddg_tds,2,,True,False,False,False,False,False,False
+performax.cz,"OSOBNOSTI.cz, s.r.o.",ddg_tds,2,,True,False,False,False,False,False,False
+permutive.app,"Permutive, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+permutive.com,"Permutive, Inc.",ddg_tds,2,Analytics|Audience Measurement|Session Replay|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+personalizer.io,LimeSpot,ddg_tds,2,,True,False,False,False,False,False,False
+pghub.io,pghub.io,ddg_tds,2,,True,False,False,False,False,False,False
+piano.io,Piano Software,ddg_tds,2,,True,False,False,False,False,False,False
+picreel.com,Webfolio Management Inc,ddg_tds,2,,True,False,False,False,False,False,False
+pingdom.net,Pingdom AB,ddg_tds,2,Action Pixels|Analytics|Audience Measurement,False,False,False,True,False,False,False
+pinterest.com,"Pinterest, Inc.",ddg_tds,2,Content Delivery|Embedded Content|Social - Share,True,True,False,False,False,False,False
+pippio.com,"LiveRamp Holdings, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+piwik.pro,Piwik PRO Sp. z o.o.,ddg_tds,2,,True,False,False,False,False,False,False
+pixad.com.tr,pixad.com.tr,ddg_tds,2,,False,False,False,False,False,False,False
+pixlee.com,"Pixlee TurnTo, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+playwire.com,Intergi Entertainment,ddg_tds,2,,False,False,False,False,False,False,False
+plug.it,ItaliaOnLine SpA,ddg_tds,2,,True,False,False,False,False,False,False
+pmbmonetize.live,pmbmonetize.live,ddg_tds,2,,True,False,False,False,False,False,False
+pmdstatic.net,PRISMA MEDIA,ddg_tds,2,,True,False,False,False,False,False,False
+popcash.net,One Media Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+portalfluently.com,portalfluently.com,ddg_tds,2,,True,False,False,False,False,False,False
+postaffiliatepro.com,Quality Unit LLC,ddg_tds,2,,True,False,False,False,False,False,False
+posthog.com,posthog.com,ddg_tds,2,,False,False,False,False,False,False,False
+postrelease.com,"Nativo, Inc",ddg_tds,2,Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+postscript.io,postscript.io,ddg_tds,2,,True,False,False,False,False,False,False
+powr.io,POWR Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+presage.io,Ogury Limited,ddg_tds,2,,False,False,False,False,False,False,False
+pretty-soft.com,pretty-soft.com,ddg_tds,2,,True,False,False,False,False,False,False
+primis.tech,McCann Disciplines Ltd.,ddg_tds,2,,False,False,False,False,False,False,False
+privacy-center.org,Didomi,ddg_tds,2,,False,False,False,False,False,False,False
+prmutv.co,"Permutive, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+pro-market.net,Almondnet Group,ddg_tds,2,Ad Motivated Tracking|Advertising|Audience Measurement,False,False,False,False,False,False,False
+programmaticx.ai,programmaticx.ai,ddg_tds,2,,False,False,False,False,False,False,False
+protechts.net,"Human Security, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+protrafficinspector.com,protrafficinspector.com,ddg_tds,2,,True,False,False,False,False,False,False
+providesupport.com,Provide Support LLC,ddg_tds,2,,True,False,False,False,False,False,False
+ptengine.com,PTMIND INC.,ddg_tds,2,,True,False,False,False,False,False,False
+ptengine.jp,PTMIND INC.,ddg_tds,2,,True,False,False,False,False,False,False
+pub.network,"Publisher First, Inc. dba Freestar",ddg_tds,2,,False,False,False,False,False,False,False
+publir.com,Publir,ddg_tds,2,,True,False,False,False,False,False,False
+publitas.com,Publitas.com B.V.,ddg_tds,2,,True,False,False,False,False,False,False
+pubmatic.com,"PubMatic, Inc.",ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,True,False,False
+pubnation.com,OpenX Technologies Inc,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,True,False,False
+pulseinsights.com,Jeremy Bieger,ddg_tds,2,,True,False,False,False,False,False,False
+pushnami.com,"Pushnami, LLC",ddg_tds,2,,True,False,False,False,False,False,False
+pxf.io,Impact,ddg_tds,2,,False,False,False,False,False,False,False
+pxlclnmdecom-a.akamaihd.net,Akamai Technologies,ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+qq.com,Tencent Holdings Ltd.,ddg_tds,2,,True,False,False,False,False,False,False
+qualaroo.com,Qualaroo,ddg_tds,2,Analytics|Audience Measurement|Embedded Content|Session Replay|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+qualified.com,qualified.com,ddg_tds,2,,True,False,False,False,False,False,False
+qualtrics.com,"Silver Lake Technology Management, L.L.C.",ddg_tds,2,Analytics|Audience Measurement|Embedded Content|Session Replay|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+quantcount.com,Quantcast Corporation,ddg_tds,2,,False,False,False,False,False,False,False
+quantserve.com,Quantcast Corporation,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+quantummetric.com,Quantum Metric Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+r10s.jp,"Rakuten, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+rakuten.com,"Rakuten, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+rambler.ru,"Rambler Internet Holding, LLC",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+rapidedge.io,rapidedge.io,ddg_tds,2,,True,False,False,False,False,False,False
+raptivecdn.com,raptivecdn.com,ddg_tds,2,,True,False,False,False,False,False,False
+realizationnewestfangs.com,realizationnewestfangs.com,ddg_tds,2,,True,False,False,False,False,False,False
+realsrv.com,"ExoClick, S.L.",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+rebuyengine.com,"Rebuy, LLC",ddg_tds,2,,True,False,False,False,False,False,False
+receptivity.io,receptivity.io,ddg_tds,2,,False,False,False,False,False,False,False
+recruitics.com,Recruitics LLC,ddg_tds,2,,True,False,False,False,False,False,False
+reddit.com,Reddit Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Badge|Embedded Content|Social - Comment|Social - Share|Social Network|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+redditstatic.com,Reddit Inc.,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Analytics,False,False,False,True,False,False,False
+refinery89.com,refinery89.com,ddg_tds,2,,True,False,False,False,False,False,False
+resetdigital.co,Reset Digital LLC,ddg_tds,2,,False,False,False,False,False,False,False
+reson8.com,Resonate Networks,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+responsiveads.com,ResponsiveAds™ Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+retargetly.com,Retargetly LLC,ddg_tds,2,,True,False,False,False,False,False,False
+revcontent.com,"RevContent, LLC",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+rezync.com,Zeta Global,ddg_tds,2,Ad Motivated Tracking,False,False,True,False,False,False,False
+rfihub.com,Zeta Global,ddg_tds,2,Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+rfksrv.com,Reflektion,ddg_tds,2,,True,False,False,False,False,False,False
+richaudience.com,Rich Audience Technologies,ddg_tds,2,,False,False,False,False,False,False,False
+rijksoverheid.nl,Rijksoverheid,ddg_tds,2,,True,False,False,False,False,False,False
+ringcentral.com,"RingCentral, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+ringier-advertising.ch,Ringier AG,ddg_tds,2,,True,False,False,False,False,False,False
+rkdms.com,Merkle Inc,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+rlcdn.com,"LiveRamp Holdings, Inc.",ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+rmbl.ws,Rumble Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+rmtag.com,"Rakuten, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+roeyecdn.com,roeyecdn.com,ddg_tds,2,,False,False,False,False,False,False,False
+rogersmedia.com,Rogers Communications Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+rokt.com,Rokt Entities,ddg_tds,2,,True,False,False,False,False,False,False
+rqtrk.eu,Roq.ad,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+rtbhouse.com,RTB House S.A.,ddg_tds,2,,True,False,False,False,False,False,False
+rtbwise.com,rtbwise.com,ddg_tds,2,,True,False,False,False,False,False,False
+rtoaster.jp,BrainPad Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+rubiconproject.com,"Magnite, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,True,False,False
+rvlife.com,"Social Knowledge, LLC",ddg_tds,2,,True,False,False,False,False,False,False
+s.sni.global.fastly.net,"Fastly, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Content Delivery|Embedded Content|Session Replay|Third-Party Analytics Marketing,False,True,False,True,False,False,False
+s13emagst.akamaized.net,Akamai Technologies,ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+s3.us-west-2.amazonaws.com,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+sail-horizon.com,CM Group,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+sailthru.com,CM Group,ddg_tds,2,,True,False,False,False,False,False,False
+salecycle.com,SaleCycle Limited,ddg_tds,2,,True,False,False,False,False,False,False
+salesforce-sites.com,"Salesforce.com, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+salesforceliveagent.com,"Salesforce.com, Inc.",ddg_tds,2,Embedded Content|Support Chat Widget,True,True,False,False,False,False,False
+salesmanago.pl,Benhauer sp. z o.o.,ddg_tds,2,,True,False,False,False,False,False,False
+samplicio.us,"Lucid Holdings, LLC",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Audience Measurement|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+sancdn.net,"ICF Technology, Inc",ddg_tds,2,,True,False,False,False,False,False,False
+sardine.ai,Sardine Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+sascdn.com,Smartadserver S.A.S,ddg_tds,2,Advertising,False,False,True,False,True,False,False
+satis.fi,Consult IT Nordic AB,ddg_tds,2,,True,False,False,False,False,False,False
+sc-static.net,Snap Inc.,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Embedded Content,False,True,False,True,False,False,False
+scene7.com,Adobe Inc.,ddg_tds,2,Advertising|Content Delivery,False,True,True,False,False,False,False
+scene7.com.edgekey.net,Akamai Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+scholarlyiq.com,Scholarly iQ,ddg_tds,2,,True,False,False,False,False,False,False
+schwab.com,"Charles Schwab & Co., Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+scorecardresearch.com,"comScore, Inc",ddg_tds,2,Analytics|Audience Measurement,False,False,False,False,False,False,False
+screenpopper.com,EZ Publishing Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+script.ac,"Human Security, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+scriptwrapper.com,scriptwrapper.com,ddg_tds,2,,False,False,False,False,False,False,False
+searchspring.io,searchspring.io,ddg_tds,2,,True,False,False,False,False,False,False
+securedvisit.com,4Cite Marketing,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+securityannex.net,securityannex.net,ddg_tds,2,,True,False,False,False,False,False,False
+seedtag.com,SEEDTAG ADVERTISING S.L.,ddg_tds,2,,False,False,False,False,True,False,False
+segment.com,"Segment.io, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+segment.io,"Segment.io, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+semasio.net,Semasio GmbH,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+servenobid.com,Prebid.org,ddg_tds,2,,False,False,False,False,False,False,False
+serverbid.com,"Consumable, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+sexad.net,"ICF Technology, Inc",ddg_tds,2,,True,False,False,False,False,False,False
+seznam.cz,"Seznam.cz, a.s.",ddg_tds,2,,True,False,False,False,False,False,False
+sharethis.com,"ShareThis, Inc",ddg_tds,2,Ad Motivated Tracking|Advertising|Embedded Content|Social - Share|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+sharethrough.com,"Sharethrough, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+shb-sync.com,shb-sync.com,ddg_tds,2,,False,False,False,False,False,False,False
+shgcdn3.com,shgcdn3.com,ddg_tds,2,,True,False,False,False,False,False,False
+shinobi.jp,Ninja Tools Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+shop.app,Shopify Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+shop.pe,Add Shoppers,ddg_tds,2,,False,False,False,False,False,False,False
+sibautomation.com,Dual Technologies Services,ddg_tds,2,,True,False,False,False,False,False,False
+signifyd.com,Signifyd Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+simpli.fi,Simplifi Holdings Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,False,False,False
+site.com,"Salesforce.com, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+siteimprove.com,Siteimprove AS,ddg_tds,2,Analytics,False,False,False,False,False,False,False
+siteimproveanalytics.com,Siteimprove AS,ddg_tds,2,Analytics,False,False,False,False,False,False,False
+sitescout.com,"Centro, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics,False,False,False,True,False,False,False
+sjv.io,Impact,ddg_tds,2,,False,False,False,False,False,False,False
+skimresources.com,Skimbit LTD,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,False,False,False
+slgnt.eu,Selligent,ddg_tds,2,,True,False,False,False,False,False,False
+slickstream.com,slickstream.com,ddg_tds,2,,False,False,False,False,False,False,False
+smaato.net,Smaato Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,False,False,False
+smartadserver.com,Smartadserver S.A.S,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,True,False,False
+smartcaptcha.yandexcloud.net,Yandex LLC,ddg_tds,2,,True,False,False,False,False,False,False
+smartnews-ads.com,"SmartNews, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+smartytouch.co,smartytouch.co,ddg_tds,2,,True,False,False,False,False,False,False
+smilewanted.com,smilewanted.com,ddg_tds,2,,False,False,False,False,False,False,False
+snapchat.com,Snap Inc.,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Social Network,False,False,True,True,False,False,False
+snigelweb.com,snigelweb.com,ddg_tds,2,,True,False,False,False,False,False,False
+socdm.com,Supership Inc,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+sojern.com,"Sojern, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+sonobi.com,"Sonobi, Inc",ddg_tds,2,Advertising,False,False,True,False,False,False,False
+sparteo.com,sparteo.com,ddg_tds,2,,False,False,False,False,False,False,False
+spendsdetachment.com,spendsdetachment.com,ddg_tds,2,,True,False,False,False,False,False,False
+sportradar.com,Sportradar AG,ddg_tds,2,,True,False,False,False,False,False,False
+sportradarserving.com,Sportradar AG,ddg_tds,2,,False,False,False,False,False,False,False
+sportslocalmedia.com,Spacefoot SAS,ddg_tds,2,,True,False,False,False,False,False,False
+spreadshirts.net,sprd.net AG,ddg_tds,2,,True,False,False,False,False,False,False
+springserve.com,"SpringServe, LLC",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+sspinc.io,"Secret Sauce Partners, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+stackadapt.com,Collective Roll,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,True,False,False,False
+stape.io,stape.io,ddg_tds,2,,False,False,False,False,False,False,False
+startappnetwork.com,startappnetwork.com,ddg_tds,2,,True,False,False,False,False,False,False
+statcounter.com,StatCounter,ddg_tds,2,Analytics,False,False,False,False,False,False,False
+stay22.com,stay22.com,ddg_tds,2,,False,False,False,False,False,False,False
+stbm.it,ARNOLDO MONDADORI EDITORE SpA,ddg_tds,2,,True,False,False,False,False,False,False
+storage.googleapis.com,Google LLC,ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,False,False,False
+storygize.net,Storygize,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+stpd.cloud,SETUPAD Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+streamrail.com,Unity Software Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+sundaysky.com,SundaySky Ltd.,ddg_tds,2,Ad Motivated Tracking|Advertising|Audience Measurement|Embedded Content,False,True,False,False,False,False,False
+swaven.com,Swaven SAS,ddg_tds,2,,True,False,False,False,False,False,False
+syf.com,Synchrony Financial,ddg_tds,2,,True,False,False,False,False,False,False
+symantec.com,Broadcom Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+syncingbridge.com,syncingbridge.com,ddg_tds,2,,False,False,False,False,False,False,False
+t.co,"Twitter, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Badge|Embedded Content|Federated Login|Social - Share|Social Network,False,True,False,False,False,False,False
+t13.io,"Publisher First, Inc. dba Freestar",ddg_tds,2,,False,False,False,False,False,False,False
+taboola.com,"Taboola, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,True,False,False
+talkable.com,Curebit Inc,ddg_tds,2,,True,False,False,False,False,False,False
+taobao.com,Alibaba Group,ddg_tds,2,,True,False,False,False,False,False,False
+tapad.com,"Tapad, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+tappx.com,Tappcelator Media S.L.,ddg_tds,2,,False,False,False,False,False,False,False
+tctm.co,Call Tracking Metrics LLC,ddg_tds,2,,True,False,False,False,False,False,False
+teads-xo.com,teads-xo.com,ddg_tds,2,,True,False,False,False,True,False,False
+teads.tv,Teads ( Luxenbourg ) SA,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Third-Party Analytics Marketing,False,False,False,False,True,False,False
+tealiumiq.com,Tealium Inc.,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Session Replay|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+team-rec.jp,Team Lab Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+technoratimedia.com,"Synacor, Inc.",ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+telkomsel.com,Telekomunikasi Seluler PT,ddg_tds,2,,True,False,False,False,False,False,False
+temu.com,Pinduoduo Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+termly.io,termly.io,ddg_tds,2,,False,False,False,False,False,False,False
+tfaforms.net,Veer West LLC.,ddg_tds,2,,True,False,False,False,False,False,False
+the-ozone-project.com,The Ozone Project,ddg_tds,2,,False,False,False,False,False,False,False
+theadex.com,Virtual Minds AG,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,True,False,False
+thejobnetwork.com,RealMatch Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+thestar.com,Toronto Star Newspapers Ltd.,ddg_tds,2,,True,False,False,False,False,False,False
+thrtle.com,Throtle,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,False,False,False,False
+tidio.co,Green Hills,ddg_tds,2,,True,False,False,False,False,False,False
+tiktok.com,ByteDance Ltd.,ddg_tds,2,,False,False,False,False,True,False,False
+tiktokw.us,ByteDance Ltd.,ddg_tds,2,,False,False,False,False,True,False,False
+tinypass.com,Piano Software,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Embedded Content|SSO|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+tiqcdn.com,Tealium Inc.,ddg_tds,2,Advertising|Analytics|Audience Measurement|Tag Manager|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+tldw.me,spoteam.com,ddg_tds,2,,True,False,False,False,False,False,False
+top100.ru,"Rambler Internet Holding, LLC",ddg_tds,2,,True,False,False,False,False,False,False
+townsquare.media,Townsquare Media,ddg_tds,2,,True,False,False,False,False,False,False
+trackjs.com,TrackJS LLC,ddg_tds,2,,True,False,False,False,False,False,False
+tracookiepixel.xyz,tracookiepixel.xyz,ddg_tds,2,,True,False,False,False,False,False,False
+tradetracker.net,TradeTracker FZ-LLC,ddg_tds,2,,True,False,False,False,False,False,False
+trafficjunky.com,Aylo,ddg_tds,2,,True,False,False,False,False,False,False
+travelaudience.com,travelaudience.com,ddg_tds,2,,False,False,False,False,False,False,False
+travelpayouts.com,Go Travel Un Limited,ddg_tds,2,,True,False,False,False,False,False,False
+treasuredata.com,"Treasure Data, Inc",ddg_tds,2,Ad Motivated Tracking|Analytics|Audience Measurement,False,False,False,False,False,False,False
+tremorhub.com,Telaria,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+trendemon.com,SSL Corporation,ddg_tds,2,,True,False,False,False,False,False,False
+tribalfusion.com,Exponential Interactive Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+trkn.us,Claritas LLC,ddg_tds,2,,False,False,False,False,False,False,False
+tru.am,trueAnthem Corp,ddg_tds,2,Third-Party Analytics Marketing,False,False,False,False,False,False,False
+trueleadid.com,"Lead Intelligence, Inc.",ddg_tds,2,Advertising|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+trustedstack.com,trustedstack.com,ddg_tds,2,,False,False,False,False,False,False,False
+trustpilot.com,Trustpilot AS,ddg_tds,2,Analytics|Embedded Content,False,True,False,False,False,False,False
+trvdp.com,Brandsmind,ddg_tds,2,,True,False,False,False,False,False,False
+tsyndicate.com,Traffic Stars,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising,False,False,True,True,False,False,False
+turn.com,"Amobee, Inc",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+tvpixel.com,Data Plus Math,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,False,False,False
+tvspix.com,tvspix.com,ddg_tds,2,,False,False,False,False,False,False,False
+tvsquared.com,TVSquared,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,False,False,False,False
+tweakwise.com,Tweakwise.com B.V.,ddg_tds,2,,True,False,False,False,False,False,False
+twitch.tv,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,True,False,False
+twitchcdn.net,"Amazon Technologies, Inc.",ddg_tds,2,,True,False,False,False,True,False,False
+twitter.com,"Twitter, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Embedded Content|Federated Login|Social - Comment|Social - Share|Social Network,False,True,False,False,False,False,False
+tynt.com,"33Across, Inc.",ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Social - Share|Third-Party Analytics Marketing,False,False,False,True,False,False,False
+uidapi.com,The Trade Desk Inc,ddg_tds,2,,False,False,False,False,True,False,False
+ujet.co,UJET INC,ddg_tds,2,,True,False,False,False,False,False,False
+unbxdapi.com,Unbxd Software Private Limited,ddg_tds,2,,True,False,False,False,False,False,False
+uncn.jp,Bulbit Inc,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Audience Measurement,False,False,False,False,False,False,False
+underdog.media,Underdog Media LLC,ddg_tds,2,,True,False,False,False,False,False,False
+undertone.com,Undertone Networks,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+unpkg.com,unpkg,ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+unrulymedia.com,Unruly Group Limited,ddg_tds,2,Ad Motivated Tracking|Advertising|Audience Measurement|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+uplift.com,Uplift Canada Services ULC,ddg_tds,2,,True,False,False,False,False,False,False
+upsellit.com,"USI Technologies, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+urbanairship.com,"Urban Airship, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+us-west-2.amazonaws.com,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+usabilla.com,Momentive Inc.,ddg_tds,2,Ad Motivated Tracking|Analytics|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+usbrowserspeed.com,usbrowserspeed.com,ddg_tds,2,,False,False,False,False,False,False,False
+usemessages.com,"HubSpot, Inc.",ddg_tds,2,Embedded Content|Support Chat Widget,True,True,False,False,False,False,False
+userapi.com,VK Company Ltd.,ddg_tds,2,,True,False,False,False,False,False,False
+usergram.info,beBit Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+uservoice.com,"UserVoice, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+usocial.pro,Compubyte Limited,ddg_tds,2,,True,False,False,False,False,False,False
+uuidksinc.net,uuidksinc.net,ddg_tds,2,,False,False,False,False,False,False,False
+valuecommerce.com,"ValueCommerce Co., Ltd.",ddg_tds,2,,True,False,False,False,False,False,False
+verint-cdn.com,Verint Systems,ddg_tds,2,,True,False,False,False,False,False,False
+viafoura.net,Viafoura Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+vibe.co,vibe.co,ddg_tds,2,,False,False,False,False,False,False,False
+vidazoo.com,Vidazoo Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+vidoomy.com,"Soluciones Corporativas IP, SL",ddg_tds,2,,True,False,False,False,False,False,False
+vimeocdn.com,"Vimeo, LLC",ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,False,False,False
+vistarsagency.com,vistarsagency.com,ddg_tds,2,,True,False,False,False,False,False,False
+visually-io.com,Visually CRM,ddg_tds,2,,True,False,False,False,False,False,False
+visualwebsiteoptimizer.com,Wingify,ddg_tds,2,Analytics|Session Replay|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+visx.net,YOC AG,ddg_tds,2,,False,False,False,False,False,False,False
+vk.com,VK Company Ltd.,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Embedded Content|Federated Login|Social - Comment|Social - Share|Social Network,False,True,False,False,False,False,False
+vk.ru,VK Company Ltd.,ddg_tds,2,,True,False,False,False,False,False,False
+vntsm.com,Venatus Media Limited,ddg_tds,2,,True,False,False,False,False,False,False
+vrtcal.com,"VRTCAL Markets, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+wbd.com,"Warner Bros. Discovery, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+we-stats.com,BioCatch,ddg_tds,2,,True,False,False,False,False,False,False
+weather.gov,National Oceanic and Atmospheric Administration NOAA,ddg_tds,2,,True,False,False,False,False,False,False
+webantenna.info,beBit Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+webcontentassessor.com,TMT Digital Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+webengage.co,Webklipper Technologies Pvt Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+webengage.com,Webklipper Technologies Pvt Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+webeyez.com,Blue Capital Markets Limited,ddg_tds,2,,True,False,False,False,False,False,False
+webtraxs.com,"Thomas Publishing Company, LLC",ddg_tds,2,,True,False,False,False,False,False,False
+webtrends-optimize.com,LCN.com Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+webtrends.com,WebTrends Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+webvisor.org,Yandex LLC,ddg_tds,2,Session Replay,False,False,False,False,False,False,False
+wec-virtualassistant-cx-prod.web.app,Google LLC,ddg_tds,2,,True,False,False,False,False,False,False
+weglot.com,weglot.com,ddg_tds,2,,True,False,False,False,False,False,False
+whitetrafsa.com,whitetrafsa.com,ddg_tds,2,,True,False,False,False,False,False,False
+wknd.ai,wknd.ai,ddg_tds,2,,False,False,False,False,False,False,False
+woosmap.com,Web Geo Services,ddg_tds,2,,True,False,False,False,False,False,False
+workdeadlinededicate.com,workdeadlinededicate.com,ddg_tds,2,,True,False,False,False,False,False,False
+wovn.io,"Wovn Technologies, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+wp.pl,Wirtualna Polska,ddg_tds,2,,False,False,False,False,False,False,False
+wt-eu02.net,Webtrekk GmbH,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Embedded Content,False,True,False,False,False,False,False
+wt-safetag.com,Webtrekk GmbH,ddg_tds,2,Advertising|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+wysistat.com,ID.fr,ddg_tds,2,,True,False,False,False,False,False,False
+x.com,"Twitter, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+yadro.ru,OOO ECO PC - Complex Solutions,ddg_tds,2,Ad Motivated Tracking|Analytics|Malware,False,False,False,False,False,False,False
+yads.tech,Yandex LLC,ddg_tds,2,,False,False,False,False,False,False,False
+yahoo.co.jp,LY-Corporation,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+yahoo.com,Yahoo Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Federated Login,False,False,False,False,False,False,False
+yandex.com,Yandex LLC,ddg_tds,2,,True,False,False,False,False,False,False
+yandex.net,Yandex LLC,ddg_tds,2,Content Delivery|Embedded Content|Session Replay,False,True,False,False,False,False,False
+yandex.ru,Yandex LLC,ddg_tds,2,Action Pixels|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Embedded Content|Online Payment|SSO|Session Replay,False,True,False,True,False,False,False
+yango.com,Yandex LLC,ddg_tds,2,,False,False,False,False,False,False,False
+yastatic.net,Yandex LLC,ddg_tds,2,Ad Motivated Tracking|Advertising|Content Delivery|Embedded Content|Social - Share,False,True,True,False,False,False,False
+yellowblue.io,Unity Software Inc.,ddg_tds,2,,False,False,False,False,False,False,False
+yieldmo.com,"YieldMo, Inc.",ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+yimg.jp,LY-Corporation,ddg_tds,2,Ad Motivated Tracking|Advertising,False,False,True,False,False,False,False
+ymmobi.com,ymmobi.com,ddg_tds,2,,True,False,False,False,False,False,False
+yotpo.com,Yotpo Ltd,ddg_tds,2,Advertising|Embedded Content|Third-Party Analytics Marketing,False,True,False,False,False,False,False
+youtube-nocookie.com,Google LLC,ddg_tds,2,Ad Motivated Tracking|Content Delivery|Embedded Content,False,True,True,False,False,False,False
+youtube.com,Google LLC,ddg_tds,2,Ad Motivated Tracking|Content Delivery|Embedded Content,False,True,True,False,False,False,False
+zemanta.com,Outbrain,ddg_tds,2,Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,False,True,False,False
+zencdn.net,"Brightcove, Inc.",ddg_tds,2,Advertising|Analytics|Content Delivery|Embedded Content,False,True,False,False,False,False,False
+zendesk.com,"Zendesk, Inc.",ddg_tds,2,Analytics|Content Delivery|Embedded Content|Federated Login,False,True,False,False,False,False,False
+zeotap.com,Zeotap GmbH,ddg_tds,2,,False,False,False,False,False,False,False
+zetaglobal.net,Zeta Global,ddg_tds,2,,True,False,False,False,False,False,False
+zi-scripts.com,zi-scripts.com,ddg_tds,2,,False,False,False,False,False,False,False
+zip.co,"Zip Co US, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+zohocdn.com,ZOHO Corporation,ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+zoologyfibre.com,zoologyfibre.com,ddg_tds,2,,True,False,False,False,False,False,False
+zoominfo.com,"Zoom Information, Inc.",ddg_tds,2,,False,False,False,False,False,False,False
+zopim.com,"Zendesk, Inc.",ddg_tds,2,Embedded Content|Support Chat Widget,True,True,False,False,False,False,False
+zprk.io,Near Pte. Ltd.,ddg_tds,2,,False,False,False,False,False,False,False
+zucks.net,"Zucks,Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+ap-southeast-2.amazonaws.com,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+createsend1.com,CM Group,ddg_tds,2,,True,False,False,False,False,False,False
+gammaplatform.com,gammaplatform.com,ddg_tds,2,,True,False,False,False,False,False,False
+js7k.com,Yahoo Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+admin.ch,Bundesamt für Informatik und Telekommunikation BIT,ddg_tds,2,,True,False,False,False,False,False,False
+da-services.ch,Tamedia AG,ddg_tds,2,,True,False,False,False,False,False,False
+klarnaservices.com,Klarna Bank AB,ddg_tds,2,,True,False,False,False,False,False,False
+com-v2.edgekey.net,Akamai Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+media01.eu,Dynamic 1001 GmbH,ddg_tds,2,,True,False,False,False,False,False,False
+witglobal.net,Würth IT GmbH,ddg_tds,2,,True,False,False,False,False,False,False
+apicit.net,KLOIS,ddg_tds,2,,True,False,False,False,False,False,False
+framasoft.org,Alexis Kauffmann,ddg_tds,2,,True,False,False,False,False,False,False
+ivitrack.com,Ividence,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics,False,False,False,False,False,False,False
+yelda-chat.s3.eu-west-3.amazonaws.com,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+d2638j3z8ek976.cloudfront.net,"Amazon Technologies, Inc.",ddg_tds,2,Content Delivery,True,True,False,False,True,False,False
+kiyoh.com,DTG B.V.,ddg_tds,2,,True,False,False,False,False,False,False
+pzz.io,Kizitos Holding B.V.,ddg_tds,2,,True,False,False,False,False,False,False
+api.no,Amedia Utvikling AS,ddg_tds,2,,True,False,False,False,False,False,False
+facebook.com,"Facebook, Inc.",ddg_tds,2,Action Pixels|Ad Fraud|Ad Motivated Tracking|Advertising|Analytics|Audience Measurement|Badge|Embedded Content|Federated Login|Social - Comment|Social - Share|Social Network,False,True,False,True,False,False,False
+imasdk.googleapis.com,Google LLC,ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,False,False,False
+1rx.io,RhythmOne,ddg_tds,2,Ad Fraud|Ad Motivated Tracking|Advertising|Third-Party Analytics Marketing,False,False,False,False,False,False,False
+ad-delivery.net,easyAd Deutschland GmbH,ddg_tds,2,,True,False,False,False,False,False,False
+akstat.io,Akamai Technologies,ddg_tds,2,,True,False,False,False,False,False,False
+anyrtb.com,anyrtb.com,ddg_tds,2,,True,False,False,False,False,False,False
+attentivemobile.com,Attentive Mobile,ddg_tds,2,,True,False,False,False,False,False,False
+bkcdn.net,bkcdn.net,ddg_tds,2,,True,False,False,False,False,False,False
+bootstrapcdn.com,"StackPath, LLC",ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+cafemedia.com,cafemedia.com,ddg_tds,2,,True,False,False,False,False,False,False
+chartbeat.net,Chartbeat,ddg_tds,2,Ad Motivated Tracking|Advertising|Analytics|Audience Measurement,False,False,False,False,False,False,False
+claritas.com,claritas.com,ddg_tds,2,,True,False,False,False,False,False,False
+cloudinary.com,Cloudinary Ltd,ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+cookieyes.com,cookieyes.com,ddg_tds,2,,True,False,False,False,False,False,False
+digitalaudience.io,Social Audience B.V.,ddg_tds,2,,True,False,False,False,False,False,False
+digitalgov.gov,U.S. General Services Administration,ddg_tds,2,,True,False,False,False,False,False,False
+dtscdn.com,DTS Technology,ddg_tds,2,,True,False,False,False,False,False,False
+fontawesome.com,Fonticons Inc,ddg_tds,2,Content Delivery,True,True,False,False,False,False,False
+fonts.googleapis.com,Google LLC,ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,False,False,False
+gamoshi.io,gamoshi.io,ddg_tds,2,,True,False,False,False,False,False,False
+getclicky.com,Roxr Software Ltd,ddg_tds,2,Ad Fraud|Analytics,False,False,False,False,False,False,False
+growplow.events,growplow.events,ddg_tds,2,,True,False,False,False,False,False,False
+hotjar.io,Hotjar Ltd,ddg_tds,2,,True,False,False,False,False,False,False
+inmobi-choice.io,inmobi-choice.io,ddg_tds,2,,True,False,False,False,False,False,False
+maps.googleapis.com,Google LLC,ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,False,False,False
+merchant-center-analytics.goog,merchant-center-analytics.goog,ddg_tds,2,,True,False,False,False,False,False,False
+ortb.net,ortb.net,ddg_tds,2,,True,False,False,False,False,False,False
+pinklion.io,pinklion.io,ddg_tds,2,,True,False,False,False,False,False,False
+playdigo.com,playdigo.com,ddg_tds,2,,True,False,False,False,False,False,False
+roeye.com,roeye.com,ddg_tds,2,,True,False,False,False,False,False,False
+rtb-oveeo.com,rtb-oveeo.com,ddg_tds,2,,True,False,False,False,False,False,False
+rtb.mx,rtb.mx,ddg_tds,2,,True,False,False,False,False,False,False
+sentry.io,"Functional Software, Inc.",ddg_tds,2,,True,False,False,False,False,False,False
+shopifycdn.com,Shopify Inc.,ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,False,False,False
+shopifysvc.com,Shopify Inc.,ddg_tds,2,,True,False,False,False,False,False,False
+stripe.com,"Stripe, Inc",ddg_tds,2,Content Delivery|Embedded Content|Online Payment,True,True,False,False,False,False,False
+translate.googleapis.com,Google LLC,ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,False,False,False
+vimeo.com,"Vimeo, LLC",ddg_tds,2,Content Delivery|Embedded Content,True,True,False,False,False,False,False
+wp.com,"Automattic, Inc.",ddg_tds,2,Analytics|Content Delivery|Embedded Content,False,True,False,False,False,False,False
+wurflcloud.com,wurflcloud.com,ddg_tds,2,,True,False,False,False,False,False,False
+yimg.com,Yahoo Inc.,ddg_tds,2,Ad Motivated Tracking|Advertising|Content Delivery,False,True,True,False,False,False,False
+yandexmetrica.com,Yandex LLC,ddg_tds,2,,False,False,False,False,False,False,False
+ymetrica1.com,Yandex LLC,ddg_tds,2,,False,False,False,False,False,False,False
+ad-company.example,Ad Company Example,ddg_tds,2,,False,False,False,False,False,False,False
+ad-company.site,Ad Company,ddg_tds,2,,False,False,False,False,False,False,False
+bad.third-party.site,Test Site for Tracker Blocking,ddg_tds,2,,False,False,False,False,False,False,False
+broken.third-party.site,Test Site for Tracker Blocking,ddg_tds,2,,True,False,False,False,False,False,False
+do-not-tracker.org,EFF Test Trackers,ddg_tds,2,,False,False,False,False,False,False,False
+eviltracker.net,EFF Test Trackers,ddg_tds,2,,False,False,False,False,False,False,False
+trackersimulator.org,EFF Test Trackers,ddg_tds,2,,False,False,False,False,False,False,False

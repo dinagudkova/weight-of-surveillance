@@ -13,11 +13,18 @@ models:
     columns:
       - name: site
         tests: [not_null, unique]
+      - name: accept_is_lower_bound
+        description: The accept visit was stopped because the page flooded the browser with requests; accept values are lower bounds.
       - name: reject_option
         tests:
           - accepted_values:
               arguments:
                 values: ["no banner", "reject on first layer", "reject only in settings", "no reject without subscription", "reject not verified"]
+  - name: mart_group_summary
+    description: Tracking load by category group (coarser categories for the dashboard).
+    columns:
+      - name: category_group
+        tests: [not_null, unique]
   - name: mart_category_summary
     description: Tracking load by site category (medians over sites).
   - name: mart_company_reach

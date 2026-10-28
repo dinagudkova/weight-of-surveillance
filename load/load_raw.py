@@ -30,7 +30,8 @@ SYNC_PATTERN = (r"(//cm\.|usersync|user\.sync|user-sync|cookie[-_]?sync|cookiema
 
 VISITS_SQL = """
 SELECT
-    visitId                                   AS visit_id,
+    -- crash placeholder rows from older crawler versions have no visitId: derive a stable one
+    COALESCE(visitId, 'crash-' || md5(concat_ws('|', site, mode, CAST(rep AS VARCHAR), date))) AS visit_id,
     site,
     category                                  AS crawl_category,
     mode,

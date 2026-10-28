@@ -1,0 +1,17 @@
+site_category,category_group,group_label,group_order
+# Coarser groups for the dashboard, so every group has enough sites for stable medians.
+news_media,media,Media,1
+portal_email,media,Media,1
+ecommerce,shopping,Shopping,2
+classifieds_jobs,shopping,Shopping,2
+brand,shopping,Shopping,2
+services,services_entertainment,Services & entertainment,3
+entertainment_gaming,services_entertainment,Services & entertainment,3
+social_community,services_entertainment,Services & entertainment,3
+travel_mobility,services_entertainment,Services & entertainment,3
+finance_insurance,finance_health,Finance & health,4
+health,finance_health,Finance & health,4
+government_public,public_education,Public sector & education,5
+education,public_education,Public sector & education,5
+gambling,gambling,Gambling,6
+other,other,Other,7

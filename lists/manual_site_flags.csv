@@ -1,0 +1,28 @@
+site_domain,pay_or_okay,note
+# Sites confirmed as "pay or okay" (accept or subscribe on the first layer) from the screenshots in review_consent.html,
+# where the crawler did not set the flag. Used by dbt in addition to the crawler flag.
+merkur.de,true,Ippen: Kostenfrei weiterlesen / Jetzt abonnieren (Freechoice)
+tz.de,true,Ippen
+fr.de,true,Ippen
+fnp.de,true,Ippen
+hna.de,true,Ippen
+op-online.de,true,Ippen
+ruhr24.de,true,Ippen
+mannheim24.de,true,Ippen
+ludwigshafen24.de,true,Ippen
+rosenheim24.de,true,Ippen
+kreiszeitung.de,true,Ippen
+come-on.de,true,Ippen
+wa.de,true,Ippen
+soester-anzeiger.de,true,Ippen
+markt.de,true,Ippen-style Freechoice banner
+regionalheute.de,true,Freechoice banner
+abendzeitung-muenchen.de,true,AZ-PUR
+rnz.de,true,ohne Werbetracking abonnieren
+nordkurier.de,true,contentpass
+elle.de,true,Burda: werbefrei lesen
+vogue.de,true,Burda: werbefrei lesen
+instyle.de,true,Burda: werbefrei lesen
+harpersbazaar.de,true,Burda: werbefrei lesen
+esquire.de,true,Burda: werbefrei lesen
+freundin.de,true,Burda: werbefrei lesen

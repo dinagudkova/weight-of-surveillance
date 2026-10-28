@@ -1,0 +1,53 @@
+name: wos
+version: "1.0.0"
+config-version: 2
+profile: wos
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  wos:
+    staging:
+      +materialized: view
+      +schema: staging
+    prep:
+      +materialized: view
+      +schema: prep
+    marts:
+      +materialized: table
+      +schema: marts
+
+seeds:
+  wos:
+    +schema: seeds
+    sites:
+      +column_types: {url: varchar, category: varchar, subcategory: varchar, site_domain: varchar, market: varchar}
+    site_aliases:
+      +column_types: {site_domain: varchar, alias_domain: varchar}
+    cmp_domains:
+      +column_types: {domain: varchar}
+    category_groups:
+      +column_types: {site_category: varchar, category_group: varchar, group_label: varchar, group_order: integer}
+    manual_site_flags:
+      +column_types: {site_domain: varchar, pay_or_okay: boolean, note: varchar}
+    domain_entities:
+      +column_types: {domain: varchar, entity: varchar}
+    trackers:
+      +column_types:
+        domain: varchar
+        owner: varchar
+        source: varchar
+        priority: integer
+        categories: varchar
+        only_non_tracking: boolean
+        cdn_like: boolean
+        ad_category: boolean
+        action_pixel: boolean
+        ad_owner: boolean
+        identity: boolean
+        telemetry: boolean

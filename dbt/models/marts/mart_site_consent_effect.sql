@@ -9,6 +9,9 @@ per_site as (
         site,
         max(site_domain)    as site_domain,
         max(site_category)  as site_category,
+        max(site_category_group) as site_category_group,
+        max(site_group_label) as site_group_label,
+        max(site_group_order) as site_group_order,
         max(site_subcategory) as site_subcategory,
         max(cmp)            as cmp,
         {{ median("case when mode = 'none' then tracking_requests end") }}   as none_tracking_requests,
@@ -24,7 +27,8 @@ per_site as (
         {{ median("case when mode = 'reject' then analytics_requests end") }} as reject_analytics_requests,
         {{ median("case when mode = 'none' then script_ms end") }}            as none_script_ms,
         {{ median("case when mode = 'accept' then script_ms end") }}          as accept_script_ms,
-        count(distinct mode) as modes_measured
+        count(distinct mode) as modes_measured,
+        bool_or(mode = 'accept' and is_lower_bound) as accept_is_lower_bound
     from usable
     group by site
 ),

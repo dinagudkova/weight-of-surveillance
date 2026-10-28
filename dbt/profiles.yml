@@ -1,0 +1,19 @@
+# Connection settings come from environment variables; scripts/dbt.py fills them from .env.
+wos:
+  target: duckdb
+  outputs:
+    duckdb:
+      type: duckdb
+      path: "{{ env_var('DBT_DUCKDB_PATH', '../warehouse/wos.duckdb') }}"
+      schema: main
+      threads: 4
+    neon:
+      type: postgres
+      host: "{{ env_var('DBT_PG_HOST', 'localhost') }}"
+      port: "{{ env_var('DBT_PG_PORT', '5432') | as_number }}"
+      user: "{{ env_var('DBT_PG_USER', 'postgres') }}"
+      password: "{{ env_var('DBT_PG_PASSWORD', '') }}"
+      dbname: "{{ env_var('DBT_PG_DBNAME', 'postgres') }}"
+      schema: public
+      sslmode: "{{ env_var('DBT_PG_SSLMODE', 'require') }}"
+      threads: 4
