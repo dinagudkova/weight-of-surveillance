@@ -1,6 +1,6 @@
 """Build dbt seed files from the project lists (lists/) and the site sample.
 
-Usage: python scripts/build_seeds.py [--sites sites_study.csv]
+Usage: python scripts/build_seeds.py [--sites sites_study.csv sites_boost.csv]
 
 Writes dbt/seeds/*.csv. Run it again whenever a list in lists/ or the site sample changes,
 then `dbt build` re-classifies all requests without crawling again.
@@ -59,21 +59,23 @@ def write(name, fieldnames, data):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--sites", default=str(ROOT / "sites_study.csv"))
+    p.add_argument("--sites", nargs="+", default=[str(ROOT / "sites_study.csv")],
+                   help="one or more site lists, e.g. sites_study.csv sites_boost.csv")
     args = p.parse_args()
 
     # Sites: url, category, subcategory, domain, market (pilot files only have url, category)
     from tldextract import TLDExtract
     extract = TLDExtract(suffix_list_urls=())
     sites = []
-    for r in rows(args.sites):
+    for r in [r for path in args.sites for r in rows(path)]:
         host = re.sub(r"^https?://", "", r["url"].strip()).split("/")[0].lower()
         e = extract(host)
         # fall back to the last two labels for hosts without a public suffix (e.g. *.test in the mock crawl)
         domain = r.get("domain") or getattr(e, "top_domain_under_public_suffix", "") or ".".join(host.split(".")[-2:])
         sites.append({"url": r["url"].strip(), "category": r.get("category", ""), "subcategory": r.get("subcategory", ""),
-                      "site_domain": domain, "market": r.get("market", "")})
-    write("sites.csv", ["url", "category", "subcategory", "site_domain", "market"], sites)
+                      "site_domain": domain, "market": r.get("market", ""),
+                      "sample_source": r.get("sample_source") or "crux_top1000"})
+    write("sites.csv", ["url", "category", "subcategory", "site_domain", "market", "sample_source"], sites)
 
     aliases = [{"site_domain": r["site_domain"], "alias_domain": r["alias_domain"]} for r in rows(LISTS / "site_aliases.csv")]
     write("site_aliases.csv", ["site_domain", "alias_domain"], aliases)

@@ -231,7 +231,7 @@ def build(args):
 
     out.sort(key=lambda o: (o["keep"] == 0, o["category"], o["domain"]))
     OUT_DIR.mkdir(exist_ok=True)
-    path = OUT_DIR / "candidates.csv"
+    path = Path(args.candidates_out)
     with open(path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(out[0].keys()))
         w.writeheader()
@@ -292,6 +292,8 @@ def main():
     p.add_argument("--market", choices=["all", "de", "intl"], default="all")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--out", default=str(ROOT / "sites_study.csv"))
+    p.add_argument("--candidates-out", default=str(OUT_DIR / "candidates.csv"),
+                   help="where to write the candidate list (use another file for the top-5000 boost)")
     args = p.parse_args()
     if args.from_reviewed:
         sample_from_reviewed(args)

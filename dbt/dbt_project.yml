@@ -26,7 +26,7 @@ seeds:
   wos:
     +schema: seeds
     sites:
-      +column_types: {url: varchar, category: varchar, subcategory: varchar, site_domain: varchar, market: varchar}
+      +column_types: {url: varchar, category: varchar, subcategory: varchar, site_domain: varchar, market: varchar, sample_source: varchar}
     site_aliases:
       +column_types: {site_domain: varchar, alias_domain: varchar}
     cmp_domains:

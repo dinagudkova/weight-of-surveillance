@@ -6,6 +6,7 @@ select
     max(site_group_label)                                                        as group_label,
     max(site_group_order)                                                        as group_order,
     count(*)                                                                     as sites,
+    count(*) filter (where site_sample_source = 'crux_top5000_boost')            as sites_boost,
     count(*) filter (where has_banner)                                           as sites_with_banner,
     {{ median('none_tracking_requests') }}                                       as median_none_tracking_requests,
     {{ median("case when has_banner then accept_tracking_requests end") }}       as median_accept_tracking_requests,

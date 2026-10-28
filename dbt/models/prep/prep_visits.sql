@@ -21,7 +21,8 @@ latest as (
         coalesce(g.group_order, 99)            as site_group_order,
         s.subcategory                         as site_subcategory,
         s.site_domain,
-        s.market
+        s.market,
+        coalesce(s.sample_source, 'crux_top1000') as site_sample_source
     from ranked r
     left join {{ ref('sites') }} s on s.url = r.site
     left join {{ ref('category_groups') }} g on g.site_category = coalesce(s.category, r.crawl_category)

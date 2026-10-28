@@ -13,6 +13,7 @@ per_site as (
         max(site_group_label) as site_group_label,
         max(site_group_order) as site_group_order,
         max(site_subcategory) as site_subcategory,
+        max(site_sample_source) as site_sample_source,
         max(cmp)            as cmp,
         {{ median("case when mode = 'none' then tracking_requests end") }}   as none_tracking_requests,
         {{ median("case when mode = 'reject' then tracking_requests end") }} as reject_tracking_requests,
