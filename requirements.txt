@@ -1,3 +1,8 @@
 pandas
 tabulate
 tldextract
+duckdb>=1.1
+psycopg[binary]>=3.1
+dbt-core>=1.10
+dbt-duckdb>=1.10
+dbt-postgres>=1.10

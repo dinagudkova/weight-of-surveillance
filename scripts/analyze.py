@@ -1,7 +1,7 @@
 """Pilot analysis v2 for "The Weight of Surveillance".
 
-Usage: python analyze.py results
-Writes results/pilot_report.md, results/summary_by_visit.csv, results/review_domains.csv
+Usage: python scripts/analyze.py data/raw/pilot_v1
+Writes <folder>/pilot_report.md, <folder>/summary_by_visit.csv, <folder>/review_domains.csv
 
 Main metrics use only requests that START inside the fixed observation window after t0
 (t0 = consent click for accept/reject, end of settling for none), so all modes are observed equally long.
@@ -11,7 +11,9 @@ from pathlib import Path
 
 import pandas as pd
 
-out = Path(sys.argv[1] if len(sys.argv) > 1 else "results")
+if len(sys.argv) < 2:
+    sys.exit("Usage: python scripts/analyze.py <folder>")
+out = Path(sys.argv[1])
 req = pd.read_json(out / "requests.jsonl", lines=True)
 vis = pd.read_json(out / "visits.jsonl", lines=True)
 key = ["site", "mode", "rep"]

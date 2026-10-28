@@ -1,12 +1,12 @@
 """Build dbt seed files from the project lists (lists/) and the site sample.
 
-Usage: python scripts/build_seeds.py [--sites sites_study.csv sites_boost.csv]
+Usage: python scripts/build_seeds.py [--sites sample/sites_study.csv sample/sites_boost.csv]
 
 Writes dbt/seeds/*.csv. Run it again whenever a list in lists/ or the site sample changes,
 then `dbt build` re-classifies all requests without crawling again.
 
 Tracker flags (ad, analytics, identity, ...) are derived here, in one place, with the same rules as
-classify.mjs, so the SQL models only join and combine booleans.
+crawler/classify.mjs, so the SQL models only join and combine booleans.
 """
 import argparse
 import csv
@@ -59,8 +59,8 @@ def write(name, fieldnames, data):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--sites", nargs="+", default=[str(ROOT / "sites_study.csv")],
-                   help="one or more site lists, e.g. sites_study.csv sites_boost.csv")
+    p.add_argument("--sites", nargs="+", default=[str(ROOT / "sample" / "sites_study.csv")],
+                   help="one or more site lists, e.g. sample/sites_study.csv sample/sites_boost.csv")
     args = p.parse_args()
 
     # Sites: url, category, subcategory, domain, market (pilot files only have url, category)

@@ -4,7 +4,7 @@ wos:
   outputs:
     duckdb:
       type: duckdb
-      path: "{{ env_var('DBT_DUCKDB_PATH', '../warehouse/wos.duckdb') }}"
+      path: "{{ env_var('DBT_DUCKDB_PATH', '../data/warehouse/wos.duckdb') }}"
       schema: main
       threads: 4
     neon:

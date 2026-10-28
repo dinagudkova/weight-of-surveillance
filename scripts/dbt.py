@@ -1,13 +1,13 @@
 """Run dbt with the project's profile and connection settings.
 
 Usage:
-  python scripts/dbt.py build                    # DuckDB (warehouse/wos.duckdb)
+  python scripts/dbt.py build                    # DuckDB (data/warehouse/wos.duckdb)
   python scripts/dbt.py build --target neon      # PostgreSQL on Neon, NEON_URL from .env
   python scripts/dbt.py docs generate
 
 Reads NEON_URL from .env (or the environment) and passes host, user, password and database to dbt
 as DBT_PG_* variables, so the password never has to be written into profiles.yml.
-Timings of build/run/seed/test are appended to warehouse/dbt_log.csv for the DuckDB vs PostgreSQL comparison.
+Timings of build/run/seed/test are appended to data/warehouse/dbt_log.csv for the DuckDB vs PostgreSQL comparison.
 """
 import csv
 import os
@@ -36,8 +36,8 @@ def main():
     args = sys.argv[1:]
     env = os.environ.copy()
     env.setdefault("DBT_PROFILES_DIR", str(ROOT / "dbt"))
-    env.setdefault("DBT_DUCKDB_PATH", str(ROOT / "warehouse" / "wos.duckdb"))
-    (ROOT / "warehouse").mkdir(exist_ok=True)
+    env.setdefault("DBT_DUCKDB_PATH", str(ROOT / "data" / "warehouse" / "wos.duckdb"))
+    (ROOT / "data" / "warehouse").mkdir(parents=True, exist_ok=True)
     url = env.get("NEON_URL") or read_env().get("NEON_URL")
     if url:
         u = urlparse(url)
@@ -53,7 +53,7 @@ def main():
     code = subprocess.call(["dbt", *args], cwd=ROOT / "dbt", env=env)
     secs = time.perf_counter() - t
     if args and args[0] in ("build", "run", "seed", "test"):
-        path = ROOT / "warehouse" / "dbt_log.csv"
+        path = ROOT / "data" / "warehouse" / "dbt_log.csv"
         new = not path.exists()
         with open(path, "a", newline="") as f:
             w = csv.writer(f)

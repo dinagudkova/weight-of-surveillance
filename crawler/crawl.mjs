@@ -8,8 +8,8 @@
 // The main metrics use only requests that START inside the window, so all modes are observed equally long.
 //
 // Usage:
-//   node crawl.mjs --sites sites_pilot.csv --out results --workers 3 --repeats 1
-//   node crawl.mjs --mock            (offline self-test against fake sites)
+//   node crawler/crawl.mjs --sites sample/sites_pilot.csv --out data/raw/pilot_v1 --workers 3 --repeats 1
+//   node crawler/crawl.mjs --mock            (offline self-test against fake sites, --out optional, default data/raw/mock)
 //   parallel machines: --shard 1/4 --machine laptop1   (each machine crawls a fixed quarter of the sites)
 //   options: --retry-failed --fresh --headed --window 30 --visit-timeout 150 --pause 3 --no-shuffle --restart-every 6
 import fs from 'fs';
@@ -27,12 +27,16 @@ const args = Object.fromEntries(
   }, []),
 );
 
-const OUT = args.out || 'results';
+const MOCK = Boolean(args.mock);
+if (!args.out && !MOCK) {
+  console.error('Usage: node crawler/crawl.mjs --sites <file> --out <folder> [options]\n       node crawler/crawl.mjs --mock [--out <folder>] [options]');
+  process.exit(1);
+}
+const OUT = args.out || 'data/raw/mock';
 const WORKERS = Number(args.workers || 3);
 const REPEATS = Number(args.repeats || 1);
 const MODES = (args.modes || 'none,accept,reject').split(',');
-const MOCK = Boolean(args.mock);
-const SITES_FILE = args.sites || (MOCK ? null : 'sites_pilot.csv');
+const SITES_FILE = args.sites || (MOCK ? null : 'sample/sites_pilot.csv');
 
 // Timings (ms). Reported in the methodology.
 // Memory safety. V8 keeps the whole original string alive behind a slice, so a short piece of a 500 KB URL

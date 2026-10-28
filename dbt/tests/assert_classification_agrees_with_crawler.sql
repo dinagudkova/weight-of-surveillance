@@ -1,5 +1,5 @@
 {{ config(severity='warn') }}
--- dbt and the crawler (classify.mjs) apply the same rules. Large disagreement means the seeds and the
+-- dbt and the crawler (crawler/classify.mjs) apply the same rules. Large disagreement means the seeds and the
 -- lists used during the crawl differ (expected after list updates) or one implementation has a bug.
 with cmp as (
     select

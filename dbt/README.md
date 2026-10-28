@@ -1,6 +1,6 @@
 # dbt project
 
-One dbt project, two targets: **DuckDB** (local file `warehouse/wos.duckdb`) and **PostgreSQL** on Neon.
+One dbt project, two targets: **DuckDB** (local file `data/warehouse/wos.duckdb`) and **PostgreSQL** on Neon.
 The models are the same for both; the only engine-specific SQL is the `median()` macro.
 
 ## Layers
@@ -16,7 +16,7 @@ Schemas: `raw` (loader), `seeds`, `staging`, `prep`, `marts`.
 
 ## Classification
 
-`prep_requests_classified` applies the same rules as `classify.mjs`, driven by the seeds. Changing a list in `lists/` and running `build_seeds.py` + `dbt build` re-classifies all requests without crawling again.
+`prep_requests_classified` applies the same rules as `crawler/classify.mjs`, driven by the seeds. Changing a list in `lists/` and running `build_seeds.py` + `dbt build` re-classifies all requests without crawling again.
 
 Two inputs cannot be evaluated in SQL and come from the crawler as flags: matches against the EasyPrivacy/EasyList rule syntax, and DNS CNAME chains.
 

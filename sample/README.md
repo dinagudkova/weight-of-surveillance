@@ -25,7 +25,7 @@
    python sample/build_sample.py --from-reviewed sample/candidates.csv --sample 500 --market de
    ```
 
-   Output: `sites_study.csv` in crawler format (`url,category,...`).
+   Output: `sample/sites_study.csv` in crawler format (`url,category,...`).
 
 ## Rules
 

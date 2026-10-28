@@ -4,11 +4,11 @@
   "description": "The Weight of Surveillance: measuring third-party tracking on German websites in three consent states",
   "scripts": {
     "setup": "npx playwright install chromium",
-    "lists": "bash update_lists.sh",
-    "mock": "node crawl.mjs --mock --out results_mock --window 10",
-    "crawl": "node crawl.mjs --sites sites_pilot.csv --out results --workers 2",
-    "reclassify": "node reclassify.mjs results",
-    "report": "python3 analyze.py results"
+    "lists": "bash scripts/update_lists.sh",
+    "mock": "node crawler/crawl.mjs --mock --out data/raw/mock --window 10",
+    "crawl": "node crawler/crawl.mjs --sites sample/sites_pilot.csv --out data/raw/pilot_v1 --workers 2",
+    "reclassify": "node crawler/reclassify.mjs data/raw/pilot_v1",
+    "report": "python3 scripts/analyze.py data/raw/pilot_v1"
   },
   "keywords": [],
   "author": "",

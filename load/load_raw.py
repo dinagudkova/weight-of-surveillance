@@ -1,15 +1,15 @@
 """Load crawl results (visits.jsonl, requests.jsonl) into raw tables in DuckDB and/or PostgreSQL (Neon).
 
 Usage:
-  python load/load_raw.py results_study                       # both targets
-  python load/load_raw.py results_study --target duckdb
-  python load/load_raw.py results_study --target postgres     # needs NEON_URL in .env
+  python load/load_raw.py data/raw/study_merged                       # both targets
+  python load/load_raw.py data/raw/study_merged --target duckdb
+  python load/load_raw.py data/raw/study_merged --target postgres     # needs NEON_URL in .env
 
 The raw tables are replaced on every run (full reload). DuckDB reads the JSONL files directly and flattens
 them; the same flat rows are then copied into PostgreSQL. To fit the Neon free plan (0.5 GB), the Postgres
 copy of the requests table drops query strings and keeps a shortened URL path.
 
-Timings are appended to warehouse/load_log.csv for the DuckDB vs PostgreSQL comparison.
+Timings are appended to data/warehouse/load_log.csv for the DuckDB vs PostgreSQL comparison.
 """
 import argparse
 import csv
@@ -22,9 +22,9 @@ from pathlib import Path
 import duckdb
 
 ROOT = Path(__file__).resolve().parent.parent
-WAREHOUSE = ROOT / "warehouse"
+WAREHOUSE = ROOT / "data" / "warehouse"
 
-# Cookie sync / ID matching, recognised by URL. Kept in sync with SYNC_RE in classify.mjs.
+# Cookie sync / ID matching, recognised by URL. Kept in sync with SYNC_RE in crawler/classify.mjs.
 SYNC_PATTERN = (r"(//cm\.|usersync|user\.sync|user-sync|cookie[-_]?sync|cookiematch|cookie-match|/sync(\?|/|$)|/psync|"
                 r"/cm(\?|/|$)|/match(\?|/|$)|\bmatch\.|/getuid|/setuid|piggyback|/rid\?|adscalematch|/tpui)")
 

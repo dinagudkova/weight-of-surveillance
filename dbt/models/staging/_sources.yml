@@ -6,7 +6,7 @@ sources:
     schema: raw
     tables:
       - name: visits
-        description: One row per visit (site × consent mode × repeat) as written by crawl.mjs.
+        description: One row per visit (site × consent mode × repeat) as written by crawler/crawl.mjs.
         columns:
           - name: visit_id
             tests: [not_null, unique]

@@ -1,5 +1,5 @@
 // Re-applies classify.mjs to an existing crawl, so updated lists take effect without crawling again.
-// Usage: node reclassify.mjs results_v3
+// Usage: node crawler/reclassify.mjs data/raw/pilot_v3
 // Keeps a backup of the first version as requests.orig.jsonl and rewrites requests.jsonl in place,
 // so visits added later (e.g. re-crawled sites) are kept.
 // Limitations: URLs are stored truncated to 500 characters; older crawls stored only the first CNAME hop;
@@ -9,7 +9,11 @@ import path from 'path';
 import readline from 'readline';
 import { classify } from './classify.mjs';
 
-const dir = process.argv[2] || 'results';
+const dir = process.argv[2];
+if (!dir) {
+  console.error('Usage: node crawler/reclassify.mjs <folder>');
+  process.exit(1);
+}
 const src = path.join(dir, 'requests.jsonl');
 const orig = path.join(dir, 'requests.orig.jsonl');
 if (!fs.existsSync(orig)) fs.copyFileSync(src, orig);

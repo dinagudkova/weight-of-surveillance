@@ -1,7 +1,7 @@
 """Visual review of problem visits: unverified consent clicks and memory aborts.
 
-Usage: python review_consent.py results_study
-Writes results_study/review_consent.html (open it in a browser) and prints a short summary.
+Usage: python scripts/review_consent.py data/raw/study_merged
+Writes <folder>/review_consent.html (open it in a browser) and prints a short summary.
 
 For every listed visit it shows the screenshots before the click, right after the click and at the end
 of the window, so you can decide quickly whether the click really failed or only the check was wrong.
@@ -12,7 +12,9 @@ from pathlib import Path
 
 import pandas as pd
 
-out = Path(sys.argv[1] if len(sys.argv) > 1 else "results")
+if len(sys.argv) < 2:
+    sys.exit("Usage: python scripts/review_consent.py <folder>")
+out = Path(sys.argv[1])
 vis = pd.read_json(out / "visits.jsonl", lines=True)
 key = ["site", "mode", "rep"]
 for col in ["memoryAbort", "botBlocked", "navError", "consentVerified", "consentMethod", "payOrOkay", "bannerPre",

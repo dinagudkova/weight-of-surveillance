@@ -291,7 +291,7 @@ def main():
     p.add_argument("--min-per-category", type=int, default=10)
     p.add_argument("--market", choices=["all", "de", "intl"], default="all")
     p.add_argument("--seed", type=int, default=42)
-    p.add_argument("--out", default=str(ROOT / "sites_study.csv"))
+    p.add_argument("--out", default=str(ROOT / "sample" / "sites_study.csv"))
     p.add_argument("--candidates-out", default=str(OUT_DIR / "candidates.csv"),
                    help="where to write the candidate list (use another file for the top-5000 boost)")
     args = p.parse_args()

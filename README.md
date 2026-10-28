@@ -58,12 +58,12 @@ Requirements: Node.js 18+, Python 3.10+.
 npm install
 npx playwright install chromium
 pip install -r requirements.txt
-bash update_lists.sh          # download third-party tracker lists
+bash scripts/update_lists.sh  # download third-party tracker lists
 
-node crawl.mjs --mock --out results_mock --window 10      # offline self-test (~2 min)
-node crawl.mjs --sites sites_pilot.csv --out results --workers 2
-node reclassify.mjs results   # re-apply classification after list changes, no new crawl
-python3 analyze.py results    # writes results/pilot_report.md
+node crawler/crawl.mjs --mock --out data/raw/mock --window 10      # offline self-test (~2 min)
+node crawler/crawl.mjs --sites sample/sites_pilot.csv --out data/raw/pilot_v1 --workers 2
+node crawler/reclassify.mjs data/raw/pilot_v1   # re-apply classification after list changes, no new crawl
+python3 scripts/analyze.py data/raw/pilot_v1    # writes data/raw/pilot_v1/pilot_report.md
 ```
 
 Useful crawler options:
@@ -80,6 +80,24 @@ Useful crawler options:
 | `--pause 3` | pause between visits, in seconds |
 
 A run can be stopped and restarted: finished visits are skipped.
+
+## Data pipeline: loading and dbt
+
+```bash
+pip install -r requirements.txt
+python scripts/build_seeds.py --sites sample/sites_study.csv sample/sites_boost.csv   # lists/ + sample -> dbt/seeds/
+python load/load_raw.py data/raw/study_merged            # JSONL -> raw tables in DuckDB and PostgreSQL
+python scripts/dbt.py build                              # DuckDB target
+python scripts/dbt.py build --target neon                # PostgreSQL on Neon
+```
+
+`load_raw.py --target duckdb|postgres|both` loads one engine or both. The PostgreSQL connection comes from `NEON_URL` in `.env` (never committed):
+
+```
+NEON_URL=postgresql://user:password@host/neondb?sslmode=require
+```
+
+`scripts/dbt.py` passes this connection to dbt and logs run times to `data/warehouse/dbt_log.csv`; the loader logs to `data/warehouse/load_log.csv`. Both feed the DuckDB vs PostgreSQL comparison. Model details: [dbt/README.md](dbt/README.md).
 
 ## Output files
 

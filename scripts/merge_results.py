@@ -1,6 +1,6 @@
 """Merge crawl folders from several machines into one folder.
 
-Usage: python merge_results.py results_study results_study_mac results_study_pc2 results_study_pc3 results_study_pc4
+Usage: python scripts/merge_results.py data/raw/study_merged data/raw/study_mac1 data/raw/study_mac2 data/raw/study_win1 data/raw/study_win2
        (first argument = target folder, the rest = source folders)
 
 Visits and requests are concatenated (visit ids are unique), screenshots are copied.

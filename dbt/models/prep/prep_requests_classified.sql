@@ -1,5 +1,5 @@
 {{ config(materialized=('table' if target.type == 'duckdb' else 'view')) }}
--- Request classification, same rules as classify.mjs, but driven by the dbt seeds,
+-- Request classification, same rules as crawler/classify.mjs, but driven by the dbt seeds,
 -- so changing a list and running `dbt build` re-classifies everything without crawling again.
 -- Rule-list matches (EasyPrivacy, EasyList) and DNS CNAME chains cannot be evaluated in SQL;
 -- they come from the crawler as flags.
@@ -18,7 +18,7 @@ with base as (
         h.tracker_owner,
         h.tracker_only_non_tracking,
         h.tracker_cdn_like,
-        -- type flags come from the CNAME target's tracker if the host is a cloaked tracker (as in classify.mjs)
+        -- type flags come from the CNAME target's tracker if the host is a cloaked tracker (as in crawler/classify.mjs)
         case when r.via_cname and hc.tracker_domain is not null then hc.tracker_ad_category else h.tracker_ad_category end as tracker_ad_category,
         case when r.via_cname and hc.tracker_domain is not null then hc.tracker_action_pixel else h.tracker_action_pixel end as tracker_action_pixel,
         case when r.via_cname and hc.tracker_domain is not null then hc.tracker_ad_owner else h.tracker_ad_owner end as tracker_ad_owner,

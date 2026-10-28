@@ -2,9 +2,9 @@
 
 Usage:
   python sample/build_sample.py --bucket 5000 --titles --candidates-out sample/candidates_top5000.csv
-  python sample/build_boost.py                      # writes sample/boost_review.csv and sites_boost.csv
+  python sample/build_boost.py                      # writes sample/boost_review.csv and sample/sites_boost.csv
 
-The study sample (sites_study.csv) stays unchanged. For every boosted category the script adds as many
+The study sample (sample/sites_study.csv) stays unchanged. For every boosted category the script adds as many
 sites as needed to reach --target, drawn at random (fixed seed) from candidates that are not in the study yet.
 All boosted sites are marked sample_source = crux_top5000_boost, so the analysis can keep them apart from the
 top-1,000 sample (they are less popular sites).
@@ -23,14 +23,14 @@ ROOT = Path(__file__).resolve().parent.parent
 
 p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 p.add_argument("--candidates", default=str(ROOT / "sample" / "candidates_top5000.csv"))
-p.add_argument("--study", default=str(ROOT / "sites_study.csv"))
+p.add_argument("--study", default=str(ROOT / "sample" / "sites_study.csv"))
 p.add_argument("--categories", default="government_public,health,finance_insurance")
 p.add_argument("--target", type=int, default=28, help="sites per category after the boost")
 p.add_argument("--market", default="de")
 p.add_argument("--seed", type=int, default=42)
 p.add_argument("--max-per-family", type=int, default=3,
                help="at most this many sites of one platform family (e.g. regional Sparkassen share one CMS)")
-p.add_argument("--out", default=str(ROOT / "sites_boost.csv"))
+p.add_argument("--out", default=str(ROOT / "sample" / "sites_boost.csv"))
 args = p.parse_args()
 
 cats = args.categories.split(",")

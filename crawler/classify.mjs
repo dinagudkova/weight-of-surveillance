@@ -16,7 +16,7 @@ import { fileURLToPath } from 'url';
 import { getDomain, getHostname } from 'tldts';
 import { FiltersEngine, Request } from '@ghostery/adblocker';
 
-const dir = path.join(path.dirname(fileURLToPath(import.meta.url)), 'lists');
+const dir = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'lists');
 const read = (f) => fs.readFileSync(path.join(dir, f), 'utf8');
 const csv = (f) => read(f).trim().split('\n').slice(1).filter((l) => l && !l.startsWith('#')).map((l) => l.split(','));
 
