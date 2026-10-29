@@ -134,7 +134,12 @@ async function inspect(page) {
     }
     const r = await withTimeout(frame.evaluate(([cw, isMain, cmpFrame]) => {
       const re = new RegExp(cw, 'i');
-      let texts = (window.autoconsentHeuristics?.getPotentialPopups(1500) || []).map((p) => p.text || '').filter((t) => re.test(t));
+      // Push-notification prompts (CleverPush, OneSignal, ...) ask for "Einwilligung" too, but are not consent
+      // banners; without cookie/tracking/partner wording they are ignored.
+      const pushOnly = (t) => /(push|benachrichtigung|browser-mitteilung|mitteilungen erlauben|notification)/i.test(t)
+        && !/(cookie|tracking|partner|werbung|personalis)/i.test(t);
+      let texts = (window.autoconsentHeuristics?.getPotentialPopups(1500) || []).map((p) => p.text || '')
+        .filter((t) => re.test(t) && !pushOnly(t));
       if (!texts.length && cmpFrame) texts = [(document.body?.innerText || '').slice(0, 2000)];
       // Banners inside open shadow roots (web components: arbeitsagentur.de, Usercentrics, consentmanager, ...).
       // Many CMPs keep the (empty, hidden) host element in the page after a choice, so only *visible* content

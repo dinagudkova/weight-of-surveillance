@@ -26,6 +26,13 @@ ${Array.from({ length: 30 }, (_, i) => `<p>Artikel ${i} Lorem ipsum dolor sit am
     tcState.addtlConsent = '2~1.39.43.46~dv.'; tcState.eventStatus = 'useractioncomplete'; tcState.tcString = 'CQ' + 'x'.repeat(200);
   });
   document.getElementById('reject').addEventListener('click', function(){ tcState.eventStatus = 'useractioncomplete'; tcState.tcString = 'CQ' + 'x'.repeat(60); });
+  document.getElementById('accept').addEventListener('click', function(){
+    var push = document.createElement('div');
+    push.setAttribute('role', 'dialog');
+    push.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);width:420px;padding:20px;background:#fff;border:1px solid #999;z-index:9999';
+    push.innerHTML = '<p>Wir w\u00fcrden dich gerne auf dem Laufenden halten per Push. Mit deiner Einwilligung erh\u00e4ltst du Browser-Mitteilungen. Du kannst deine Einwilligung jederzeit widerrufen. Powered by CleverPush / Datenschutz</p><button>VERBIETEN</button> <button>ERLAUBEN</button>';
+    setTimeout(function(){ document.body.appendChild(push); }, 300);
+  });
   document.getElementById('accept').onclick=function(){
     document.getElementById('cookie-banner').remove();
     load('https://securepubads.g.doubleclick.net/tag/js/gpt.js');
