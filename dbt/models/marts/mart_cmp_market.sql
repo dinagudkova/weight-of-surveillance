@@ -6,7 +6,7 @@ with site_cmp as (
         bool_or(site_pay_or_okay)      as pay_or_okay,
         {{ median('consent_bytes') }}  as consent_bytes
     from {{ ref('fct_visits') }}
-    where is_measured and site_has_banner
+    where is_measured and site_has_banner and dataset = '{{ var("main_dataset") }}'
     group by site
 )
 

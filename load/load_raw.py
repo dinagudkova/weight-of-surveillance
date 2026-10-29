@@ -79,7 +79,9 @@ SELECT
     CAST(tcf.vendorConsents AS INTEGER)       AS tcf_vendor_consents,
     CAST(tcf.vendorLegitimateInterests AS INTEGER) AS tcf_vendor_legitimate_interests,
     CAST(tcf.purposeConsents AS INTEGER)      AS tcf_purpose_consents,
-    CAST(tcf.acVendors AS INTEGER)            AS tcf_ac_vendors
+    CAST(tcf.acVendors AS INTEGER)            AS tcf_ac_vendors,
+    COALESCE(browserMode, 'automated')        AS browser_mode,
+    CAST(webdriver AS BOOLEAN)                AS webdriver
 FROM read_json('{path}', format = 'newline_delimited', union_by_name = true, sample_size = -1, columns = {columns})
 """
 
@@ -95,7 +97,7 @@ VISIT_COLUMNS = {
     "cookiesPre": "STRUCT(total BIGINT, thirdParty BIGINT, tracker BIGINT, trackerOwners VARCHAR[])",
     "cookiesEnd": "STRUCT(total BIGINT, thirdParty BIGINT, tracker BIGINT, trackerOwners VARCHAR[])",
     "requests": "BIGINT", "requestsDropped": "BIGINT", "memoryAbort": "BOOLEAN",
-    "declaredPartners": "BIGINT", "declaredPartnersSnippet": "VARCHAR",
+    "declaredPartners": "BIGINT", "declaredPartnersSnippet": "VARCHAR", "browserMode": "VARCHAR", "webdriver": "BOOLEAN",
     "tcf": "STRUCT(available BOOLEAN, ok BOOLEAN, cmpId BIGINT, gdprApplies BOOLEAN, eventStatus VARCHAR, vendorConsents BIGINT, "
            "vendorLegitimateInterests BIGINT, purposeConsents BIGINT, acVendors BIGINT, tcStringLength BIGINT, error VARCHAR)",
 }
@@ -164,7 +166,10 @@ def log(target, table, rows, seconds, folder):
 # --dataset study (default): the main study, raw.visits + raw.requests (full reload).
 # --dataset tcf: the consent-vendor crawl ("promise vs reality"), visits only, into raw.tcf_visits;
 # its requests are not needed (observed companies come from the main study) and would only use Neon storage.
-DATASETS = {"study": {"visits": "visits", "requests": "requests"}, "tcf": {"visits": "tcf_visits"}}
+# --dataset real: the real-browser crawl (regular Chrome without the automation flag) into raw.real_visits
+# and raw.real_requests; dbt classifies it with the same rules and compares it with the automated crawl.
+DATASETS = {"study": {"visits": "visits", "requests": "requests"}, "tcf": {"visits": "tcf_visits"},
+            "real": {"visits": "real_visits", "requests": "real_requests"}}
 
 
 def load_duckdb(folder, db_path, dataset="study"):
@@ -218,9 +223,9 @@ def load_postgres(folder, url, dataset="study"):
                     for row in batch:
                         cp.write_row(row)
                     n += len(batch)
-            if table == "requests":
-                pg.execute("CREATE INDEX ON raw.requests (visit_id)")
-                pg.execute("CREATE INDEX ON raw.requests (host)")
+            if table.endswith("requests"):
+                pg.execute(f"CREATE INDEX ON raw.{table} (visit_id)")
+                pg.execute(f"CREATE INDEX ON raw.{table} (host)")
             pg.commit()
             secs = time.perf_counter() - t
             log("postgres", table, n, secs, folder)
@@ -235,7 +240,7 @@ def main():
     p.add_argument("--target", choices=["duckdb", "postgres", "both"], default="both")
     p.add_argument("--duckdb-path", default=str(WAREHOUSE / "wos.duckdb"))
     p.add_argument("--dataset", choices=list(DATASETS), default="study",
-                   help="study: raw.visits + raw.requests; tcf: consent-vendor crawl into raw.tcf_visits")
+                   help="study: raw.visits + raw.requests; tcf: consent-vendor crawl into raw.tcf_visits; real: real-browser crawl into raw.real_visits + raw.real_requests")
     args = p.parse_args()
     folder = Path(args.folder).resolve()
     if args.target in ("duckdb", "both"):

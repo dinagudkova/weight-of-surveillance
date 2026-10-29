@@ -11,6 +11,7 @@
 //   node crawler/crawl.mjs --sites sample/sites_pilot.csv --out data/raw/pilot_v1 --workers 3 --repeats 1
 //   node crawler/crawl.mjs --mock            (offline self-test against fake sites, --out optional, default data/raw/mock)
 //   parallel machines: --shard 1/4 --machine laptop1   (each machine crawls a fixed quarter of the sites)
+//   real browser (regular Chrome, no automation flag): --real-browser
 //   options: --retry-failed --fresh --headed --window 30 --visit-timeout 150 --pause 3 --no-shuffle --restart-every 6
 import fs from 'fs';
 import os from 'os';
@@ -376,6 +377,7 @@ async function visit(browser, ua, site, mode, rep, handle) {
   let pre = { banner: false, bannerText: null, payOrOkay: false, botBlocked: false };
   let post = null;
   let cookiesPre = null;
+  let webdriver = null;
   const consent = { tcf: null, attempted: false, method: null, label: null, verified: null, clickAt: null };
 
   if (!navError) {
@@ -386,6 +388,7 @@ async function visit(browser, ua, site, mode, rep, handle) {
     if ([403, 429].includes(mainStatus)) pre.botBlocked = true;
     cookiesPre = await cookieSnapshot(context, site.url);
     const tPre = now();
+    webdriver = await withTimeout(page.evaluate(() => navigator.webdriver), T.op, null);
     const shot = (tag) => withTimeout(page.screenshot({ path: path.join(OUT, 'screens', `${new URL(site.url).hostname}_${mode}_${rep}_${tag}.jpg`), type: 'jpeg', quality: 40, timeout: T.op }), T.op + 1000);
     await shot('1pre');
 
@@ -457,6 +460,7 @@ async function visit(browser, ua, site, mode, rep, handle) {
   active.delete(visitId);
   const visitRow = {
     visitId, site: site.url, category: site.category, mode, rep, date: new Date().toISOString(),
+    browserMode: args['real-browser'] ? 'real' : 'automated', webdriver,
     machine: MACHINE, shard: args.shard || null, cpu: os.cpus()[0]?.model || null, cores: os.cpus().length,
     platform: `${os.platform()} ${os.release()}`, browserVersion: browser.version(),
     navError, loadTimeout, mainStatus, finalUrl,
@@ -496,8 +500,30 @@ async function main() {
   const visOut = fs.createWriteStream(visPath, { flags: 'a' });
   // Each worker has its own browser and restarts it every RESTART visits, so memory cannot pile up.
   const RESTART = Number(args['restart-every'] || 6);
+  // --real-browser: measure the page as a regular Chrome user sees it. Ad systems often skip ad auctions for
+  // browsers that report automation (navigator.webdriver = true, headless mode), which makes tracking after
+  // consent look much smaller than it is. This mode uses installed Google Chrome in a visible window and does
+  // not set the automation flag. It is only used on sites without bot protection (see make_real_browser_list.py).
+  const REAL = Boolean(args['real-browser']);
+  const launchOptions = REAL
+    ? {
+        headless: Boolean(args['real-headless']), // for automated tests only; real runs use a visible window
+        channel: args.chrome ? undefined : 'chrome',
+        executablePath: args.chrome || undefined,
+        args: ['--disable-blink-features=AutomationControlled'],
+        ignoreDefaultArgs: ['--enable-automation'],
+      }
+    : { headless: !args.headed, executablePath: args.chrome || undefined };
   async function launch() {
-    const browser = await chromium.launch({ headless: !args.headed, executablePath: args.chrome || undefined });
+    let browser;
+    try {
+      browser = await chromium.launch(launchOptions);
+    } catch (e) {
+      if (REAL && /chrome/i.test(e.message)) {
+        console.error('Google Chrome was not found. Install it, or run: npx playwright install chrome');
+      }
+      throw e;
+    }
     const probe = await browser.newPage();
     const ua = (await probe.evaluate(() => navigator.userAgent)).replace('HeadlessChrome', 'Chrome');
     await probe.close();

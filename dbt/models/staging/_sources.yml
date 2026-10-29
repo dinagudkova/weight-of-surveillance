@@ -20,3 +20,7 @@ sources:
           Consent-vendor crawl ("promise vs reality"), loaded with load_raw.py --dataset tcf. Same columns as
           visits; tcf_* fields hold the IAB TCF vendor consents after the click. May be absent until that crawl
           is loaded (stg_tcf_visits then returns no rows).
+      - name: real_visits
+        description: Real-browser crawl (regular Chrome without the automation flag), loaded with load_raw.py --dataset real. Optional.
+      - name: real_requests
+        description: Requests of the real-browser crawl. Optional.

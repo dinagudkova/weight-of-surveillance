@@ -10,6 +10,11 @@ macro-paths: ["macros"]
 target-path: "target"
 clean-targets: ["target", "dbt_packages"]
 
+vars:
+  # Which crawl the marts describe: 'automated' (main study) or 'real' (real-browser crawl).
+  # Switch with: python scripts/dbt.py build --vars '{main_dataset: real}'
+  main_dataset: automated
+
 models:
   wos:
     staging:

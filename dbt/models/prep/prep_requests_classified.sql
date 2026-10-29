@@ -68,6 +68,7 @@ tracking as (
 )
 
 select
+    dataset,
     visit_id,
     site,
     mode,

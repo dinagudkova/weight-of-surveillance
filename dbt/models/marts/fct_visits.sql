@@ -29,6 +29,7 @@ with req as (
 )
 
 select
+    v.dataset,
     v.visit_id,
     v.site,
     v.site_domain,

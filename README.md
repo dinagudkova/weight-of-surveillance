@@ -118,6 +118,29 @@ python scripts/dbt.py build
 
 Observed companies are a lower bound of who receives data: server-side sharing is not visible from the browser.
 
+## Real-browser crawl
+
+Validation in a regular Chrome showed that ad systems often skip ad auctions for the automated crawler, which
+reports itself as automated (`navigator.webdriver = true`): on several media sites a normal browser contacted
+3-13 times more third-party domains after "Accept all". The crawler therefore has a second mode:
+
+- `--real-browser`: installed Google Chrome in a visible window, without the automation flag
+  (`--disable-blink-features=AutomationControlled`, no `--enable-automation`). Everything else is identical.
+- Sites that blocked the automated crawler with bot protection are excluded (`scripts/make_real_browser_list.py`):
+  the mode is meant to see pages as a regular user does, not to get past protection set up against bots.
+- Ads may be served to the crawler in this mode; it never clicks ads and visits every page once per consent mode.
+
+```bash
+python scripts/make_real_browser_list.py data/raw/study_merged          # -> sample/sites_real_browser.csv
+node crawler/crawl.mjs --sites sample/sites_real_browser.csv --out data/raw/real_mac1 --real-browser --shard 1/4 --machine mac1
+python scripts/merge_results.py data/raw/real_merged data/raw/real_mac1 data/raw/real_mac2 data/raw/real_win1 data/raw/real_win2
+python load/load_raw.py data/raw/real_merged --dataset real              # -> raw.real_visits, raw.real_requests
+python scripts/dbt.py build                                               # marts describe the automated crawl
+python scripts/dbt.py build --vars '{main_dataset: real}'                 # marts describe the real-browser crawl
+```
+
+`mart_dataset_comparison` compares both crawls per site and consent mode.
+
 ## Output files
 
 | File | Content |

@@ -1,4 +1,11 @@
+-- Union of the automated crawl (raw.visits) and, once loaded, the real-browser crawl (raw.real_visits).
+-- The dataset column tells them apart; marts use var('main_dataset') and mart_dataset_comparison compares both.
+{% set real = adapter.get_relation(database=target.database, schema='raw', identifier='real_visits') %}
+{% set parts = [(source('raw', 'visits'), 'automated')] %}
+{% if real is not none %}{% do parts.append((source('raw', 'real_visits'), 'real')) %}{% endif %}
+{% for rel, ds in parts %}
 select
+    cast('{{ ds }}' as varchar) as dataset,
     visit_id,
     site,
     crawl_category,
@@ -44,4 +51,6 @@ select
     coalesce(request_count, 0)      as request_count,
     coalesce(requests_dropped, 0)   as requests_dropped,
     coalesce(memory_abort, false)   as memory_abort
-from {{ source('raw', 'visits') }}
+from {{ rel }}
+{% if not loop.last %}union all{% endif %}
+{% endfor %}

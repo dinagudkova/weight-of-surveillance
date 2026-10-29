@@ -8,7 +8,7 @@
 with ranked as (
     select
         v.*,
-        row_number() over (partition by v.site, v.mode, v.rep order by v.visited_at desc, v.visit_id desc) as rn
+        row_number() over (partition by v.dataset, v.site, v.mode, v.rep order by v.visited_at desc, v.visit_id desc) as rn
     from {{ ref('stg_visits') }} v
 ),
 
@@ -42,13 +42,14 @@ measured as (
 
 site_flags as (
     select
+        dataset,
         site,
         bool_or(banner_pre or cmp is not null)          as site_has_banner,
         bool_or(pay_or_okay)                            as site_pay_or_okay,
         bool_or(mode = 'reject' and consent_verified)   as site_reject_verified
     from measured
     where is_measured
-    group by site
+    group by dataset, site
 )
 
 select
@@ -67,5 +68,5 @@ select
         )
     ) as is_usable
 from measured m
-left join site_flags f on f.site = m.site
+left join site_flags f on f.site = m.site and f.dataset = m.dataset
 left join {{ ref('manual_site_flags') }} mf on mf.site_domain = m.site_domain

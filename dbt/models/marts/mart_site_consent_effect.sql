@@ -1,7 +1,7 @@
 -- One row per site: tracking in the three consent modes (median over repeats, usable visits only),
 -- and how free the choice is. Main table for business questions 1, 3, 4 and 7.
 with usable as (
-    select * from {{ ref('fct_visits') }} where is_usable
+    select * from {{ ref('fct_visits') }} where is_usable and dataset = '{{ var("main_dataset") }}'
 ),
 
 per_site as (
@@ -41,7 +41,7 @@ choice as (
         bool_or(site_pay_or_okay)     as pay_or_okay,
         bool_or(site_reject_verified) as reject_verified
     from {{ ref('fct_visits') }}
-    where is_measured
+    where is_measured and dataset = '{{ var("main_dataset") }}'
     group by site
 )
 

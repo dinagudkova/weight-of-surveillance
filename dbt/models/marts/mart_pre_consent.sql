@@ -10,5 +10,5 @@ select
     max(cookies_pre_tracker)                  as tracker_cookies_before_choice,
     max(cookies_pre_tracker_owners)           as tracker_cookie_owners
 from {{ ref('fct_visits') }}
-where is_usable and mode = 'none'
+where is_usable and mode = 'none' and dataset = '{{ var("main_dataset") }}'
 group by site, site_domain, site_category
