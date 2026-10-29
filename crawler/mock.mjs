@@ -133,7 +133,8 @@ const ucPage = `<!doctype html><html lang="de"><head><meta charset="utf-8"><titl
 <div id="uc-root" style="position:fixed;left:0;right:0;bottom:0;width:100%"></div>
 <script>
   const host = document.getElementById('uc-root'); const r = host.attachShadow({ mode: 'open' });
-  r.innerHTML = '<div id="box" style="background:#fff;border-top:2px solid #333;padding:20px;height:160px">' +
+  r.innerHTML = '<div class="overlay" style="position:fixed;inset:0;background:rgba(0,0,0,.3)"></div>' +
+    '<div id="box" style="position:relative;background:#fff;border-top:2px solid #333;padding:20px;height:160px">' +
     '<p>Cookies und andere Technologien erlauben? Wir und unsere Partner verarbeiten Daten für personalisierte Werbung.</p>' +
     '<button id="no">Einwilligung ablehnen</button> <button id="ok">OK</button><span style="display:none">Datenschutz Cookie Einstellungen versteckt</span></div>';
   const hide = () => { r.getElementById('box').style.display = 'none'; };

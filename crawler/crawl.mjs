@@ -152,10 +152,15 @@ async function inspect(page) {
       if (!texts.length) {
         for (const host of document.querySelectorAll('*')) {
           if (!host.shadowRoot) continue;
-          const box = [...host.shadowRoot.querySelectorAll('*')].find(shown);
-          if (!box) continue;
-          const t = (box.innerText || '').replace(/\s+/g, ' ');
-          if (re.test(t) && /(akzeptier|ablehn|zustimm|einwillig|accept|reject|zulassen)/i.test(t)) { texts = [t.slice(0, 2000)]; break; }
+          // the first visible element is often an empty backdrop (Ippen's opencmp: div.cmp_overlay), so look
+          // through the visible elements until one carries the banner text
+          let hit = null;
+          for (const box of [...host.shadowRoot.querySelectorAll('*')].slice(0, 300)) {
+            if (!shown(box)) continue;
+            const t = (box.innerText || '').replace(/\s+/g, ' ');
+            if (re.test(t) && /(akzeptier|ablehn|zustimm|einwillig|accept|reject|zulassen)/i.test(t)) { hit = t; break; }
+          }
+          if (hit) { texts = [hit.slice(0, 2000)]; break; }
         }
       }
       const body = isMain ? `${document.title}\n${(document.body?.innerText || '').slice(0, 3000)}` : '';

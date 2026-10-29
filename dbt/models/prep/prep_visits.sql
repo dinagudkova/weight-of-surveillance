@@ -5,6 +5,7 @@
 --                   banner count as usable in every mode). Memory-aborted accept visits are usable as
 --                   lower bounds: the flood only starts after consent, while none/reject stay small.
 --   site_pay_or_okay: crawler flag on any visit of the site, or confirmed manually (seeds/manual_site_flags).
+--   site_has_banner: a banner seen in any crawl of the site, or a manual pay-or-okay flag (which implies one).
 with ranked as (
     select
         v.*,
@@ -50,11 +51,18 @@ site_flags as (
     from measured
     where is_measured
     group by dataset, site
+),
+
+-- a banner seen in either crawl counts for both (the real-browser crawl missed some, e.g. Ippen's opencmp)
+banner_any as (
+    select site, bool_or(site_has_banner) as seen_any
+    from site_flags
+    group by site
 )
 
 select
     m.*,
-    coalesce(f.site_has_banner, false)                                   as site_has_banner,
+    (coalesce(f.site_has_banner, false) or coalesce(ba.seen_any, false) or coalesce(mf.pay_or_okay, false)) as site_has_banner,
     (coalesce(f.site_pay_or_okay, false) or coalesce(mf.pay_or_okay, false)) as site_pay_or_okay,
     (mf.pay_or_okay is not null)                                         as site_pay_or_okay_manual,
     coalesce(f.site_reject_verified, false)                              as site_reject_verified,
@@ -62,11 +70,21 @@ select
         m.is_measured
         and (
             m.mode = 'none'
-            or coalesce(m.consent_verified, false)
             or m.is_lower_bound
-            or not coalesce(f.site_has_banner, false)
+            or not (coalesce(f.site_has_banner, false) or coalesce(ba.seen_any, false) or coalesce(mf.pay_or_okay, false))
+            or (
+                coalesce(m.consent_verified, false)
+                -- on pay-or-okay sites there is no free reject on the first layer: a "reject" only counts if a
+                -- known consent platform handled it (reject in the settings layer), not a generic heuristic click
+                and not (
+                    m.mode = 'reject'
+                    and (coalesce(f.site_pay_or_okay, false) or coalesce(mf.pay_or_okay, false))
+                    and (m.cmp is null or m.cmp = 'Unknown (generic banner)')
+                )
+            )
         )
     ) as is_usable
 from measured m
 left join site_flags f on f.site = m.site and f.dataset = m.dataset
+left join banner_any ba on ba.site = m.site
 left join {{ ref('manual_site_flags') }} mf on mf.site_domain = m.site_domain
