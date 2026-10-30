@@ -69,4 +69,6 @@ mygaru.com,myGaru,Identity,ad identity / audience; verify
 k5a.io,Kilkaya,Analytics,publisher analytics; verify
 ad-preview.com,unknown,Advertising,ad creative delivery (15 sites, 1314 requests); verify
 api-taboola.com,Taboola,Advertising,Taboola API domain
-trbo.com,trbo,Analytics,onsite personalisation and behavioural targeting; verify
+trbo.com,trbo,Analytics,onsite personalisation and behavioural targeting; verifyeu-1-id5-sync.com,ID5 Technology Ltd,Identity,ID5 regional sync endpoint
+dv.tech,DoubleVerify,Advertising,ad verification
+agma-analytics.de,AGMA,Analytics,German audience measurement (agof/AGMA)

@@ -6,6 +6,7 @@ with req as (
         visit_id,
         count(*) filter (where phase = 'window')                                       as window_requests,
         coalesce(sum(bytes) filter (where phase = 'window'), 0)                        as window_bytes,
+        coalesce(sum(bytes), 0)                                                        as visit_bytes,
         count(*) filter (where phase = 'window' and is_tracking)                       as tracking_requests,
         coalesce(sum(bytes) filter (where phase = 'window' and is_tracking), 0)        as tracking_bytes,
         count(*) filter (where phase = 'window' and tracking_type = 'advertising')     as advertising_requests,
@@ -15,7 +16,8 @@ with req as (
         coalesce(sum(bytes) filter (where phase = 'window' and tracking_type = 'analytics'), 0)   as analytics_bytes,
         coalesce(sum(bytes) filter (where phase = 'window' and tracking_type = 'identity'), 0)    as identity_bytes,
         count(*) filter (where phase = 'window' and is_telemetry)                      as telemetry_requests,
-        coalesce(sum(bytes) filter (where phase = 'window' and is_consent), 0)         as consent_bytes,
+        coalesce(sum(bytes) filter (where is_consent), 0)                              as consent_bytes,
+        max(case when is_consent then reg_domain end)                                  as consent_domain,
         count(distinct owner) filter (where phase = 'window' and is_tracking)          as tracking_companies,
         count(*) filter (where is_tracking)                                            as all_tracking_requests,
         coalesce(sum(bytes) filter (where is_tracking), 0)                             as all_tracking_bytes,
@@ -75,11 +77,13 @@ select
     coalesce(r.identity_bytes, 0)         as identity_bytes,
     coalesce(r.telemetry_requests, 0)     as telemetry_requests,
     coalesce(r.consent_bytes, 0)          as consent_bytes,
+    r.consent_domain,
+    coalesce(r.visit_bytes, 0)            as visit_bytes,
     case when v.is_lower_bound then coalesce(r.all_tracking_companies, 0) else coalesce(r.tracking_companies, 0) end as tracking_companies,
     coalesce(r.pre_tracking_requests, 0)  as pre_tracking_requests,
     coalesce(r.pre_advertising_requests, 0) as pre_advertising_requests,
     coalesce(r.pre_identity_requests, 0)  as pre_identity_requests,
     case when v.is_lower_bound then null  -- share is undefined for an aborted window
-         when coalesce(r.window_bytes, 0) > 0 then 1.0 * r.tracking_bytes / r.window_bytes end as tracking_share_bytes
+         when coalesce(r.visit_bytes, 0) > 0 then 1.0 * r.tracking_bytes / r.visit_bytes end as tracking_share_bytes
 from {{ ref('prep_visits') }} v
 left join req r on r.visit_id = v.visit_id

@@ -46,7 +46,7 @@ site_flags as (
     select
         dataset,
         site,
-        bool_or(banner_pre or cmp is not null)          as site_has_banner,
+        bool_or(banner_pre or cmp is not null or consent_method is not null) as site_has_banner,
         bool_or(pay_or_okay)                            as site_pay_or_okay,
         bool_or(mode = 'reject' and consent_verified)   as site_reject_verified
     from measured
