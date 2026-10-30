@@ -22,6 +22,17 @@ models:
           - accepted_values:
               arguments:
                 values: ["no banner", "reject on first layer", "reject only in settings", "no reject without subscription", "reject not verified"]
+  - name: mart_first_tracker
+    description: >
+      Per usable visit on a site with a banner: milliseconds from the consent click to the first tracking,
+      advertising and ID-sync request, and companies reached within 1 s, 5 s and 30 s.
+    columns:
+      - name: visit_id
+        tests: [not_null, unique]
+  - name: mart_consent_timeline
+    description: >
+      For each second of the window (0-29): cumulative tracking requests and companies (median over sites)
+      and the share of sites where tracking has started, by consent mode and site group plus 'All sites'.
   - name: mart_promise_vs_reality
     description: >
       Per site: partners the banner asks consent for (IAB TCF vendor consents after a verified "Accept all",
