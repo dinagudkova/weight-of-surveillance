@@ -2,7 +2,9 @@
 {% macro normalize_cmp(col) -%}
     case
         when {{ col }} is null then null
-        when lower({{ col }}) like '%sourcepoint%' then 'Sourcepoint'
+        when lower({{ col }}) like '%sourcepoint%' or lower({{ col }}) like '%privacy-mgmt%' or lower({{ col }}) like '%sp-prod%' then 'Sourcepoint'
+        when lower({{ col }}) like '%cookielaw%' then 'OneTrust'
+        when lower({{ col }}) like '%privacy-center%' then 'Didomi'
         when lower({{ col }}) like '%onetrust%' then 'OneTrust'
         when lower({{ col }}) like '%usercentrics%' then 'Usercentrics'
         when lower({{ col }}) like '%consentmanager%' then 'consentmanager'

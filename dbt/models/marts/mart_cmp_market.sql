@@ -6,7 +6,7 @@ with site_cmp as (
             max(case when cmp <> 'Unknown (generic banner)' then cmp end),
             max(case consent_domain when 'opencmp.net' then 'opencmp (Ippen)' end),
             max(cmp),
-            max(consent_domain)
+            max({{ normalize_cmp('consent_domain') }})
         ) as cmp,
         bool_or(site_pay_or_okay)      as pay_or_okay,
         {{ median('consent_bytes') }}  as consent_bytes
