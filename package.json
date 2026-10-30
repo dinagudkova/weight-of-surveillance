@@ -6,7 +6,7 @@
     "setup": "npx playwright install chromium",
     "lists": "bash scripts/update_lists.sh",
     "mock": "node crawler/crawl.mjs --mock --out data/raw/mock --window 10",
-    "crawl": "node crawler/crawl.mjs --sites sample/sites_pilot.csv --out data/raw/pilot_v1 --workers 2",
+    "crawl": "node crawler/crawl.mjs --sites sample/sites_real_browser.csv --out data/raw/new_run --workers 2 --real-browser",
     "reclassify": "node crawler/reclassify.mjs data/raw/pilot_v1",
     "report": "python3 scripts/analyze.py data/raw/pilot_v1"
   },

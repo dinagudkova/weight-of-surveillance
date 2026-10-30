@@ -20,10 +20,6 @@ models:
           - accepted_values:
               arguments:
                 values: ["no banner", "reject on first layer", "reject only in settings", "no reject without subscription", "reject not verified"]
-  - name: mart_dataset_comparison
-    description: >
-      Automated crawl vs real-browser crawl (regular Chrome without the automation flag) per site and consent
-      mode: tracking requests, companies, bytes, third-party domains and whether a Google Ad Manager auction ran.
   - name: mart_promise_vs_reality
     description: >
       Per site: partners the banner asks consent for (IAB TCF vendor consents after a verified "Accept all",

@@ -1,3 +1,6 @@
+{{ config(enabled=false) }}
+-- DISABLED: three of four machines of the automated crawl ran behind a DNS ad/tracker blocker (Proton VPN
+-- NetShield), so its tracking numbers are not comparable with the real-browser crawl. Kept for reference only.
 -- Automated crawl vs real-browser crawl, per site and consent mode (usable visits, medians over repeats).
 -- Ad systems often skip ad auctions for browsers that report automation; this mart shows how much tracking
 -- the automated crawl misses. Empty until the real-browser crawl is loaded (load_raw.py --dataset real).

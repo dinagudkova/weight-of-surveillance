@@ -2,7 +2,7 @@
 with site_cmp as (
     select
         site,
-        max(cmp)                       as cmp,
+        coalesce(max(case when cmp <> 'Unknown (generic banner)' then cmp end), max(cmp)) as cmp,
         bool_or(site_pay_or_okay)      as pay_or_okay,
         {{ median('consent_bytes') }}  as consent_bytes
     from {{ ref('fct_visits') }}

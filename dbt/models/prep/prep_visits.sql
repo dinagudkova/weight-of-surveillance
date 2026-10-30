@@ -35,9 +35,10 @@ measured as (
         *,
         (
             nav_error is null and not bot_blocked and request_count > 1
-            and (not memory_abort or mode = 'accept')
+            and (not memory_abort or (mode = 'accept' and (consent_attempted or consent_method is not null)))
         ) as is_measured,
-        (memory_abort and mode = 'accept') as is_lower_bound
+        -- only if consent was actually attempted: a flood on a page whose banner was never clicked is not "after accept"
+        (memory_abort and mode = 'accept' and (consent_attempted or consent_method is not null)) as is_lower_bound
     from latest
 ),
 

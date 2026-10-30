@@ -10,7 +10,7 @@ This project measures how much of a web page's weight (requests, bytes, script t
 
 Business questions are listed in [docs/business_questions.md](docs/business_questions.md).
 
-> Status: pilot finished (25 sites, 3 repeats). Full study in progress.
+> Status: data collection finished: 525 sites (CrUX top 1,000 for Germany plus a top-5,000 boost for government, health and finance), three consent states, crawled in a regular Chrome. Dashboard and write-up in progress.
 
 ## Pipeline
 
@@ -75,6 +75,9 @@ Useful crawler options:
 | `--retry-failed` | re-run visits with errors or bot protection |
 | `--fresh` | re-run visits that already exist (the analysis keeps the latest) |
 | `--headed` | visible browser |
+| `--real-browser` | regular Google Chrome without the automation flag (main dataset) |
+| `--shard 1/4 --machine mac1` | split the sample between machines |
+| `--heap-limit 3000` | memory guard: stop the heaviest page above this heap size (MB) |
 | `--window 30` | observation window in seconds |
 | `--restart-every 6` | restart the browser every N visits (limits memory) |
 | `--pause 3` | pause between visits, in seconds |
@@ -118,28 +121,31 @@ python scripts/dbt.py build
 
 Observed companies are a lower bound of who receives data: server-side sharing is not visible from the browser.
 
-## Real-browser crawl
+## Real-browser crawl (main dataset)
 
-Validation in a regular Chrome showed that ad systems often skip ad auctions for the automated crawler, which
-reports itself as automated (`navigator.webdriver = true`): on several media sites a normal browser contacted
-3-13 times more third-party domains after "Accept all". The crawler therefore has a second mode:
+The main dataset is crawled with `--real-browser`: installed Google Chrome in a visible window, without the
+automation flag (`--disable-blink-features=AutomationControlled`, no `--enable-automation`), so pages are seen as
+a regular user sees them. Everything else (consent clicks, verification, observation window) is identical to the
+default mode.
 
-- `--real-browser`: installed Google Chrome in a visible window, without the automation flag
-  (`--disable-blink-features=AutomationControlled`, no `--enable-automation`). Everything else is identical.
-- Sites that blocked the automated crawler with bot protection are excluded (`scripts/make_real_browser_list.py`):
-  the mode is meant to see pages as a regular user does, not to get past protection set up against bots.
+- Sites that blocked the crawler with bot protection in the first crawl are excluded
+  (`scripts/make_real_browser_list.py`): the mode is meant to see pages as a regular user does, not to get past
+  protection set up against bots.
 - Ads may be served to the crawler in this mode; it never clicks ads and visits every page once per consent mode.
+- The network must not filter ads: an earlier crawl ran partly behind a VPN with a DNS ad/tracker blocker
+  (Proton VPN NetShield) and saw only a fraction of the tracking. All machines of the final crawl were checked on
+  the same reference sites before the run.
 
 ```bash
 python scripts/make_real_browser_list.py data/raw/study_merged          # -> sample/sites_real_browser.csv
 node crawler/crawl.mjs --sites sample/sites_real_browser.csv --out data/raw/real_mac1 --real-browser --shard 1/4 --machine mac1
-python scripts/merge_results.py data/raw/real_merged data/raw/real_mac1 data/raw/real_mac2 data/raw/real_win1 data/raw/real_win2
-python load/load_raw.py data/raw/real_merged --dataset real              # -> raw.real_visits, raw.real_requests
-python scripts/dbt.py build                                               # marts describe the automated crawl
-python scripts/dbt.py build --vars '{main_dataset: real}'                 # marts describe the real-browser crawl
+python scripts/merge_results.py data/raw/real_final data/raw/real_mac1 data/raw/real_mac2 data/raw/real_win1 data/raw/real_win2
+python load/load_raw.py data/raw/real_final --dataset real              # -> raw.real_visits, raw.real_requests
+python scripts/dbt.py build                                              # marts use var main_dataset (default: real)
 ```
 
-`mart_dataset_comparison` compares both crawls per site and consent mode.
+Whether the automation flag itself changes what ad systems serve was not measured: the earlier automated crawl
+is not comparable because of the ad blocker, so `mart_dataset_comparison` is disabled.
 
 ## Output files
 
@@ -157,17 +163,24 @@ Raw data and screenshots are not part of this repository.
 
 ## Measurement setup
 
-- Crawled from Germany through a German VPN exit, desktop viewport 1366×900, locale `de-DE`.
-- Gentle crawling: random order, pause between visits, two parallel browsers.
-- Only home pages, no login.
+- Crawled from Germany through a German VPN exit without ad or tracker filtering, desktop viewport 1366×900,
+  locale `de-DE`, regular Google Chrome without the automation flag.
+- Gentle crawling: random order, pause between visits, two parallel browsers per machine.
+- Only home pages, no login, one visit per site and consent mode (repeat variance in the pilot: about 8%).
 
 ## Limitations
 
-- About 16% of the pilot sites block automated browsers and cannot be measured.
-- Server-side tracking (e.g. on Amazon) is not visible from the browser.
+- About 10% of the sites block automated browsers and are not measured.
+- Pages whose request flood after "Accept all" filled the crawler's memory are stopped; their numbers are lower
+  bounds (`is_lower_bound`).
+- Accept or reject clicks that could not be verified are excluded (about 13% of sites with a banner lack a usable
+  "Accept" visit).
+- Server-side data sharing (e.g. server-to-server ad auctions) is not visible from the browser, so observed
+  companies are a lower bound of who receives data.
 - International tracker lists miss part of the German ad-tech market; the custom lists are reviewed manually.
 - The number of clicks to reject cannot be measured for consent platforms controlled through an API (e.g. Sourcepoint).
-- Requests sent before consent are indicators, not proof of a legal violation.
+- Requests before consent or after a reject are indicators, not proof of a legal violation; partners may claim
+  "legitimate interest". Swiss sites (e.g. 20min.ch) fall under Swiss data protection law, not the GDPR.
 
 ## Data sources and licences
 
