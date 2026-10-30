@@ -132,6 +132,7 @@ default mode.
   (`scripts/make_real_browser_list.py`): the mode is meant to see pages as a regular user does, not to get past
   protection set up against bots.
 - Ads may be served to the crawler in this mode; it never clicks ads and visits every page once per consent mode.
+- Before a crawl, every machine is checked on the same reference sites (`sample/archive/sites_real_check.csv`).
 - The network must not filter ads: an earlier crawl ran partly behind a VPN with a DNS ad/tracker blocker
   (Proton VPN NetShield) and saw only a fraction of the tracking. All machines of the final crawl were checked on
   the same reference sites before the run.
@@ -140,7 +141,7 @@ default mode.
 python scripts/make_real_browser_list.py data/raw/study_merged          # -> sample/sites_real_browser.csv
 node crawler/crawl.mjs --sites sample/sites_real_browser.csv --out data/raw/real_mac1 --real-browser --shard 1/4 --machine mac1
 python scripts/merge_results.py data/raw/real_final data/raw/real_mac1 data/raw/real_mac2 data/raw/real_win1 data/raw/real_win2
-python load/load_raw.py data/raw/real_final --dataset real              # -> raw.real_visits, raw.real_requests
+python load/load_raw.py data/raw/real_final --dataset real              # -> raw.real_visits, raw.real_requests (DuckDB and Neon; --target duckdb for local only)
 python scripts/dbt.py build                                              # marts use var main_dataset (default: real)
 ```
 

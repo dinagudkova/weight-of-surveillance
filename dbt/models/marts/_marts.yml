@@ -7,7 +7,9 @@ models:
       - name: visit_id
         tests: [not_null, unique]
       - name: tracking_share_bytes
-        description: Tracking bytes in the window divided by all bytes of the visit (page load and window).
+        description: >
+          Share of tracking in the observed page weight: tracking bytes divided by all bytes from page load
+          to the end of the 30-second window (phases pre + window). Null for lower-bound visits.
   - name: mart_site_consent_effect
     description: One row per site with tracking in the three consent modes and the available reject option.
     columns:

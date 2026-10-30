@@ -7,6 +7,10 @@ with req as (
         count(*) filter (where phase = 'window')                                       as window_requests,
         coalesce(sum(bytes) filter (where phase = 'window'), 0)                        as window_bytes,
         coalesce(sum(bytes), 0)                                                        as visit_bytes,
+        -- page weight as observed: page load and settle ('pre') plus the 30 s window; the open-ended 'after'
+        -- phase (until the browser closes) is left out so every visit is weighed over a comparable span
+        coalesce(sum(bytes) filter (where phase in ('pre', 'window')), 0)              as observed_bytes,
+        coalesce(sum(bytes) filter (where phase in ('pre', 'window') and is_tracking), 0) as observed_tracking_bytes,
         count(*) filter (where phase = 'window' and is_tracking)                       as tracking_requests,
         coalesce(sum(bytes) filter (where phase = 'window' and is_tracking), 0)        as tracking_bytes,
         count(*) filter (where phase = 'window' and tracking_type = 'advertising')     as advertising_requests,
@@ -18,11 +22,12 @@ with req as (
         count(*) filter (where phase = 'window' and is_telemetry)                      as telemetry_requests,
         coalesce(sum(bytes) filter (where is_consent), 0)                              as consent_bytes,
         max(case when is_consent then reg_domain end)                                  as consent_domain,
-        count(distinct owner) filter (where phase = 'window' and is_tracking)          as tracking_companies,
+        -- companies = third parties; self-hosted tracking ('<site> (first-party)') counts as tracking but not as a company
+        count(distinct owner) filter (where phase = 'window' and is_tracking and owner not like '%(first-party)') as tracking_companies,
         count(*) filter (where is_tracking)                                            as all_tracking_requests,
         coalesce(sum(bytes) filter (where is_tracking), 0)                             as all_tracking_bytes,
         count(*) filter (where tracking_type = 'identity')                             as all_identity_requests,
-        count(distinct owner) filter (where is_tracking)                               as all_tracking_companies,
+        count(distinct owner) filter (where is_tracking and owner not like '%(first-party)')                      as all_tracking_companies,
         count(*) filter (where phase = 'pre' and is_tracking)                          as pre_tracking_requests,
         count(*) filter (where phase = 'pre' and tracking_type = 'advertising')        as pre_advertising_requests,
         count(*) filter (where phase = 'pre' and tracking_type = 'identity')           as pre_identity_requests
@@ -79,11 +84,12 @@ select
     coalesce(r.consent_bytes, 0)          as consent_bytes,
     r.consent_domain,
     coalesce(r.visit_bytes, 0)            as visit_bytes,
+    coalesce(r.observed_bytes, 0)         as observed_bytes,
     case when v.is_lower_bound then coalesce(r.all_tracking_companies, 0) else coalesce(r.tracking_companies, 0) end as tracking_companies,
     coalesce(r.pre_tracking_requests, 0)  as pre_tracking_requests,
     coalesce(r.pre_advertising_requests, 0) as pre_advertising_requests,
     coalesce(r.pre_identity_requests, 0)  as pre_identity_requests,
     case when v.is_lower_bound then null  -- share is undefined for an aborted window
-         when coalesce(r.visit_bytes, 0) > 0 then 1.0 * r.tracking_bytes / r.visit_bytes end as tracking_share_bytes
+         when coalesce(r.observed_bytes, 0) > 0 then 1.0 * r.observed_tracking_bytes / r.observed_bytes end as tracking_share_bytes
 from {{ ref('prep_visits') }} v
 left join req r on r.visit_id = v.visit_id

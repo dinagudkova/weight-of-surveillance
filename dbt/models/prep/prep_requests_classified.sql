@@ -14,6 +14,7 @@ with base as (
         v.site_domain,
         v.is_measured,
         v.is_usable,
+        v.is_lower_bound,
         h.tracker_domain,
         h.tracker_owner,
         h.tracker_only_non_tracking,
@@ -64,7 +65,7 @@ tracking as (
             not is_cmp_host
             and (via_tracker_list or via_cname or via_easyprivacy or via_easylist_third_party)
         ) as matches_tracking_rule,
-        (not is_first_party and tracker_telemetry) as is_telemetry_host
+        coalesce(tracker_telemetry, false) as is_telemetry_host  -- same as classify.mjs: no first-party gate
     from flags
 )
 
@@ -78,6 +79,7 @@ select
     site_domain,
     is_measured,
     is_usable,
+    is_lower_bound,
     start_ms,
     phase,
     url,
