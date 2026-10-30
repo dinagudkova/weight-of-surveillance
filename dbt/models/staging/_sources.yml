@@ -24,3 +24,7 @@ sources:
         description: Real-browser crawl (regular Chrome without the automation flag), loaded with load_raw.py --dataset real. Optional.
       - name: real_requests
         description: Requests of the real-browser crawl. Optional.
+      - name: manual_visits
+        description: Manual visits of bot-protected sites imported from DevTools HAR files (crawler/har_import.mjs). Optional.
+      - name: manual_requests
+        description: Requests of the manual visits. Optional.

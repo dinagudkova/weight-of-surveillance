@@ -1,8 +1,11 @@
--- Union of the automated crawl (raw.requests) and, once loaded, the real-browser crawl (raw.real_requests).
--- The dataset column tells them apart; marts use var('main_dataset') and mart_dataset_comparison compares both.
-{% set real = adapter.get_relation(database=target.database, schema='raw', identifier='real_requests') %}
+-- Union of the automated crawl, the real-browser crawl and manual HAR imports (when loaded):
+-- The dataset column tells them apart; marts use var('main_dataset').
 {% set parts = [(source('raw', 'requests'), 'automated')] %}
-{% if real is not none %}{% do parts.append((source('raw', 'real_requests'), 'real')) %}{% endif %}
+{% for prefix, ds in [('real_', 'real'), ('manual_', 'manual')] %}
+{% if adapter.get_relation(database=target.database, schema='raw', identifier=prefix ~ 'requests') is not none %}
+{% do parts.append((source('raw', prefix ~ 'requests'), ds)) %}
+{% endif %}
+{% endfor %}
 {% for rel, ds in parts %}
 select
     cast('{{ ds }}' as varchar) as dataset,

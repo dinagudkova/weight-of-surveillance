@@ -166,10 +166,12 @@ def log(target, table, rows, seconds, folder):
 # --dataset study (default): the main study, raw.visits + raw.requests (full reload).
 # --dataset tcf: the consent-vendor crawl ("promise vs reality"), visits only, into raw.tcf_visits;
 # its requests are not needed (observed companies come from the main study) and would only use Neon storage.
+# --dataset manual: manual visits imported from HAR files (crawler/har_import.mjs), for bot-protected sites.
 # --dataset real: the real-browser crawl (regular Chrome without the automation flag) into raw.real_visits
 # and raw.real_requests; dbt classifies it with the same rules and compares it with the automated crawl.
 DATASETS = {"study": {"visits": "visits", "requests": "requests"}, "tcf": {"visits": "tcf_visits"},
-            "real": {"visits": "real_visits", "requests": "real_requests"}}
+            "real": {"visits": "real_visits", "requests": "real_requests"},
+            "manual": {"visits": "manual_visits", "requests": "manual_requests"}}
 
 
 def load_duckdb(folder, db_path, dataset="study"):
@@ -240,7 +242,7 @@ def main():
     p.add_argument("--target", choices=["duckdb", "postgres", "both"], default="both")
     p.add_argument("--duckdb-path", default=str(WAREHOUSE / "wos.duckdb"))
     p.add_argument("--dataset", choices=list(DATASETS), default="study",
-                   help="study: raw.visits + raw.requests; tcf: consent-vendor crawl into raw.tcf_visits; real: real-browser crawl into raw.real_visits + raw.real_requests")
+                   help="study: raw.visits + raw.requests; tcf: consent-vendor crawl into raw.tcf_visits; real: real-browser crawl into raw.real_visits + raw.real_requests; manual: HAR imports into raw.manual_visits + raw.manual_requests")
     args = p.parse_args()
     folder = Path(args.folder).resolve()
     if args.target in ("duckdb", "both"):

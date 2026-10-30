@@ -33,6 +33,10 @@ models:
     description: >
       For each second of the window (0-29): cumulative tracking requests and companies (median over sites)
       and the share of sites where tracking has started, by consent mode and site group plus 'All sites'.
+  - name: mart_manual_sites
+    description: >
+      Bot-protected sites measured by hand (HAR import), per site and mode, with the group medians of the main
+      dataset for orientation. Different procedure: shown separately, not pooled.
   - name: mart_promise_vs_reality
     description: >
       Per site: partners the banner asks consent for (IAB TCF vendor consents after a verified "Accept all",

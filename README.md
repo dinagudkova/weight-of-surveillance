@@ -148,6 +148,26 @@ python scripts/dbt.py build                                              # marts
 Whether the automation flag itself changes what ad systems serve was not measured: the earlier automated crawl
 is not comparable because of the ad blocker, so `mart_dataset_comparison` is disabled.
 
+## Manual measurements of bot-protected sites
+
+Sites that block automated browsers are not crawled. For ten well-known ones, a person visited the home page in
+a normal Chrome (incognito, German VPN, no ad blocking) and recorded the network log in DevTools:
+
+1. DevTools → Network, "Preserve log" and "Disable cache" on, then open the site.
+2. About 5 seconds after the page opened, run `fetch('https://example.com/?wos_t0')` in the Console (marks time 0),
+   then immediately click "Accept all" (mode `accept`) or do nothing (mode `none`).
+3. Wait 30 seconds, scrolling down a few times, then export the log (Export HAR, sanitized) as
+   `<domain>_<mode>.har`.
+
+```bash
+node crawler/har_import.mjs --hars data/manual_hars --out data/raw/manual    # same classification as the crawler
+python load/load_raw.py data/raw/manual --dataset manual                    # -> raw.manual_visits, raw.manual_requests
+python scripts/dbt.py build                                                 # -> marts.mart_manual_sites
+```
+
+These visits follow a different procedure (manual click and timing), so they are shown separately
+(`mart_manual_sites`) and never pooled into the group medians.
+
 ## Output files
 
 | File | Content |
