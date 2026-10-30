@@ -25,7 +25,8 @@ with base as (
         case when r.via_cname and hc.tracker_domain is not null then hc.tracker_identity else h.tracker_identity end as tracker_identity,
         case when r.via_cname and hc.tracker_domain is not null then hc.tracker_telemetry else h.tracker_telemetry end as tracker_telemetry,
         h.host_entity,
-        h.is_cmp_host,
+        -- consent platforms are often served from a publisher subdomain that CNAMEs to the CMP (e.g. Sourcepoint)
+        (coalesce(h.is_cmp_host, false) or (r.cname_target is not null and coalesce(hc.is_cmp_host, false))) as is_cmp_host,
         hc.tracker_owner as cname_tracker_owner,
         -- coalesce: a missing entity on either side must mean "not the same owner", not NULL
         coalesce(
