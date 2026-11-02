@@ -64,6 +64,22 @@ models:
     description: Tracking load by site category (medians over sites).
   - name: mart_company_reach
     description: Reach and data volume per company, consent mode and tracking type.
+  - name: mart_company_sites
+    description: >
+      Reach per company and consent mode: distinct sites across all tracking types, share of the sites measured in
+      that mode, requests, bytes and rank. Use this mart for "top companies"; mart_company_reach splits companies
+      by tracking type.
+    columns:
+      - name: owner
+        tests: [not_null]
+      - name: mode
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["none", "reject", "accept"]
+      - name: share_of_sites
+        tests: [not_null]
   - name: mart_cmp_market
     description: Consent management platforms, pay-or-okay share and banner weight.
   - name: mart_pre_consent

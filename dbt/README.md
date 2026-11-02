@@ -10,7 +10,7 @@ The models are the same for both; the only engine-specific SQL is the `median()`
 | seeds | `sites`, `site_aliases`, `trackers`, `domain_entities`, `cmp_domains` (built by `scripts/build_seeds.py` from `lists/`) | table |
 | staging | `stg_visits`, `stg_requests` (automated and real-browser crawl, `dataset` column), `stg_tcf_visits` | view |
 | prep | `prep_visits` (latest visit per site/mode/repeat, validity flags), `prep_host_suffixes`, `prep_host_lookup` (tracker, owner, consent platform per host), `prep_requests_classified` | view; `prep_host_lookup` table; `prep_requests_classified` table in DuckDB, view in PostgreSQL (storage) |
-| marts | `fct_visits`, `mart_site_consent_effect`, `mart_group_summary`, `mart_category_summary`, `mart_company_reach`, `mart_cmp_market`, `mart_pre_consent`, `mart_promise_vs_reality`, `mart_first_tracker`, `mart_consent_timeline`, `mart_manual_sites` (`mart_dataset_comparison` is disabled) | table |
+| marts | `fct_visits`, `mart_site_consent_effect`, `mart_group_summary`, `mart_category_summary`, `mart_company_reach`, `mart_company_sites`, `mart_cmp_market`, `mart_pre_consent`, `mart_promise_vs_reality`, `mart_first_tracker`, `mart_consent_timeline`, `mart_manual_sites` (`mart_dataset_comparison` is disabled) | table |
 
 Schemas: `raw` (loader), `seeds`, `staging`, `prep`, `marts`.
 
