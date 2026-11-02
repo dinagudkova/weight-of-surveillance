@@ -8,6 +8,7 @@ select
     count(*)                                                                     as sites,
     count(*) filter (where site_sample_source = 'crux_top5000_boost')            as sites_boost,
     count(*) filter (where has_banner)                                           as sites_with_banner,
+    count(*) filter (where site_country <> 'DE')                                 as sites_outside_de,
     {{ median('none_tracking_requests') }}                                       as median_none_tracking_requests,
     {{ median("case when has_banner then accept_tracking_requests end") }}       as median_accept_tracking_requests,
     {{ median("case when has_banner then reject_tracking_requests end") }}       as median_reject_tracking_requests,

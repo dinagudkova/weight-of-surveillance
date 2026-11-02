@@ -14,6 +14,7 @@ per_site as (
         max(site_group_order) as site_group_order,
         max(site_subcategory) as site_subcategory,
         max(site_sample_source) as site_sample_source,
+        max(site_country)   as site_country,
         coalesce(
             max(case when cmp <> 'Unknown (generic banner)' then cmp end),
             max(case consent_domain when 'opencmp.net' then 'opencmp (Ippen)' end),

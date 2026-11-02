@@ -10,7 +10,36 @@ This project measures how much of a web page's weight (requests, bytes, script t
 
 Business questions are listed in [docs/business_questions.md](docs/business_questions.md).
 
-> Status: data collection finished: 525 sites (CrUX top 1,000 for Germany plus a top-5,000 boost for government, health and finance), three consent states, crawled in a regular Chrome. Dashboard and write-up in progress.
+> Status: data final: 525 sites (CrUX top 1,000 for Germany plus a top-5,000 boost for government, health and finance), 507 with data, three consent states, crawled in a regular Chrome. Tableau dashboard, statistics notebook and methodology write-up in progress.
+
+## Results
+
+Medians per site; Accept and Reject over the 449 sites with a consent banner. All numbers, their sources and the
+script that reproduces them: [docs/results_numbers.md](docs/results_numbers.md).
+
+| Group | Sites with banner | Tracking requests: no choice | Reject | Accept | Tracking companies after Accept |
+|---|---|---|---|---|---|
+| Media | 165 | 0 | 4 | 1,069* | 100* |
+| Shopping | 118 | 0 | 3 | 81 | 11.5 |
+| Services & entertainment | 96 | 0 | 2 | 91* | 9 |
+| Finance & health | 48 | 0 | 0 | 28 | 4 |
+| Public sector & education | 10 | 0 | 0 | 0.5 | 0 |
+| Gambling | 12 | 0 | 2 | 37 | 5 |
+
+\* Lower bound: on 60 media and 11 services sites the request flood after Accept filled the browser's memory.
+
+- **Without a choice, tracking waits.** The median site sends no tracking request before the user decides.
+- **"Accept all" opens the floodgates, above all on news sites:** about a thousand tracking requests to about a
+  hundred companies in 30 seconds. Tracking starts within a fraction of a second of the click; on all sites with
+  a banner the median is 6 companies by the end of the first second.
+- **Reject mostly works, but not completely.** Median tracking after Reject is close to zero, yet on about half of
+  the sites at least one tracking request starts within five seconds of the click.
+- **A few platforms run the banners:** Sourcepoint (104 sites), Usercentrics (76), consentmanager (72), OneTrust (39),
+  Ippen's opencmp (25).
+- **Paying instead of consenting:** 148 banners offer a paid, tracking-free subscription, 113 of them on media sites.
+  On some of these sites a free reject exists only in the settings layer or not at all.
+- **Promised vs seen:** media banners with IAB TCF ask consent for a median of 210 partners; 101 tracking companies
+  are actually seen after Accept. 7 sites ask consent for the entire IAB vendor list.
 
 ## Pipeline
 
@@ -184,14 +213,18 @@ Raw data and screenshots are not part of this repository.
 
 ## Measurement setup
 
-- Crawled from Germany through a German VPN exit without ad or tracker filtering, desktop viewport 1366×900,
-  locale `de-DE`, regular Google Chrome without the automation flag.
+- Crawled from Germany (home connections or a German VPN exit, both without ad or tracker filtering), desktop
+  viewport 1366×900, locale `de-DE`, regular Google Chrome without the automation flag. Sites that blocked the
+  VPN's IP addresses were re-measured from a home connection.
+- Sample: the CrUX top list for Germany ranks sites popular with users in Germany, so it contains six Swiss and
+  Austrian sites (five of them media). They are kept and flagged with `site_country` (by top-level domain) in the
+  site-level marts; `mart_group_summary.sites_outside_de` counts them per group.
 - Gentle crawling: random order, pause between visits, two parallel browsers per machine.
 - Only home pages, no login, one visit per site and consent mode (repeat variance in the pilot: about 8%).
 
 ## Limitations
 
-- About 10% of the sites block automated browsers and are not measured.
+- About 2% of the sample could not be measured (bot protection or unreachable); 507 of 525 sites have data.
 - Pages whose request flood after "Accept all" filled the crawler's memory are stopped; their numbers are lower
   bounds (`is_lower_bound`).
 - Accept or reject clicks that could not be verified are excluded (about 13% of sites with a banner lack a usable
@@ -201,7 +234,8 @@ Raw data and screenshots are not part of this repository.
 - International tracker lists miss part of the German ad-tech market; the custom lists are reviewed manually.
 - The number of clicks to reject cannot be measured for consent platforms controlled through an API (e.g. Sourcepoint).
 - Requests before consent or after a reject are indicators, not proof of a legal violation; partners may claim
-  "legitimate interest". Swiss sites (e.g. 20min.ch) fall under Swiss data protection law, not the GDPR.
+  "legitimate interest". The four Swiss sites (`site_country = 'CH'`) fall under Swiss data protection law, not the
+  GDPR; the two Austrian sites are under the GDPR like the German ones.
 
 ## Data sources and licences
 

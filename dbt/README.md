@@ -10,7 +10,7 @@ The models are the same for both; the only engine-specific SQL is the `median()`
 | seeds | `sites`, `site_aliases`, `trackers`, `domain_entities`, `cmp_domains` (built by `scripts/build_seeds.py` from `lists/`) | table |
 | staging | `stg_visits`, `stg_requests` (automated and real-browser crawl, `dataset` column), `stg_tcf_visits` | view |
 | prep | `prep_visits` (latest visit per site/mode/repeat, validity flags), `prep_host_suffixes`, `prep_host_lookup` (tracker, owner, consent platform per host), `prep_requests_classified` | view; `prep_host_lookup` table; `prep_requests_classified` table in DuckDB, view in PostgreSQL (storage) |
-| marts | `fct_visits`, `mart_site_consent_effect`, `mart_group_summary`, `mart_category_summary`, `mart_company_reach`, `mart_cmp_market`, `mart_pre_consent`, `mart_promise_vs_reality` (`mart_dataset_comparison` is disabled) | table |
+| marts | `fct_visits`, `mart_site_consent_effect`, `mart_group_summary`, `mart_category_summary`, `mart_company_reach`, `mart_cmp_market`, `mart_pre_consent`, `mart_promise_vs_reality`, `mart_first_tracker`, `mart_consent_timeline`, `mart_manual_sites` (`mart_dataset_comparison` is disabled) | table |
 
 Schemas: `raw` (loader), `seeds`, `staging`, `prep`, `marts`.
 
@@ -37,3 +37,7 @@ Domain lists are matched by expanding every host into its suffixes (`a.b.example
 - A model disabled with `enabled=false` is no longer built, but a table built earlier stays in the database.
   Drop it by hand (e.g. `drop table if exists marts.mart_dataset_comparison`) in DuckDB and in PostgreSQL.
 - Self-hosted tracking (owner `<site> (first-party)`) counts in tracking requests and bytes, but not as a company.
+- `site_country` (DE, AT, CH, other) is derived in `prep_visits` from the site's top-level domain and passed to
+  `fct_visits`, `mart_site_consent_effect`, `mart_pre_consent` and `mart_promise_vs_reality`;
+  `mart_group_summary.sites_outside_de` counts non-German sites per group.
+- `scripts/results_numbers.py` prints the headline numbers from the marts (see `docs/results_numbers.md`).

@@ -6,6 +6,12 @@ models:
     columns:
       - name: visit_id
         tests: [not_null, unique]
+      - name: site_country
+        description: Country of the site by top-level domain (DE, AT, CH; 'other' for any other domain).
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["DE", "AT", "CH", "other"]
   - name: prep_host_suffixes
     description: All domain suffixes of every requested host, for equality joins against domain lists.
   - name: prep_host_lookup

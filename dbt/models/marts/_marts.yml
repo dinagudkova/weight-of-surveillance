@@ -15,6 +15,12 @@ models:
     columns:
       - name: site
         tests: [not_null, unique]
+      - name: site_country
+        description: Country of the site by top-level domain (DE, AT, CH; 'other' for any other domain).
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["DE", "AT", "CH", "other"]
       - name: accept_is_lower_bound
         description: The accept visit was stopped because the page flooded the browser with requests; accept values are lower bounds.
       - name: reject_option
@@ -49,7 +55,8 @@ models:
     description: >
       Tracking load by category group (coarser categories for the dashboard). sites_boost counts sites added
       from the CrUX top 5,000 for under-represented categories; filter on site_sample_source in the site-level
-      marts to compare with the top-1,000 sample only.
+      marts to compare with the top-1,000 sample only. sites_outside_de counts Swiss and Austrian sites in
+      the group (site_country); filter on site_country in the site-level marts to leave them out.
     columns:
       - name: category_group
         tests: [not_null, unique]

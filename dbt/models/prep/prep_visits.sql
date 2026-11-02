@@ -6,6 +6,9 @@
 --                   lower bounds: the flood only starts after consent, while none/reject stay small.
 --   site_pay_or_okay: crawler flag on any visit of the site, or confirmed manually (seeds/manual_site_flags).
 --   site_has_banner: a banner seen in any crawl of the site, or a manual pay-or-okay flag (which implies one).
+--   site_country:   country of the site by its top-level domain. The CrUX sample is "popular with users in
+--                   Germany", which includes a few Swiss and Austrian sites; this flag lets marts and the
+--                   dashboard show them separately or leave them out.
 with ranked as (
     select
         v.*,
@@ -23,6 +26,13 @@ latest as (
         s.subcategory                         as site_subcategory,
         s.site_domain,
         s.market,
+        case
+            when s.site_domain is null    then null
+            when s.site_domain like '%.de' then 'DE'
+            when s.site_domain like '%.at' then 'AT'
+            when s.site_domain like '%.ch' then 'CH'
+            else 'other'
+        end                                   as site_country,
         coalesce(s.sample_source, 'crux_top1000') as site_sample_source
     from ranked r
     left join {{ ref('sites') }} s on s.url = r.site

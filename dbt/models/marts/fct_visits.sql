@@ -46,6 +46,7 @@ select
     v.site_group_order,
     v.site_subcategory,
     v.site_sample_source,
+    v.site_country,
     v.mode,
     v.rep,
     v.visited_at,

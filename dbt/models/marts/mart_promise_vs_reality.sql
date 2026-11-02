@@ -44,6 +44,7 @@ select
     s.site_group_label,
     s.site_group_order,
     s.site_sample_source,
+    s.site_country,
     s.cmp,
     s.pay_or_okay,
     s.has_banner,
