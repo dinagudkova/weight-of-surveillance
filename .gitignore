@@ -10,4 +10,7 @@ screens/
 __pycache__/
 target/
 logs/
-dbt_packages/.claude/scheduled_tasks*
+dbt_packages/
+.claude/scheduled_tasks*
+*.twbx
+*.hyper
