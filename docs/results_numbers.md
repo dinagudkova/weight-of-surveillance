@@ -79,17 +79,23 @@ Outside media these are mostly ad-funded content sites: recipes, gaming, health 
 
 ### Reject options
 
-Source: `mart_site_consent_effect.reject_option` (sites with a banner).
+Source: `mart_site_consent_effect.reject_option` (sites with a banner). The categories combine two facts: whether
+the banner offers a paid subscription (`pay_or_okay`) and whether the crawler managed a working reject
+(`consent_verified` in a Reject visit). They do not record where on the banner the reject was found.
 
-| Reject option | All groups | Media |
-|---|---|---|
-| Reject on the first layer | 235 | 33 |
-| Reject only in the settings layer | 66 | 48 |
-| No reject without a subscription | 82 | 65 |
-| Reject could not be verified | 66 | 19 |
-| **Total** | **449** | **165** |
+| Reject option (value in the mart) | Meaning | All groups | Media |
+|---|---|---|---|
+| `reject on first layer` | no paid option, reject worked | 235 | 33 |
+| `reject only in settings` | paid option, a free reject worked anyway (the first layer offers accept or subscribe, so the reject sits deeper, e.g. in the settings) | 66 | 48 |
+| `no reject without subscription` | paid option, the crawler found no free way to reject | 82 | 65 |
+| `reject not verified` | no paid option, reject could not be verified | 66 | 19 |
+| **Total** | | **449** | **165** |
 
-"No reject without a subscription" by group (`mart_group_summary.sites_no_free_reject`): media 65, services &
+So every one of the 148 banners with a paid option either hides the free reject below the first layer or, as
+far as the crawler could tell, has none. "No free reject found" is the crawler's result, not a proof; markt.de
+was checked by hand (only "Accept all" or a subscription), kleinanzeigen.de has a free reject in the settings.
+
+"No free reject found" by group (`mart_group_summary.sites_no_free_reject`): media 65, services &
 entertainment 13, shopping 2, finance & health 2.
 
 ## The first seconds after the choice

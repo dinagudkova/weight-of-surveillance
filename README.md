@@ -41,7 +41,8 @@ script that reproduces them: [docs/results_numbers.md](docs/results_numbers.md).
 - **A few platforms run the banners:** Sourcepoint (104 sites), Usercentrics (76), consentmanager (72), OneTrust (39),
   Ippen's opencmp (25).
 - **Paying instead of consenting:** 148 banners offer a paid, tracking-free subscription, 113 of them on media sites.
-  82 banners (65 on media sites) offer no free reject at all; on the other 66 the free reject is only in the settings layer.
+  On 82 of them (65 media sites) the crawler found no free way to reject; on the other 66 a free reject exists but
+  not on the first layer of the banner.
 - **Promised vs seen:** media banners with IAB TCF ask consent for a median of 210 partners; 101 tracking companies
   are actually seen after Accept. 7 sites ask consent for the entire IAB vendor list.
 
