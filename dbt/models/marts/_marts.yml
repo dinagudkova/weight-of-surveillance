@@ -66,8 +66,8 @@ models:
     description: Reach and data volume per company, consent mode and tracking type.
   - name: mart_company_sites
     description: >
-      Reach per company and consent mode: distinct sites across all tracking types, share of the sites measured in
-      that mode, requests, bytes and rank. Use this mart for "top companies"; mart_company_reach splits companies
+      Reach per company and consent mode on sites with a consent banner: distinct sites across all tracking types,
+      share of the banner sites measured in that mode, requests, bytes and rank. Use this mart for "top companies"; mart_company_reach splits companies
       by tracking type.
     columns:
       - name: owner
