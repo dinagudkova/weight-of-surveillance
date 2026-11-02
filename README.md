@@ -30,7 +30,9 @@ script that reproduces them: [docs/results_numbers.md](docs/results_numbers.md).
 
 - **Before a choice, tracking is smaller but not absent.** While the banner stays unanswered, the median site
   sends no further tracking requests. But during page load, before anyone could click, 195 of 446 sites with a
-  banner already send advertising requests, most often to Google (see the caveats in the results document).
+  banner already contact advertising companies. Google, the most frequent, receives data hits (not just code
+  loads) from 79 sites; on 7 of them Google's Consent Mode reports consent as granted before any click (confirmed
+  by hand on bwin.de).
 - **"Accept all" opens the floodgates, above all on news sites:** about a thousand tracking requests to about a
   hundred companies in 30 seconds. Tracking starts within a fraction of a second of the click; on all sites with
   a banner the median is 6 companies by the end of the first second.
@@ -235,6 +237,10 @@ Raw data and screenshots are not part of this repository.
   companies are a lower bound of who receives data.
 - International tracker lists miss part of the German ad-tech market; the custom lists are reviewed manually.
 - The number of clicks to reject cannot be measured for consent platforms controlled through an API (e.g. Sourcepoint).
+- Content blockers: the crawler runs Chrome with a temporary profile and extensions disabled, so a blocker in a
+  personal Chrome profile cannot affect it; a per-machine check shows the same share of visits reaching Google on
+  all four crawl machines. Manual checks use a Chrome profile without extensions. A blocker can only hide
+  tracking, never create it, so findings confirmed by hand stay valid either way.
 - Requests before consent or after a reject are indicators, not proof of a legal violation; partners may claim
   "legitimate interest". The four Swiss sites (`site_country = 'CH'`) fall under Swiss data protection law, not the
   GDPR; the two Austrian sites are under the GDPR like the German ones.

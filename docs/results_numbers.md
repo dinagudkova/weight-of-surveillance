@@ -163,9 +163,46 @@ on 106), Adobe (analytics, 39), Amazon (analytics and advertising, 29 each), Mic
 (advertising, 19), Utiq (identity, 18), The Trade Desk (identity, 11).
 
 How to read this: a request is not the same as data collection with consent-free identifiers. Google's Consent
-Mode, for example, sends cookieless pings before a choice by design. The table is an indicator for manual
-checks, not proof of a violation. After the page has loaded, while the banner stays unanswered, almost nothing
+Mode, for example, sends cookieless pings before a choice by design, and many ad requests only load code. The
+next section looks at Google in detail. The table is an indicator for manual checks, not proof of a violation. After the page has loaded, while the banner stays unanswered, almost nothing
 more happens (median 0 tracking requests in the 30-second window).
+
+## Google before any choice: consent signals
+
+Source: `scripts/check_google_consent_mode.py` (same visits as above: mode "No choice", page load, sites with a
+banner, requests owned by Google). Each Google request is split into **code** (scripts, configuration, Google's
+ad-fraud checks: `/pagead/managed`, `/pagead/js`, sodar, `generate_204`, ...) and **hits** (analytics collect,
+conversion and Floodlight pixels, cookie matching, remarketing, ad requests), and the consent signal in the hit's
+URL is read: `gcs=G1xy` (Google Consent Mode; x = ad_storage, y = analytics_storage), `gdpr_consent=` (IAB TCF),
+`npa=1` (non-personalised ads).
+
+| Strongest signal among a site's Google hits before any choice | Sites | With advertising hits |
+|---|---|---|
+| Consent Mode reports ad_storage **granted** | 6 | 4 |
+| Consent Mode reports analytics_storage granted (ads denied) | 1 | 0 |
+| Hits without any denied signal | 36 | 32 |
+| Only denied, empty or non-personalised signals, or URLs cut before the parameter | 36 | 27 |
+| **Sites with Google hits before any choice** | **79** | |
+
+Loading Google code before a choice (gtag/GTM on 171 sites, ad libraries on 59) is not counted.
+
+- **Granted before any click (6 sites):** baur.de, xn--schnppchenportal-ynb.de, bwin.de, fr.de, vevor.de,
+  op-online.de; analytics only: opodo.de. fr.de and op-online.de belong to the Ippen network, which also syncs IDs
+  before a choice; vevor.de also syncs IDs after Reject.
+- **Manual check, 2 November 2026** (Chrome profile without extensions, banner left open, nothing clicked):
+  bwin.de **confirmed**: about 3 s after load a `pageView` goes to www.google.com with `gcs=G111` (ads and
+  analytics granted), plus GA4 hits with `G111` through the site's own domain (`www.bwin.de/dlr/g/collect`,
+  server-side tagging), repeated every ~5 s. **Not reproduced** on baur.de (only `gtm.js` from Google; 13 POST
+  requests to the site's own collector `te.baur.de/collect`, content not visible) and fr.de (no Google request
+  before a choice). Each crawler visit uses a fresh browser context, so a consent from an earlier visit cannot
+  carry over; the sites have most likely changed their setup since the crawl.
+- **Hits without a denied signal (36 sites)**, most frequent: `ad.doubleclick.net/ccm/s` (12 sites),
+  `www3.doubleclick.net` (6), cookie matching `cm.g.doubleclick.net/pixel` (5: novoline.de, stayfriends.de,
+  lampenwelt.de, apotheke-adhoc.de, merkur.de), `pagead2.googlesyndication.com/pagead/ping` (4). The consent
+  state may also travel in cookies or request bodies, which the crawler does not store; these are cases for
+  manual checks.
+- Not covered: Google tags routed through the site's own domain (server-side tagging, as on bwin.de) are
+  classified as first-party and do not appear in this count.
 
 ## Share of tracking in the page weight after Accept
 
@@ -194,6 +231,22 @@ hand-checked cases: the Ippen network before a choice (mannheim24.de), vevor.de 
 Leaving out the six Swiss and Austrian sites hardly changes anything: media 1,075 instead of 1,069 tracking
 requests after Accept (99.5 instead of 100 companies), shopping 12 instead of 11.5 companies, all other medians
 unchanged.
+
+## Check: no machine of the crawl filtered tracking
+
+The main crawl ran on four machines. A content blocker or filtering network on one of them would show up as a
+lower share of visits reaching Google. It does not (usable visits on sites with a banner, lower bounds excluded):
+
+| Machine | Accept visits | Share with Google Analytics / GTM | Share with doubleclick | Median companies after Accept |
+|---|---|---|---|---|
+| mac1 | 79 | 76% | 80% | 8 |
+| mac2 | 70 | 86% | 93% | 15 |
+| win1 | 100 | 75% | 83% | 22 |
+| win2 | 63 | 75% | 87% | 10 |
+
+The medians differ because each machine crawled a different random quarter of the sites. The crawler runs
+installed Chrome with a temporary profile and extensions disabled (Playwright default `--disable-extensions`),
+and every visit gets a fresh browser context, so extensions in the user's own Chrome profile cannot affect it.
 
 ## Still open
 
