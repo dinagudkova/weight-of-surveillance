@@ -27,6 +27,9 @@ script that reproduces them: [docs/results_numbers.md](docs/results_numbers.md).
 | Gambling | 12 | 0 | 2 | 37 | 5 |
 
 \* Lower bound: on 60 media and 11 services sites the request flood after Accept filled the browser's memory.
+Bracketing these sites, the true media median lies between 1,069 and 1,347 requests (100–114 companies); the
+services median is not affected. Paired Wilcoxon tests (Holm-corrected) show the Accept effect in every group except
+public sector, which has too few sites with a banner; details in [notebooks/statistics.ipynb](notebooks/statistics.ipynb).
 
 - **Before a choice, tracking is smaller but not absent.** While the banner stays unanswered, the median site
   sends no further tracking requests. But during page load, before anyone could click, 195 of 446 sites with a
@@ -37,7 +40,9 @@ script that reproduces them: [docs/results_numbers.md](docs/results_numbers.md).
   hundred companies in 30 seconds. Tracking starts within a fraction of a second of the click; on all sites with
   a banner the median is 6 companies by the end of the first second.
 - **Reject mostly works, but not completely.** Median tracking after Reject is close to zero, yet on about half of
-  the sites at least one tracking request starts within five seconds of the click.
+  the sites at least one tracking request starts within five seconds of the click. Any tracking in the 30-second
+  window is even more common after Reject (57% of sites) than when the user does nothing (32%); part of it may be
+  consent-update pings (see the caveats in the results document).
 - **Behind "Accept all": a whole ad-tech market.** Google receives tracking requests on 89% of the sites with a
   banner after Accept, Microsoft on 74%, and even the 15th most frequent company on more than half. After Reject,
   Google is still seen on 24% of the sites, every other company on 8% or less.
@@ -138,6 +143,10 @@ NEON_URL=postgresql://user:password@host/neondb?sslmode=require
 ```
 
 `scripts/dbt.py` passes this connection to dbt and logs run times to `data/warehouse/dbt_log.csv`; the loader logs to `data/warehouse/load_log.csv`. Both feed the DuckDB vs PostgreSQL comparison. Model details: [dbt/README.md](dbt/README.md).
+
+Statistics (paired tests between consent states, bootstrap intervals for group medians, bounds for the
+memory-aborted Accept visits) are in [notebooks/statistics.ipynb](notebooks/statistics.ipynb); it reads the DuckDB
+warehouse and writes `docs/figures/medians_bootstrap_ci.png`.
 
 ## Promise vs reality: consent partners
 

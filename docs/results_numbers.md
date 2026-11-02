@@ -283,6 +283,69 @@ The medians differ because each machine crawled a different random quarter of th
 installed Chrome with a temporary profile and extensions disabled (Playwright default `--disable-extensions`),
 and every visit gets a fresh browser context, so extensions in the user's own Chrome profile cannot affect it.
 
+## Statistics
+
+Source: [notebooks/statistics.ipynb](../notebooks/statistics.ipynb). Sites with a banner, one value per site and
+state (median over the site's usable visits). Paired Wilcoxon signed-rank tests (ties kept, `zero_method="pratt"`),
+Holm correction over all 42 tests, matched-pairs rank-biserial correlation `r` as effect size; percentile
+bootstrap with 10,000 resamples and a fixed seed.
+
+**Group medians with 95% bootstrap intervals** (tracking requests in 30 s; companies after Accept):
+
+| Group | No choice | Reject | Accept | Companies after Accept |
+|---|---|---|---|---|
+| Media | 0 [0–0] | 4 [1–15] | 1,069 [995–1,139]* | 100 [94–103]* |
+| Shopping | 0 [0–1] | 3 [1–4] | 81 [61–95] | 11.5 [8.5–21.5] |
+| Services & entertainment | 0 [0–0] | 2 [0–4] | 91 [53–192.5] | 9 [4.5–33.5] |
+| Finance & health | 0 [0–0] | 0 [0–0] | 28 [9–54] | 4 [2–8] |
+| Public sector & education | 0 [0–0] | 0 [0–0] | 0.5 [0–6] | 0 [0–2] |
+| Gambling | 0 [0–7] | 2 [0–8] | 37 [9–47] | 5 [3–9] |
+| All sites | 0 [0–0] | 2 [1–3] | 138 [111–211] | 29 [23–37] |
+
+\* Lower bounds included as measured. **Bracket for the true median** (lower-bound sites once as measured, once as
++∞): media, Accept, tracking requests **between 1,069 and 1,347** (95% interval 1,006–1,917); companies **between
+100 and 114**. For services & entertainment (11 lower-bound sites), finance & health (2) and all sites together the
+two ends coincide: the memory aborts do not change these medians.
+
+**Paired tests.** Accept raises tracking on almost every site:
+
+| All sites | Sites | Higher on | Median difference | r | p (Holm) |
+|---|---|---|---|---|---|
+| No choice → Accept, requests | 382 | 95% | +135.5 | 1.00 | < 0.001 |
+| Reject → Accept, requests | 292 | 90% | +83.5 | 0.99 | < 0.001 |
+| No choice → Accept, companies | 382 | 92% | +28 | 1.00 | < 0.001 |
+| Reject → Accept, companies | 292 | 87% | +13 | 0.99 | < 0.001 |
+
+By group, both Accept comparisons are significant for media, shopping, services & entertainment, finance & health
+and gambling. Public sector & education (8 sites with both values) is not significant in any test: too few sites
+with a banner to tell. 34 of 42 tests are significant after Holm correction.
+
+**Reject vs no choice: is there any tracking at all?** (McNemar, exact)
+
+| Group | Sites | Any tracking, no choice | Any tracking, after Reject | Only after Reject | Only without a choice | p (Holm) |
+|---|---|---|---|---|---|---|
+| Media | 81 | 32% | 68% | 30 | 1 | < 0.001 |
+| Shopping | 96 | 50% | 62% | 15 | 3 | 0.03 |
+| Services & entertainment | 71 | 21% | 56% | 25 | 0 | < 0.001 |
+| Finance & health | 33 | 12% | 30% | 6 | 0 | 0.09 |
+| Public sector & education | 8 | 0% | 12% | 1 | 0 | 1 |
+| Gambling | 10 | 30% | 50% | 2 | 0 | 1 |
+| **All sites** | **299** | **32%** | **57%** | **79** | **4** | **< 0.001** |
+
+A tracking request in the 30-second window is more common after Reject than when the user does nothing. How to read
+it: the two windows start differently (no choice: after page load; Reject: at the click, so scripts reacting to the
+choice fall into it), and a reject itself can trigger requests that are allowed or claimed as such: Google Consent
+Mode sends a "denied" update ping, and partners invoke "legitimate interest". The medians stay small (2 requests
+over all sites). Which part are consent-update pings is a next check (`check_google_consent_mode.py` for the Reject
+window).
+
+Coverage: Reject values exist only where a free reject worked. For media that is 81 of 165 sites with a banner (the
+others offer no free reject or it could not be verified), so the media Reject median describes the sites that
+let you say no.
+
+Germany only: medians unchanged except media Accept (1,075 instead of 1,069 requests, 99.5 instead of 100
+companies) and shopping companies (12 instead of 11.5).
+
 ## Still open
 
 - Bot-blocked sites: 48 in the first crawl, 38 re-measured from a home connection; 11 sites (~2%) could not be
