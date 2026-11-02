@@ -41,8 +41,10 @@ public sector, which has too few sites with a banner; details in [notebooks/stat
   a banner the median is 6 companies by the end of the first second.
 - **Reject mostly works, but not completely.** Median tracking after Reject is close to zero, yet on about half of
   the sites at least one tracking request starts within five seconds of the click. Any tracking in the 30-second
-  window is even more common after Reject (57% of sites) than when the user does nothing (32%); part of it may be
-  consent-update pings (see the caveats in the results document).
+  window is even more common after Reject (57% of sites) than when the user does nothing (32%). Consent-update pings
+  and code loads explain little of it (53% vs 29% without them): after a reject many pages start loading ads that
+  are declared non-personalised, so ad-tech companies still receive requests. On 3 sites Google's Consent Mode even
+  reports ad storage as granted after the user rejected.
 - **Behind "Accept all": a whole ad-tech market.** Google receives tracking requests on 89% of the sites with a
   banner after Accept, Microsoft on 74%, and even the 15th most frequent company on more than half. After Reject,
   Google is still seen on 24% of the sites, every other company on 8% or less.

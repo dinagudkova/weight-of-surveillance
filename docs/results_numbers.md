@@ -332,12 +332,32 @@ with a banner to tell. 34 of 42 tests are significant after Holm correction.
 | Gambling | 10 | 30% | 50% | 2 | 0 | 1 |
 | **All sites** | **299** | **32%** | **57%** | **79** | **4** | **< 0.001** |
 
-A tracking request in the 30-second window is more common after Reject than when the user does nothing. How to read
-it: the two windows start differently (no choice: after page load; Reject: at the click, so scripts reacting to the
-choice fall into it), and a reject itself can trigger requests that are allowed or claimed as such: Google Consent
-Mode sends a "denied" update ping, and partners invoke "legitimate interest". The medians stay small (2 requests
-over all sites). Which part are consent-update pings is a next check (`check_google_consent_mode.py` for the Reject
-window).
+A tracking request in the 30-second window is more common after Reject than when the user does nothing. The
+medians stay small (2 requests over all sites), and the two windows start differently (no choice: after page load;
+Reject: at the click, so scripts reacting to the choice fall into it).
+
+**Consent-update pings and code loads do not explain it** (`check_google_consent_mode.py --mode reject --phase
+window`, any tracking request per site, same 299 sites):
+
+| Counted as tracking | No choice | After Reject | Only after Reject | Only without a choice |
+|---|---|---|---|---|
+| A: every tracking request | 32% | 57% | 79 | 4 |
+| B: without Google Consent Mode pings that report everything denied (`gcs=G100`) | 30% | 56% | 82 | 4 |
+| C: also without code loads (scripts, stylesheets, fonts; Google configuration and ad-fraud checks) | 29% | 53% | 73 | 3 |
+
+What remains on the 73 sites with tracking only after Reject is mostly **ad delivery**: Google advertising on 19 of
+them (ad rendering and measurement: `pagead2.googlesyndication.com/pagead/gen_204`, `tpc.googlesyndication.com`
+ad images, SafeFrame), then Virtual Minds and Microsoft (7 each), PubMatic, Nielsen and Outbrain (6 each), Teads and
+Criteo (5 each). The reading that fits: without a choice the page holds its ad slots back; after a Reject it starts
+loading ads, which the ad-tech companies say are non-personalised or based on "legitimate interest". So a reject
+does not mean "no contact with ad tech": on more than half of the sites with a working reject, ad-tech companies
+receive requests (with the user's IP address and the page) within 30 seconds of the click.
+
+Hard indicators in the Reject window (Google hits, same check): on 3 sites Consent Mode reports **ad_storage
+granted after the user rejected** (traum-ferienwohnungen.de with 18 such hits, wallstreet-online.de,
+xn--schnppchenportal-ynb.de), on 2 more analytics granted (boersennews.de, opodo.de); Google cookie matching
+(`cm.g.doubleclick.net/pixel`) runs after Reject on 6 sites (20min.ch, tichyseinblick.de, lampenwelt.de,
+apotheke-adhoc.de, vevor.de, novoline.de; vevor.de was confirmed by hand earlier). Not yet checked by hand.
 
 Coverage: Reject values exist only where a free reject worked. For media that is 81 of 165 sites with a banner (the
 others offer no free reject or it could not be verified), so the media Reject median describes the sites that

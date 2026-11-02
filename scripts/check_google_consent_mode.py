@@ -1,11 +1,17 @@
-"""Google requests before any choice: Consent Mode pings or real tracking?
+"""Google requests before any choice or after Reject: Consent Mode pings or real tracking?
 
 Usage:
-  python scripts/check_google_consent_mode.py
+  python scripts/check_google_consent_mode.py                              # page load before any choice
+  python scripts/check_google_consent_mode.py --mode reject --phase window # 30 s after a verified Reject
   python scripts/check_google_consent_mode.py --db other.duckdb --sites 40
 
-Looks at requests to Google (owner 'Google LLC') during page load in mode "none" (phase 'pre', usable visits of
-the main dataset) on sites with a consent banner, and reads the consent signal each request carries in its URL:
+The last section is always printed: any tracking in the 30-second window, no choice vs Reject, on the same sites,
+raw and after removing (B) Google Consent Mode pings that report everything denied (gcs=G100) and (C) also all
+code loads (scripts, stylesheets, fonts of any tracker, Google service requests). It tests whether "tracking is
+more common after Reject than without a choice" survives once consent-update pings and code loads are set aside.
+
+Looks at requests to Google (owner 'Google LLC') in the chosen mode and phase (default: page load in mode "none",
+phase 'pre'; usable visits of the main dataset) on sites with a consent banner, and reads the consent signal each request carries in its URL:
 
   gcs=G1xy        Google Consent Mode: x = ad_storage, y = analytics_storage (1 granted, 0 denied).
                   G100 = everything denied, i.e. a cookieless ping, which Consent Mode sends by design.
@@ -45,7 +51,7 @@ BASE = """
 with v as (
     select visit_id, site_group_label, site_group_order
     from marts.fct_visits
-    where dataset = '{dataset}' and mode = 'none' and is_usable and site_has_banner
+    where dataset = '{dataset}' and mode = '{mode}' and is_usable and site_has_banner
 ),
 r as (
     select
@@ -59,7 +65,7 @@ r as (
         length(p.url) >= 500                                                as truncated
     from prep.prep_requests_classified p
     join v on v.visit_id = p.visit_id
-    where p.phase = 'pre' and p.is_tracking and p.owner = 'Google LLC'
+    where p.phase = '{phase}' and p.is_tracking and p.owner = 'Google LLC'
 ),
 s as (
     select *,
@@ -78,11 +84,11 @@ s as (
 """
 
 SECTIONS = [
-    ("Google requests before any choice, sites with a banner: by type, kind and consent signal", """
+    ("Google requests ({when}), sites with a banner: by type, kind and consent signal", """
         select tracking_type, kind, signal, count(distinct site) as sites, count(*) as requests
         from s group by 1, 2, 3 order by 1, 2, 4 desc
     """),
-    ("Per site: the strongest signal among its Google hits before any choice", """
+    ("Per site: the strongest signal among its Google hits ({when})", """
         , per_site as (
             select site,
                    bool_or(signal = 'gcs: ad_storage granted')               as ads_granted,
@@ -94,8 +100,8 @@ SECTIONS = [
         )
         select
             case
-                when ads_granted       then '1 ad_storage granted before any choice'
-                when analytics_granted then '2 analytics granted before any choice'
+                when ads_granted       then '1 ad_storage granted'
+                when analytics_granted then '2 analytics granted (ads denied)'
                 when unclear           then '3 hits without a denied signal (check by hand)'
                 when truncated         then '4 signal unknown: URL cut before the parameter'
                 else                        '5 only denied / empty / non-personalised signals'
@@ -132,18 +138,89 @@ SECTIONS = [
     """),
 ]
 
+WINDOW_COMPARISON = """
+with v as (
+    select visit_id, site, mode
+    from marts.fct_visits
+    where dataset = '{dataset}' and is_usable and site_has_banner and mode in ('none', 'reject')
+),
+both_modes as (select site from v group by site having count(distinct mode) = 2),
+r as (
+    select p.site, p.mode, p.owner, p.tracking_type,
+           p.owner = 'Google LLC' and regexp_extract(p.url, '[?&]gcs=(G1[0-9]{{2}})', 1) = 'G100' as google_denied,
+           p.resource_type in ('script', 'stylesheet', 'font')
+               or (p.owner = 'Google LLC' and regexp_matches(p.url, '{service}'))             as code
+    from prep.prep_requests_classified p
+    join v on v.visit_id = p.visit_id
+    where p.phase = 'window' and p.is_tracking and p.site in (select site from both_modes)
+),
+per_site as (
+    select b.site, m.mode,
+           coalesce(bool_or(r.site is not null), false)                    as a_raw,
+           coalesce(bool_or(not r.google_denied), false)                   as b_no_g100,
+           coalesce(bool_or(not r.google_denied and not r.code), false)    as c_no_code
+    from both_modes b
+    cross join (select unnest(['none', 'reject']) as mode) m
+    left join r on r.site = b.site and r.mode = m.mode
+    group by 1, 2
+),
+wide as (
+    select site,
+           bool_or(mode = 'none'   and a_raw)     as a_none, bool_or(mode = 'reject' and a_raw)     as a_reject,
+           bool_or(mode = 'none'   and b_no_g100) as b_none, bool_or(mode = 'reject' and b_no_g100) as b_reject,
+           bool_or(mode = 'none'   and c_no_code) as c_none, bool_or(mode = 'reject' and c_no_code) as c_reject
+    from per_site group by site
+)
+"""
+
+WINDOW_SUMMARY = """
+select tier, count(*) as sites,
+       round(avg(case when no_choice then 1.0 else 0 end), 2) as share_no_choice,
+       round(avg(case when after_reject then 1.0 else 0 end), 2) as share_after_reject,
+       count(*) filter (where after_reject and not no_choice) as only_after_reject,
+       count(*) filter (where no_choice and not after_reject) as only_without_choice
+from (
+    select 'A raw' as tier, a_none as no_choice, a_reject as after_reject from wide
+    union all select 'B without Google G100 pings', b_none, b_reject from wide
+    union all select 'C also without code loads', c_none, c_reject from wide
+) t
+group by tier order by tier
+"""
+
+WINDOW_ONLY_REJECT = """
+, only_reject as (select site from wide where c_reject and not c_none)
+select r.owner, r.tracking_type, count(distinct r.site) as sites, count(*) as requests
+from r join only_reject o on o.site = r.site
+where r.mode = 'reject' and not r.google_denied and not r.code
+group by 1, 2 order by 3 desc limit 20
+"""
+
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--db", default=str(ROOT / "data" / "warehouse" / "wos.duckdb"))
     p.add_argument("--dataset", default="real")
     p.add_argument("--sites", type=int, default=40, help="rows in the manual-check list")
+    p.add_argument("--mode", choices=["none", "reject", "accept"], default="none")
+    p.add_argument("--phase", choices=["pre", "window"], default="pre")
     args = p.parse_args()
     con = duckdb.connect(args.db, read_only=True)
-    base = BASE.format(dataset=args.dataset, service=SERVICE_PATTERN.replace("'", "''"))
+    service = SERVICE_PATTERN.replace("'", "''")
+    base = BASE.format(dataset=args.dataset, service=service, mode=args.mode, phase=args.phase)
+    when = {("none", "pre"): "before any choice, page load", ("reject", "window"): "30 s after Reject",
+            ("none", "window"): "30 s window without a choice", ("accept", "window"): "30 s after Accept"}.get(
+        (args.mode, args.phase), f"mode {args.mode}, phase {args.phase}")
     for title, sql in SECTIONS:
+        title = title.format(when=when)
         print(f"\n## {title}")
         con.sql(base + sql.format(limit=args.sites)).show(max_rows=100, max_width=220)
+
+    comp = WINDOW_COMPARISON.format(dataset=args.dataset, service=service)
+    print("\n## Any tracking in the 30 s window, no choice vs Reject (same sites; A raw, B without Google "
+          "G100 pings, C also without code loads)")
+    con.sql(comp + WINDOW_SUMMARY).show(max_rows=20, max_width=220)
+    print("\n## What remains (tier C) on sites with tracking only after Reject: companies and types")
+    con.sql(comp + WINDOW_ONLY_REJECT).show(max_rows=30, max_width=220)
 
 
 if __name__ == "__main__":
