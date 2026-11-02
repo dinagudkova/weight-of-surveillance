@@ -13,8 +13,7 @@ python scripts/results_numbers.py
 Dataset: real-browser crawl (`main_dataset: real`), DuckDB warehouse, same results in PostgreSQL on Neon.
 Medians are medians over sites; accept/reject medians only use sites with a consent banner.
 
-All sections were compared against the output of `scripts/results_numbers.py` on 2026-11-02, except the
-last one ("Still open").
+All sections were compared against the output of `scripts/results_numbers.py` on 2026-11-02.
 
 ## Sample
 
@@ -410,7 +409,16 @@ let you say no.
 Germany only: medians unchanged except media Accept (1,075 instead of 1,069 requests, 99.5 instead of 100
 companies) and shopping companies (12 instead of 11.5).
 
-## Still open
+## Sites without data
 
-- Bot-blocked sites: 48 in the first crawl, 38 re-measured from a home connection; 11 sites (~2%) could not be
-  measured. 48 − 38 = 10, so one of these counts needs checking; 525 − 507 = 18 sites have no data at all.
+Source: `seeds.sites` joined with `fct_visits` (main dataset). Of the 525 sites in the sample:
+
+| Status | Sites |
+|---|---|
+| At least one usable visit (in the marts) | 507 |
+| Blocked the crawler in every visit | 16 |
+| Other (visited, never usable, not blocked) | 2 |
+| **Without data** | **18 (3.4%)** |
+
+The earlier figures (48 sites blocked in the first crawl, 38 re-measured from a home connection, "11 unreachable")
+described the re-measurement step, not the final dataset; the table above is the final count.

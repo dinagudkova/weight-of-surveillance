@@ -8,9 +8,9 @@ This project measures how much of a web page's weight (requests, bytes, script t
 - `accept`: "Accept all" clicked
 - `reject`: "Reject all" clicked
 
-Business questions are listed in [docs/business_questions.md](docs/business_questions.md).
+Business questions are listed in [docs/business_questions.md](docs/business_questions.md); how the data was collected and analysed: [docs/methodology.md](docs/methodology.md).
 
-> Status: data final: 525 sites (CrUX top 1,000 for Germany plus a top-5,000 boost for government, health and finance), 507 with data, three consent states, crawled in a regular Chrome. Tableau dashboard, statistics notebook and methodology write-up in progress.
+> Status: data final: 525 sites (CrUX top 1,000 for Germany plus a top-5,000 boost for government, health and finance), 507 with data, three consent states, crawled in a regular Chrome. Tableau dashboard and presentation in progress.
 
 ## Results
 
@@ -242,11 +242,12 @@ Raw data and screenshots are not part of this repository.
 
 ## Limitations
 
-- About 2% of the sample could not be measured (bot protection or unreachable); 507 of 525 sites have data.
+- 18 of the 525 sites (3.4%) have no data: 16 blocked the crawler in every visit, 2 never gave a usable visit; 507
+  sites have data.
 - Pages whose request flood after "Accept all" filled the crawler's memory are stopped; their numbers are lower
   bounds (`is_lower_bound`).
-- Accept or reject clicks that could not be verified are excluded (about 13% of sites with a banner lack a usable
-  "Accept" visit).
+- Accept or reject clicks that could not be verified are excluded: 64 of the 449 sites with a banner (14%) lack a
+  usable "Accept" visit, 148 (33%) a usable "Reject" visit, mostly because no free reject was found.
 - Server-side data sharing (e.g. server-to-server ad auctions) is not visible from the browser, so observed
   companies are a lower bound of who receives data.
 - International tracker lists miss part of the German ad-tech market; the custom lists are reviewed manually.
