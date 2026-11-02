@@ -28,7 +28,9 @@ script that reproduces them: [docs/results_numbers.md](docs/results_numbers.md).
 
 \* Lower bound: on 60 media and 11 services sites the request flood after Accept filled the browser's memory.
 
-- **Without a choice, tracking waits.** The median site sends no tracking request before the user decides.
+- **Before a choice, tracking is smaller but not absent.** While the banner stays unanswered, the median site
+  sends no further tracking requests. But during page load, before anyone could click, 195 of 446 sites with a
+  banner already send advertising requests, most often to Google (see the caveats in the results document).
 - **"Accept all" opens the floodgates, above all on news sites:** about a thousand tracking requests to about a
   hundred companies in 30 seconds. Tracking starts within a fraction of a second of the click; on all sites with
   a banner the median is 6 companies by the end of the first second.
@@ -37,7 +39,7 @@ script that reproduces them: [docs/results_numbers.md](docs/results_numbers.md).
 - **A few platforms run the banners:** Sourcepoint (104 sites), Usercentrics (76), consentmanager (72), OneTrust (39),
   Ippen's opencmp (25).
 - **Paying instead of consenting:** 148 banners offer a paid, tracking-free subscription, 113 of them on media sites.
-  On some of these sites a free reject exists only in the settings layer or not at all.
+  82 banners (65 on media sites) offer no free reject at all; on the other 66 the free reject is only in the settings layer.
 - **Promised vs seen:** media banners with IAB TCF ask consent for a median of 210 partners; 101 tracking companies
   are actually seen after Accept. 7 sites ask consent for the entire IAB vendor list.
 

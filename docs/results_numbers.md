@@ -11,10 +11,10 @@ python scripts/results_numbers.py
 Dataset: real-browser crawl (`main_dataset: real`), DuckDB warehouse, same results in PostgreSQL on Neon.
 Medians are medians over sites; accept/reject medians only use sites with a consent banner.
 
-Status of each section: **checked** = compared against the marts on 2026-11-02; **to check** = from an
-earlier summary, confirm with `scripts/results_numbers.py` before publishing.
+All sections were compared against the output of `scripts/results_numbers.py` on 2026-11-02, except the
+last one ("Still open").
 
-## Sample (checked)
+## Sample
 
 | | Sites | Source |
 |---|---|---|
@@ -26,9 +26,11 @@ earlier summary, confirm with `scripts/results_numbers.py` before publishing.
 The CrUX list for Germany ranks sites popular with users in Germany, so it includes a few Swiss and Austrian
 sites. They stay in the sample and are flagged with `site_country`; five of the six are media sites.
 
-## Consent effect by group (checked)
+## Consent effect by group
 
-Source: `mart_group_summary`. Tracking requests in the 30-second window, median per site.
+Source: `mart_group_summary`. Tracking requests in the 30-second window, median per site. In mode "No choice"
+the window starts after the page has loaded (about 4 s), so tracking during page load is not in this table; see
+"Before any choice" below.
 
 | Group | Sites | With banner | No choice | Reject | Accept | Companies after Accept | Accept lower bound |
 |---|---|---|---|---|---|---|---|
@@ -42,7 +44,7 @@ Source: `mart_group_summary`. Tracking requests in the 30-second window, median 
 "Accept lower bound": the browser ran out of memory after Accept; these sites enter with the requests counted
 until the stop, so the true medians are higher (most of all for media).
 
-## Consent platforms (checked)
+## Consent platforms
 
 Source: `mart_cmp_market`. 449 sites with a banner, one platform per site.
 
@@ -58,7 +60,7 @@ Source: `mart_cmp_market`. 449 sites with a banner, one platform per site.
 | Cookiebot | 15 | 0 |
 | Didomi | 13 | 2 |
 
-## Paid option in the banner (checked)
+## Paid option in the banner
 
 Source: `fct_visits.site_pay_or_okay` (sites with a banner). The flag means the banner offers a paid,
 tracking-free subscription. It does not by itself mean there is no free reject: kleinanzeigen.de, for example,
@@ -75,9 +77,22 @@ offers both (checked by hand). markt.de offers only "Accept all" or a subscripti
 
 Outside media these are mostly ad-funded content sites: recipes, gaming, health and finance portals.
 
-**To check:** media sites without a free reject: 63 (`mart_group_summary.sites_no_free_reject`).
+### Reject options
 
-## The first seconds after the choice (checked)
+Source: `mart_site_consent_effect.reject_option` (sites with a banner).
+
+| Reject option | All groups | Media |
+|---|---|---|
+| Reject on the first layer | 235 | 33 |
+| Reject only in the settings layer | 66 | 48 |
+| No reject without a subscription | 82 | 65 |
+| Reject could not be verified | 66 | 19 |
+| **Total** | **449** | **165** |
+
+"No reject without a subscription" by group (`mart_group_summary.sites_no_free_reject`): media 65, services &
+entertainment 13, shopping 2, finance & health 2.
+
+## The first seconds after the choice
 
 Source: `mart_consent_timeline`. Usable visits on sites with a banner, memory-aborted visits excluded
 (312 Accept, 301 Reject, 446 No-choice visits). Companies contacted by the end of each second, median.
@@ -91,10 +106,20 @@ Source: `mart_consent_timeline`. Usable visits on sites with a banner, memory-ab
 The median tracking after Reject is close to zero, but on about half of the sites at least one tracking request
 starts within five seconds of the click.
 
-**To check:** media, Accept: ~12 companies by the end of second 1 and ~42 by the end of second 5; first tracking
-request ~70 ms after the Accept click (`mart_first_tracker`).
+First tracking request and companies reached after Accept, median per visit (`mart_first_tracker`, same visits):
 
-## Promise vs reality (checked)
+| Group | Visits | First tracking request (ms after the click) | Companies by 1 s | by 5 s | by 30 s |
+|---|---|---|---|---|---|
+| Media | 83 | 68 | 12 | 42 | 91 |
+| Shopping | 104 | 28 | 7 | 11.5 | 11.5 |
+| Services & entertainment | 71 | 113 | 3 | 5 | 5 |
+| Finance & health | 35 | 71 | 2 | 3 | 3 |
+| Public sector & education | 8 | 16.5 | 0 | 0 | 0 |
+| Gambling | 11 | 14.5 | 5 | 5 | 5 |
+
+Media visits here exclude the 60 memory-aborted ones, so the heaviest media sites are missing.
+
+## Promise vs reality
 
 Source: `mart_promise_vs_reality`. Sites with an IAB TCF banner. Promised: vendors in the TCF consent after
 "Accept all" plus Google Additional Consent vendors. Seen: distinct tracking companies after Accept.
@@ -115,13 +140,62 @@ comparison is approximate.
 On TCF sites more companies are seen than on all sites of the same group (services: 36 vs 9): the TCF banner is
 used mostly by ad-funded content sites.
 
-## To check before publishing
+## Before any choice: tracking during page load
 
-These come from earlier summaries and have not yet been re-run against the current marts:
+Source: `mart_pre_consent` (mode "No choice", load phase before the pre snapshot, usable visits) joined with
+`mart_site_consent_effect.has_banner`; companies from `prep_requests_classified`.
 
-- Share of tracking in the page weight after Accept (pre + window): media 55%, other groups 13–24%.
-- ID syncing before any choice on ~29 sites (core: the Ippen network, confirmed by hand on mannheim24.de) and after
-  Reject on ~18 sites (confirmed by hand on vevor.de, frankenpost.de; partners claim "legitimate interest").
-  Indicators, not proof of a violation. A dedicated ID-sync mart is planned.
+| Group | Sites with a banner | Advertising requests before any choice | Identity requests | Tracker cookies |
+|---|---|---|---|---|
+| Media | 164 | 99 | 23 | 36 |
+| Shopping | 117 | 39 | 4 | 26 |
+| Services & entertainment | 96 | 42 | 7 | 16 |
+| Finance & health | 48 | 10 | 2 | 10 |
+| Public sector & education | 10 | 1 | 0 | 1 |
+| Gambling | 11 | 4 | 1 | 4 |
+| **Total** | **446** | **195** | **37** | **93** |
+
+Over all 503 sites with a usable "No choice" visit (with or without a banner), 406 send at least one tracking
+request during page load and 98 set a tracker cookie.
+
+Most frequent companies before any choice on sites with a banner: Google (analytics on 172 sites, advertising
+on 106), Adobe (analytics, 39), Amazon (analytics and advertising, 29 each), Microsoft (advertising, 22), Criteo
+(advertising, 19), Utiq (identity, 18), The Trade Desk (identity, 11).
+
+How to read this: a request is not the same as data collection with consent-free identifiers. Google's Consent
+Mode, for example, sends cookieless pings before a choice by design. The table is an indicator for manual
+checks, not proof of a violation. After the page has loaded, while the banner stays unanswered, almost nothing
+more happens (median 0 tracking requests in the 30-second window).
+
+## Share of tracking in the page weight after Accept
+
+Source: `mart_site_consent_effect.accept_tracking_share_bytes` (sites with a banner; phases pre + window;
+lower-bound visits excluded, so media covers only 83 sites). Secondary metric.
+
+| Group | Sites | Median share |
+|---|---|---|
+| Media | 83 | 54% |
+| Services & entertainment | 71 | 24% |
+| Shopping | 104 | 21% |
+| Finance & health | 35 | 21% |
+| Gambling | 11 | 12% |
+| Public sector & education | 8 | 0% |
+
+## Identity requests before a choice and after Reject
+
+37 sites with a banner send identity requests (ID syncing, cookie matching, telco identifiers) during page load
+before any choice; 19 of 301 sites with a measured Reject send them in the 30 seconds after the click. Earlier
+hand-checked cases: the Ippen network before a choice (mannheim24.de), vevor.de and frankenpost.de after Reject
+(partners claim "legitimate interest"). Earlier summaries counted ~29 and ~18 sites with a narrower definition
+(ID-sync URLs only); a dedicated ID-sync mart is planned.
+
+## Sensitivity: Germany only
+
+Leaving out the six Swiss and Austrian sites hardly changes anything: media 1,075 instead of 1,069 tracking
+requests after Accept (99.5 instead of 100 companies), shopping 12 instead of 11.5 companies, all other medians
+unchanged.
+
+## Still open
+
 - Bot-blocked sites: 48 in the first crawl, 38 re-measured from a home connection; 11 sites (~2%) could not be
   measured. 48 − 38 = 10, so one of these counts needs checking; 525 − 507 = 18 sites have no data at all.
