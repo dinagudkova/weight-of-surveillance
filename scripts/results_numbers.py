@@ -72,6 +72,12 @@ SECTIONS = [
         from marts.mart_consent_timeline
         where site_group_label = 'All sites' and second < 6 order by mode, second
     """),
+    ("Companies: top 15 after Accept and after Reject (sites with a banner)", """
+        select mode, rank_in_mode as rank, owner, sites, sites_measured, round(share_of_sites, 2) as share,
+               tracking_types
+        from marts.mart_company_sites
+        where rank_in_mode <= 15 and mode in ('accept', 'reject') order by mode, rank_in_mode
+    """),
     ("Promise vs reality (sites with an IAB TCF banner)", """
         select site_group_label,
                count(*) filter (where promised_vendors_total is not null)                          as tcf_sites,

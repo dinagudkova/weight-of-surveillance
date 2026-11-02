@@ -38,6 +38,9 @@ script that reproduces them: [docs/results_numbers.md](docs/results_numbers.md).
   a banner the median is 6 companies by the end of the first second.
 - **Reject mostly works, but not completely.** Median tracking after Reject is close to zero, yet on about half of
   the sites at least one tracking request starts within five seconds of the click.
+- **Behind "Accept all": a whole ad-tech market.** Google receives tracking requests on 89% of the sites with a
+  banner after Accept, Microsoft on 74%, and even the 15th most frequent company on more than half. After Reject,
+  Google is still seen on 24% of the sites, every other company on 8% or less.
 - **A few platforms run the banners:** Sourcepoint (104 sites), Usercentrics (76), consentmanager (72), OneTrust (39),
   Ippen's opencmp (25).
 - **Paying instead of consenting:** 148 banners offer a paid, tracking-free subscription, 113 of them on media sites.

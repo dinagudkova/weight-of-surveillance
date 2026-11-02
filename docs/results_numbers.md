@@ -127,6 +127,33 @@ First tracking request and companies reached after Accept, median per visit (`ma
 
 Media visits here exclude the 60 memory-aborted ones, so the heaviest media sites are missing.
 
+## Companies
+
+Source: `mart_company_sites` (sites with a banner; window phase, plus all phases of the 73 memory-aborted Accept
+visits). Share of the sites with a usable visit in that mode on which the company receives tracking requests.
+A company is an owner in the tracker lists: Google LLC includes DoubleClick, Google Analytics and Google Ads.
+
+| Rank | After Accept (385 sites) | Sites | Share | After Reject (301 sites) | Sites | Share |
+|---|---|---|---|---|---|---|
+| 1 | Google | 342 | 89% | Google | 72 | 24% |
+| 2 | Microsoft | 285 | 74% | Microsoft | 25 | 8% |
+| 3 | Criteo | 229 | 59% | Virtual Minds | 14 | 5% |
+| 4 | Adobe | 228 | 59% | Criteo | 14 | 5% |
+| 5 | Virtual Minds | 224 | 58% | Adobe | 14 | 5% |
+| 6 | PubMatic | 219 | 57% | PubMatic | 12 | 4% |
+| 7 | RTB House | 215 | 56% | Amazon | 10 | 3% |
+| 8 | Smartadserver | 213 | 55% | The Trade Desk | 10 | 3% |
+| 9 | Index Exchange | 213 | 55% | ID5 | 9 | 3% |
+| 10 | IPONWEB | 211 | 55% | Outbrain | 8 | 3% |
+| 11 | Outbrain | 210 | 55% | Relevant Digital | 8 | 3% |
+| 12 | ID5 | 205 | 53% | trustedshops.com | 8 | 3% |
+| 13 | Improve Digital | 205 | 53% | Taboola | 7 | 2% |
+| 14 | TripleLift | 201 | 52% | CleverPush | 7 | 2% |
+| 15 | The Trade Desk | 199 | 52% | Piano Software | 7 | 2% |
+
+After Accept, even the 15th company reaches more than half of the sites: the ad-tech market behind the banners
+is wide, not just Google. After Reject, Google is the only company still seen on a large share of sites.
+
 ## Promise vs reality
 
 Source: `mart_promise_vs_reality`. Sites with an IAB TCF banner. Promised: vendors in the TCF consent after
