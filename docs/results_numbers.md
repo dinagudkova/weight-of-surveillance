@@ -239,6 +239,41 @@ Loading Google code before a choice (gtag/GTM on 171 sites, ad libraries on 59) 
 - Not covered: Google tags routed through the site's own domain (server-side tagging, as on bwin.de) are
   classified as first-party and do not appear in this count.
 
+## Reject visits that look like Accept: manual checks
+
+On 10 of 292 usable Reject visits (sites with a banner) the crawler saw at least half as many tracking companies
+after Reject as after Accept (and at least 5 after Accept). Leaving them out hardly changes the Reject results:
+any tracking in the window 30% without a choice vs 56% after Reject (299 sites: 32% vs 57%), median after Reject
+2 requests either way.
+
+All 10 were checked by hand on 2 November 2026: Chrome profile without extensions, fresh page load, banner
+answered with its own reject (on the second layer where the first has none, all optional categories off),
+third-party requests recorded for 20 seconds after the click (resource timing through a PerformanceObserver).
+
+| Site | CMP | Reject on the first layer | After the manual reject | Result |
+|---|---|---|---|---|
+| zelesta.de | Cookiebot | yes ("Deny") | TikTok, Taboola, Microsoft Clarity | confirmed |
+| 20min.ch | OneTrust | yes | header-bidding auction: Adform, Smartadserver, Rubicon, OpenX, TripleLift, PubMatic, Criteo, Index Exchange, Teads, Permutive, DoubleClick; Google `G100` | confirmed |
+| nzz.ch | consentmanager | no ("Change cookie preferences" / "Accept all") | full-page ad; adnz, Criteo, OpenX, Teads, AppNexus, RTB House, **ID5 and Lotame (identity)** | confirmed |
+| apotheke-adhoc.de | Cookiebot | no (only "Akzeptieren"; small "Einstellungen") | The ADEX, Aumago, Bombora, BlueConic (data and targeting platforms), Google Analytics `G100`, Google ads; the same set as before any choice | confirmed |
+| vevor.de | own banner | yes | Taboola, Microsoft Clarity, Microsoft UET; on reload with the reject stored also RTB House, DoubleClick | confirmed |
+| skechers.de | TrustArc | yes ("Alle verweigern") | Microsoft UET event 97 ms after the click, then the UET conversion script | partly (may be UET's consent signal) |
+| novoline.de | Usercentrics | yes ("Deny"; **"Marketing" is pre-ticked**, so "Save Services" would consent) | Microsoft Clarity (session recording) | partly |
+| zdfheute.de | own banner | yes | Nielsen audience measurement (AGF) and Piano Analytics; no advertising | analytics only (reach measurement, likely treated as consent-free) |
+| sky.de | Sourcepoint | yes ("Nur notwendige Cookies") | Adobe Launch, Akamai mPulse, Salesforce chat, Sourcepoint; no advertising | low tracking either way (7 companies after Accept): the flag comes from the ratio, not from a failed reject |
+| joybuy.de | own banner | yes | only the Microsoft conversion script loads | not reproduced after Reject; before any choice Microsoft Ads, Google, Facebook and Pinterest |
+
+So the flag mostly points at real site behaviour, not at crawler errors: 5 sites confirmed, 3 partly (Microsoft
+UET, Clarity, reach measurement), 1 artefact of the ratio on a low-tracking site, 1 not reproduced. These visits stay
+in the data. Seven of them (zelesta, nzz, apotheke-adhoc, vevor, skechers, novoline, joybuy) also send tracking requests
+before any choice; on 20min.ch this could not be seen, because the profile had an earlier consent stored, which was
+reset to "reject all" before the check.
+
+traum-ferienwohnungen.de (Google Consent Mode "granted" after Reject in the crawl) is not among the ten. Its Reject
+visit was done by autoconsent's heuristic mode (`HEURISTIC-TIER2`, stored as "Unknown (generic banner)") before the
+banner was visible; by hand the banner has no first-layer reject, and after saving with all categories off no
+request to Google followed. Recorded "granted" signals stay candidates until confirmed (1 of 4 confirmed so far).
+
 ## Share of tracking in the page weight after Accept
 
 Source: `mart_site_consent_effect.accept_tracking_share_bytes` (sites with a banner; phases pre + window;
@@ -357,7 +392,16 @@ Hard indicators in the Reject window (Google hits, same check): on 3 sites Conse
 granted after the user rejected** (traum-ferienwohnungen.de with 18 such hits, wallstreet-online.de,
 xn--schnppchenportal-ynb.de), on 2 more analytics granted (boersennews.de, opodo.de); Google cookie matching
 (`cm.g.doubleclick.net/pixel`) runs after Reject on 6 sites (20min.ch, tichyseinblick.de, lampenwelt.de,
-apotheke-adhoc.de, vevor.de, novoline.de; vevor.de was confirmed by hand earlier). Not yet checked by hand.
+apotheke-adhoc.de, vevor.de, novoline.de; vevor.de was confirmed by hand earlier).
+
+Manual check, 2 November 2026, traum-ferienwohnungen.de (Chrome profile without extensions, resource timing of
+the page): **not reproduced.** Before a choice Google receives only Consent Mode pings with `gcs=G100` (GA4
+`first_visit` / `page_view`, `pagead2.googlesyndication.com/ccm/collect`). The banner has no reject on the first
+layer ("Alle Cookies zulassen" / "Cookie Einstellungen"); in the settings all optional categories are off by default,
+and after "Einstellungen speichern" no request to Google followed in the next 26 seconds. Together with the
+pre-choice checks (bwin.de confirmed, baur.de and fr.de not reproduced), "granted" signals recorded by the crawler
+are treated as candidates until confirmed by hand: either the sites changed since the crawl, or the crawler's
+reject path differed from the manual one (its screenshot after the click shows which).
 
 Coverage: Reject values exist only where a free reject worked. For media that is 81 of 165 sites with a banner (the
 others offer no free reject or it could not be verified), so the media Reject median describes the sites that
