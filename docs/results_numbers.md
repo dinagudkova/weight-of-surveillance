@@ -1,6 +1,4 @@
-git add -A
-git commit -m "Reject options: describe what the categories measure"
-git push# Results: the numbers
+# Results: the numbers
 
 Single source for every number used in the README, the dashboard captions and the presentation. Each table
 names the mart it comes from. To re-check all of them after a rebuild:
